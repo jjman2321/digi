@@ -330,6 +330,73 @@ function paywallPro(glass) {
   return `<div class="screen">${hero}${head}<div style="flex-grow:1"></div><div style="position:relative;margin:0 ${glass ? 12 : 0}px ${glass ? 14 : 0}px;padding:${glass ? '20px 16px 18px' : '0 20px 24px'};${glass ? 'border-radius:30px;background:rgba(17,17,21,.72);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08)' : ''}">${inner}</div></div>`;
 }
 
+// ---------- round 6: 10/10 pass (Mobbin refs in docs/design/research/mobbin/) ----------
+const PINKSEL = 'background:#FF4FA3;color:#1A0010;border-color:#FF4FA3';
+const bars = (n) => `<svg width="34" height="26" viewBox="0 0 34 26">${[0, 1, 2, 3].map((i) => `<rect x="${i * 9}" y="${18 - i * 6}" width="6" height="${8 + i * 6}" rx="1.5" fill="${i < n ? '#FF4FA3' : '#33333B'}"/>`).join('')}</svg>`;
+const tile6 = (lead, t, sub, sel) => `<div style="display:flex;align-items:center;gap:14px;min-height:96px;padding:12px 16px;border-radius:18px;border:2px solid #24242B;background:#17171C;${sel ? PINKSEL : ''}">${lead ? `<span style="width:44px;display:flex;justify-content:center">${sel ? lead.replaceAll('#FF4FA3', '#1A0010').replaceAll('#33333B', 'rgba(26,0,16,.25)') : lead}</span>` : ''}<div style="flex-grow:1"><div style="font-size:18px;font-weight:700">${t}</div>${sub ? `<div style="font-size:14px;margin-top:2px;${sel ? 'color:#3D0A24' : 'color:#B4B4C0'}">${sub}</div>` : ''}</div></div>`;
+function q6(step, total, reply, title, pinkWord, helper, body, foot) {
+  return `<div class="screen">${qTop(step).replace(battery(step), battery(step, total))}<div style="padding:16px 20px 0;flex-grow:1;display:flex;flex-direction:column">
+    <div style="font-size:15px;font-weight:600;color:#FF7DBE;min-height:20px;margin-bottom:6px">${reply}</div>
+    <div class="serif" style="font-size:40px;line-height:1.02">${title} <span class="pink">${pinkWord}</span></div>
+    <div style="font-size:15px;color:#B4B4C0;margin-top:8px">${helper}</div>
+    <div style="flex-grow:1;min-height:24px"></div><div>${body}</div>
+    <div style="font-size:13px;color:#9A9AA8;text-align:center;padding:16px 0 30px">${foot || 'Tap one to keep going'}</div></div></div>`;
+}
+const occ6 = (t, ph, sel) => occTile(t, ph, false).replace('<span style="position:absolute;left:12px;bottom:10px;font-size:16px;font-weight:700">', `<span style="position:absolute;left:10px;bottom:10px;font-size:16px;font-weight:700;${sel ? 'padding:4px 10px;border-radius:999px;background:#FF4FA3;color:#1A0010' : ''}">`).replace('position:relative;height:132px;border-radius:18px;overflow:hidden;', `position:relative;height:150px;border-radius:18px;overflow:hidden;${sel ? 'box-shadow:0 0 0 3px #FF4FA3;' : ''}`);
+const R6_Q1 = q6(1, 6, '', "What's the first", 'party?', "We'll load looks for it.", `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${[['Birthday', 'r5.png', true], ['House party', 'r1.png'], ['Night out', 'r2.png'], ['Holidays', 'r6.png'], ['Wedding', 'r4.png'], ['Just us', 'selfie.png']].map(([t, ph, sel]) => occ6(t, ph, sel)).join('')}</div>`, 'All good if it changes');
+const R6_Q2 = q6(2, 6, 'Birthday looks, loaded 🎂', 'How often are you', 'out?', 'So we suggest the plan that fits.', `<div style="display:flex;flex-direction:column;gap:12px">${tile6(bars(4), 'Every weekend', 'Fridays, Saturdays, repeat')}${tile6(bars(2), 'A couple of times a month', 'Dinners and house parties', true)}${tile6(bars(1), 'Only big nights', 'Birthdays, holidays, weddings')}</div>`);
+const R6_Q3 = q6(3, 6, 'Nice.', "Who's in your", 'pics?', 'We set up your camera for it.', `<div style="display:flex;flex-direction:column;gap:12px">${photoRow('selfie.png', 'Mostly me', 'Front flash first')}${photoRow('r2.png', 'Me + a few friends', 'Strip mode first', true)}${photoRow('r1.png', 'The whole group', 'Wide 0.5× first')}</div>`);
+const R6_G = q6(4, 6, 'Strip mode it is.', 'Which describes', 'you?', 'Picks your sample photos and first looks. Never shown to anyone.', `<div style="display:flex;flex-direction:column;gap:10px">${['Woman', 'Man', 'Non-binary', 'Prefer not to say'].map((t, i) => tile6('', t, '', i === 0).replace('min-height:96px', 'min-height:72px')).join('')}</div>`, 'Optional · change it any time in Settings');
+const R6_Q4 = q6(5, 6, 'Got it.', 'How did you find', 'Digi?', 'One tap. It helps a tiny team a lot.', `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${[['🎵', 'TikTok'], ['📸', 'Instagram'], ['💬', 'A friend'], ['🔎', 'App Store'], ['▶️', 'YouTube'], ['✨', 'Other']].map(([i, t]) => `<div style="height:122px;border-radius:18px;background:#17171C;border:2px solid #24242B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px"><span style="font-size:28px">${i}</span><span style="font-size:16px;font-weight:700">${t}</span></div>`).join('')}</div>`);
+const R6_READY = ready().replace(qTop(5).replace('Skip', ''), qTop(6).replace(battery(6), battery(6, 6)).replace('Skip', ''));
+
+// Paywall A: "their prints" (Photoroom fan + Snapchat rows + FocusFlight tiles/CTA + Headspace/Jomo date line)
+const print = (ph, rot, x, y, w, label, filt) => `<div style="position:absolute;left:${x}px;top:${y}px;width:${w}px;padding:7px 7px 26px;background:#F4F1EC;border-radius:4px;transform:rotate(${rot}deg);box-shadow:0 14px 30px rgba(0,0,0,.55)"><div style="position:relative;height:${Math.round(w * 1.18)}px;overflow:hidden;border-radius:2px"><img src="${img(ph)}" style="width:100%;height:100%;object-fit:cover;filter:${filt}"><span class="stamp" style="position:absolute;right:6px;bottom:4px;font-size:${Math.round(w / 11)}px">11 17 '26</span></div><span class="pix" style="position:absolute;left:8px;bottom:7px;font-size:9px;color:#C21F70">${label}</span></div>`;
+const featRow = (ic, t, sub) => `<div style="display:flex;align-items:center;gap:12px;padding:10px 0"><span style="width:38px;height:38px;flex-shrink:0;border-radius:11px;background:#2A1420;display:flex;align-items:center;justify-content:center">${ic}</span><div><div style="font-size:15px;font-weight:700">${t}</div><div style="font-size:13px;color:#B4B4C0">${sub}</div></div></div>`;
+const planTile = (sel, name, price, per, sub, badge) => `<div style="position:relative;flex:1;padding:14px 12px 12px;border-radius:18px;${sel ? 'background:#FFFFFF;color:#1A0010' : 'background:#17171C;border:1.5px solid #2E2E36'}">${badge ? `<span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:3px 9px;border-radius:999px;background:#FF4FA3;color:#1A0010;font-size:11px;font-weight:800">${badge}</span>` : ''}<div style="font-size:14px;font-weight:700;${sel ? '' : 'color:#E4E4EA'}">${name}</div><div style="margin-top:6px"><span style="font-size:26px;font-weight:800">${price}</span><span style="font-size:14px;${sel ? 'color:#55304A' : 'color:#B4B4C0'}"> ${per}</span></div><div style="font-size:12px;margin-top:3px;${sel ? 'color:#55304A' : 'color:#B4B4C0'}">${sub}</div></div>`;
+const bell = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF7DBE" stroke-width="2.4" stroke-linecap="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>';
+function payTop() { return `<div style="position:relative;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;z-index:2"><span style="font-size:15px;font-weight:600;color:#B4B4C0;min-width:44px;height:44px;display:flex;align-items:center">Restore</span><div class="ico">${ICON.x}</div></div>`; }
+function payBottom() {
+  return `<div style="display:flex;gap:10px;margin:18px 0 16px">${planTile(true, 'Yearly', '$39.99', '/yr', '3 days free · $0.77/wk', 'BEST VALUE')}${planTile(false, 'Weekly', '$6.99', '/wk', 'Cancel anytime')}</div>
+    <div style="height:58px;border-radius:999px;background:#FFFFFF;color:#1A0010;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px rgba(255,79,163,.4),0 10px 34px rgba(255,79,163,.55)">Start my 3 free days</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:#B4B4C0;margin-top:10px">${bell}Reminder on Nov 19 · first charge Nov 20</div>
+    <div style="text-align:center;font-size:12px;color:#9A9AA8;margin-top:6px">Auto-renews until you cancel in Settings · <u>Terms</u> · <u>Privacy</u></div>
+    <div style="text-align:center;font-size:14px;color:#FF7DBE;font-weight:700;margin-top:12px">Just tonight? 25 digis · $5.99</div>`;
+}
+function payA() {
+  return `<div class="screen" style="background:radial-gradient(120% 60% at 50% 18%,#3A1028 0%,#0B0B0E 62%)">${payTop()}
+    <div style="position:relative;height:262px;margin-top:-6px">${print('r2.png', -10, 30, 22, 118, 'FILM 400', 'sepia(.35) saturate(1.2) contrast(1.05)')}${print('r1.png', 9, 242, 22, 118, 'LIVE ✦', 'contrast(1.2) saturate(1.2)')}${print('r1.png', -1.5, 117, 0, 156, 'YOURS ✦', 'contrast(1.28) saturate(1.25) brightness(.95)')}</div>
+    <div style="padding:0 20px 24px;display:flex;flex-direction:column;flex-grow:1">
+      <div style="display:flex;align-items:center;gap:8px;margin-top:6px">${pixelLogo(3.4)}<span class="pix" style="font-size:12px;padding:3px 8px;border-radius:5px;background:#FF4FA3;color:#1A0010">PLUS</span></div>
+      <div class="serif" style="font-size:36px;line-height:1.02;margin-top:8px">Keep the <span class="pink">flash</span> going</div>
+      <div style="margin-top:8px">${featRow(PICON.ai, '60 AI re-lights a month', '')}${featRow(PICON.live, 'Live digis: 5-second flash clips', '')}${featRow(PICON.mark, 'Every look, no DIGI.PINK mark', '')}</div>
+      <div style="flex-grow:1"></div>${payBottom()}</div></div>`;
+}
+// Paywall B: camera bento (Halide), drawn as digicam widgets
+function payB() {
+  const t = (inner, span, h) => `<div style="grid-column:span ${span};height:${h}px;border-radius:18px;background:#15151A;border:1px solid #26262E;padding:12px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative">${inner}</div>`;
+  const cap = (a, b) => `<div><div style="font-size:14px;font-weight:700">${a}</div><div style="font-size:12px;color:#B4B4C0">${b}</div></div>`;
+  return `<div class="screen">${payTop()}
+    <div style="padding:0 16px"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+      ${t(`<img src="${img('r1.png')}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.28) saturate(1.25)"><span class="pix" style="position:relative;align-self:flex-start;font-size:10px;padding:2px 7px;border-radius:4px;background:#FF4FA3;color:#1A0010">AI RE-LIGHT ✦</span><span class="stamp" style="position:relative;align-self:flex-end;font-size:14px">11 17 '26</span>`, 2, 236)}
+      <div style="grid-column:span 2;display:grid;gap:8px">${t(`<span class="pix" style="font-size:22px;color:#FF5A5A">● LIVE 5s</span>${cap('Live digis', 'Flash clips')}`, 2, 114)}${t(`<span class="pix" style="font-size:26px;color:#FF4FA3;letter-spacing:2px">60/mo</span>${cap('AI digis', 'Refill monthly')}`, 2, 114)}</div>
+      ${t(`<div style="display:flex;gap:3px">${['r5.png', 'r2.png', 'r4.png', 'selfie.png'].map((p) => `<img src="${img(p)}" style="width:30px;height:40px;object-fit:cover;border:2px solid #F4F1EC">`).join('')}</div>${cap('Every look', 'Holiday drops too')}`, 2, 124)}
+      ${t(`<span class="pix" style="font-size:13px;color:#9A9AA8;text-decoration:line-through;text-decoration-color:#FF4FA3;text-decoration-thickness:3px">DIGI.PINK</span>${cap('No watermark', 'Clean shares')}`, 2, 124)}
+    </div></div>
+    <div style="padding:0 20px 24px;display:flex;flex-direction:column;flex-grow:1">
+      <div style="display:flex;align-items:center;gap:8px;margin-top:18px">${pixelLogo(3.4)}<span class="pix" style="font-size:12px;padding:3px 8px;border-radius:5px;background:#FF4FA3;color:#1A0010">PLUS</span></div><div class="serif" style="font-size:36px;line-height:1.02;margin-top:8px">Keep the <span class="pink">flash</span> going</div>
+      <div style="flex-grow:1"></div>${payBottom()}</div></div>`;
+}
+// Out of digis: separate sheet, Party Pack first (Replika), never on the main paywall
+function payPack() {
+  const pk = (sel, n, price, sub, badge) => `<div style="position:relative;flex:1;border-radius:20px;padding:16px 14px;text-align:center;${sel ? 'background:#FFFFFF;color:#1A0010' : 'background:#1C1C22;border:1.5px solid #2E2E36'}">${badge ? `<span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:3px 9px;border-radius:999px;background:#FF4FA3;color:#1A0010;font-size:11px;font-weight:800">${badge}</span>` : ''}<div style="font-size:40px;font-weight:800;line-height:1">${n}</div><div style="font-size:14px;font-weight:600;margin-top:2px">AI digis</div><div style="font-size:22px;font-weight:800;margin-top:12px">${price}</div><div style="font-size:12px;margin-top:2px;${sel ? 'color:#55304A' : 'color:#B4B4C0'}">${sub}</div></div>`;
+  return camera({ ...PICK, overlay: sheet(`<div style="text-align:center"><div class="pix" style="font-size:12px;color:#FF7DBE">0 DIGIS LEFT · CAMERA'S STILL FREE</div><div class="serif" style="font-size:34px;margin-top:6px">Party <span class="pink">tonight?</span></div><div style="font-size:14px;color:#B4B4C0;margin-top:4px">Pay once. Your digis never expire.</div></div>
+    <div style="display:flex;gap:10px;margin:22px 0 16px">${pk(true, '25', '$5.99', 'Party Pack', 'PAY ONCE')}${pk(false, '60', '$11.99', 'Big Night')}</div>
+    <div style="height:58px;border-radius:999px;background:#FFFFFF;color:#1A0010;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 34px rgba(255,79,163,.5)">Get 25 digis · $5.99</div>
+    <div style="display:flex;align-items:center;gap:10px;margin:16px 0 4px;color:#9A9AA8;font-size:12px"><span style="flex:1;height:1px;background:#2E2E36"></span>or<span style="flex:1;height:1px;background:#2E2E36"></span></div>
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:#1C1C22"><div style="flex-grow:1"><div style="font-size:15px;font-weight:700">Digi Plus · 60 digis a month</div><div style="font-size:12px;color:#B4B4C0">3 days free, then $39.99/year</div></div><span style="height:40px;padding:0 14px;border-radius:999px;background:#2A1420;color:#FF7DBE;font-weight:700;font-size:14px;display:flex;align-items:center">See Plus</span></div>`) });
+}
+
 const ONB_A = camera({ ...PICK, photo: 'r2.png', photoFilter: 'brightness(1.12) saturate(.75)', vfOverlay: vfLabel('A NORMAL PHONE PIC'), overlay: coach('Tap it.') });
 const ONB_B = camera({ ...PICK, photo: 'r2.png', photoFilter: 'contrast(1.3) saturate(1.25) brightness(.92)', vfOverlay: vfLabel("THAT'S A DIGI", true) + `<span class="stamp" style="position:absolute;bottom:10px;right:10px;font-size:15px">11 17 '26</span>`,
   overlay: `<div style="position:absolute;inset:0;pointer-events:none">${confetti()}</div>` + sheet(`<div class="serif" style="font-size:30px;line-height:1.05">Now shoot <span class="pink">your</span> party</div><div style="font-size:15px;color:#B4B4C0;margin:8px 0 18px">Digi needs the camera. Photos stay on your phone.</div><div class="btn">Use my camera</div>`) });
@@ -382,6 +449,8 @@ const SCREENS = {
   'q6-strips': paywall('strips'),
   'q6-beforeafter': paywall('beforeafter'),
   'q6-pixel': paywall('pixel'),
+  'r6-q1': R6_Q1, 'r6-q2': R6_Q2, 'r6-q3': R6_Q3, 'r6-gender': R6_G, 'r6-q4': R6_Q4, 'r6-ready': R6_READY,
+  'r6-pay-a': payA(), 'r6-pay-b': payB(), 'r6-pack': payPack(),
   'r5-q1': Q1, 'r5-q2': Q2, 'r5-q3': Q3, 'r5-q4': Q4, 'r5-ready': ready(),
   'r5-pay-pro': paywallPro(false),
   'r5-pay-glass': paywallPro(true),
@@ -400,6 +469,7 @@ const SCREENS = {
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+  const audit = {};
   for (const [name, html] of Object.entries(SCREENS)) {
     const file = path.join(OUT, name + '.html');
     fs.writeFileSync(file, `<!doctype html><html><head><meta charset="utf-8"><style>${CSS}</style></head><body>${html}</body></html>`);
@@ -407,8 +477,19 @@ const SCREENS = {
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(150);
     await page.screenshot({ path: path.join(OUT, name + '.png') });
+    if (name.startsWith('r6-')) {
+      audit[name] = await page.evaluate(() => {
+        const scr = document.querySelector('.screen');
+        const clone = scr.cloneNode(true); clone.querySelectorAll('.stamp,.pix,svg').forEach((e) => e.remove()); document.body.appendChild(clone); const txt = clone.innerText; clone.remove();
+        const words = txt.split(/\s+/).filter((w) => /[A-Za-z0-9$]/.test(w)).length;
+        const prices = [...scr.querySelectorAll('*')].filter((e) => e.children.length === 0 && /\$\d/.test(e.textContent)).map((e) => ({ t: e.textContent.trim().slice(0, 40), px: parseFloat(getComputedStyle(e).fontSize) }));
+        const over = [...scr.querySelectorAll('*')].some((e) => { const r = e.getBoundingClientRect(); return r.bottom > 845 && r.height > 0 && getComputedStyle(e).position !== 'absolute'; });
+        return { words, overflow: over, prices };
+      });
+    }
     fs.unlinkSync(file);
   }
+  fs.writeFileSync(path.join(__dirname, 'audit-metrics.json'), JSON.stringify(audit, null, 1));
   await browser.close();
   console.log('rendered', Object.keys(SCREENS).length);
 })();

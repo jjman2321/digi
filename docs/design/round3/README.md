@@ -23,3 +23,7 @@ Boards: `board-r4-onboarding.jpg`, `board-r4-paywall.jpg`; full-size picks: `r4-
 Owner: "we want to ask some qusstion in the onboardig yea swe haave some data no? pawayls is good but it can defo be a bit more professional?"
 Research: ch. 10 (2–3 questions that change what the user sees + tap-to-advance attribution; Cal AI founder: questions raised conversion; Adapty: personalized onboarding +13–35% ARPU). Mobbin: ABY Journal, Insight Timer, Tabby (question screens), VSCO, Halide (paywalls).
 Flow: `r5-onboarding-flow.jpg`. Paywall: `board-r5-paywall.jpg`, `r5-pay-pick.jpg`.
+
+## Round 6 (Nov 17): 10/10 pass
+Owner: "nah polish oboarding more maybe add gender? and pawywal is ass deeply research this look at other niches for inspo and internally audit so its 10/1- use appkitte aswel"
+Cross-niche Mobbin research: `../research/mobbin/` + `mobbin-refs.json`. Audit: `AUDIT-r6.md`. Flow: `r6-onboarding-flow.jpg`. Paywall: `board-r6-paywall.jpg`, `r6-pay-pick.jpg`.

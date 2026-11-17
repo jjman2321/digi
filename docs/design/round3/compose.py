@@ -102,3 +102,10 @@ board('board-r5-paywall', 'Paywall v3: more professional (VSCO + Halide on Mobbi
     (R + 'r5-pay-glass.png', 'Frosted glass card', 8.5, 'Very premium. Photo shows less.', False),
     (R + 'r4-pay-bleed.png', 'v2 (last round)', 8, 'Good, but plain checkmarks.', False),
 ])
+
+# ---- round 6: 10/10 pass ----
+board('board-r6-paywall', 'Paywall v4 (Photoroom, Snapchat, FocusFlight, Headspace, Halide)', [
+    (R + 'r6-pay-a.png', 'A: Their prints', 10, 'Sells THEIR photo. Passes all 16 checks.', True),
+    (R + 'r6-pay-b.png', 'B: Camera bento (Halide)', 9, 'Very on-brand. Sells features, not their photo.', False),
+    (R + 'r6-pack.png', 'Out-of-digis sheet', 10, 'Separate sheet, Party Pack first (Replika).', True),
+])

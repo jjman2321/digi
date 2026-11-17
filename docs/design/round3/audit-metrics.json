@@ -1,0 +1,98 @@
+{
+ "r6-q1": {
+  "words": 24,
+  "overflow": false,
+  "prices": []
+ },
+ "r6-q2": {
+  "words": 42,
+  "overflow": false,
+  "prices": []
+ },
+ "r6-q3": {
+  "words": 36,
+  "overflow": false,
+  "prices": []
+ },
+ "r6-gender": {
+  "words": 33,
+  "overflow": false,
+  "prices": []
+ },
+ "r6-q4": {
+  "words": 30,
+  "overflow": false,
+  "prices": []
+ },
+ "r6-ready": {
+  "words": 17,
+  "overflow": false,
+  "prices": []
+ },
+ "r6-pay-a": {
+  "words": 60,
+  "overflow": false,
+  "prices": [
+   {
+    "t": "$39.99",
+    "px": 26
+   },
+   {
+    "t": "3 days free · $0.77/wk",
+    "px": 12
+   },
+   {
+    "t": "$6.99",
+    "px": 26
+   },
+   {
+    "t": "Just tonight? 25 digis · $5.99",
+    "px": 14
+   }
+  ]
+ },
+ "r6-pay-b": {
+  "words": 62,
+  "overflow": false,
+  "prices": [
+   {
+    "t": "$39.99",
+    "px": 26
+   },
+   {
+    "t": "3 days free · $0.77/wk",
+    "px": 12
+   },
+   {
+    "t": "$6.99",
+    "px": 26
+   },
+   {
+    "t": "Just tonight? 25 digis · $5.99",
+    "px": 14
+   }
+  ]
+ },
+ "r6-pack": {
+  "words": 49,
+  "overflow": false,
+  "prices": [
+   {
+    "t": "$5.99",
+    "px": 22
+   },
+   {
+    "t": "$11.99",
+    "px": 22
+   },
+   {
+    "t": "Get 25 digis · $5.99",
+    "px": 17
+   },
+   {
+    "t": "3 days free, then $39.99/year",
+    "px": 12
+   }
+  ]
+ }
+}
