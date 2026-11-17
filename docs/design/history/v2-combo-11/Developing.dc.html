@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Developing your digi</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600;700&amp;family=Silkscreen:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FF7DBE}a:hover{color:#FFB3D6}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0B0B0E; display: flex; flex-direction: column; align-items: center; font-family: 'Inter', system-ui, sans-serif; color: #FFFFFF; overflow: hidden; position: relative">
+  <div aria-hidden="true" style="position: absolute; top: 120px; left: 20px; width: 350px; height: 350px; border-radius: 50%; background: radial-gradient(circle, rgba(255,79,163,0.3) 0%, rgba(255,79,163,0) 70%)"></div>
+
+  <div style="position: relative; margin-top: 92px; width: 270px; border-radius: 30px; background: linear-gradient(160deg, #FDE1EE 0%, #F7B9D6 45%, #EE9CC2 100%); box-shadow: inset 0 2px 0 rgba(255,255,255,0.85), inset 0 -4px 0 rgba(160,40,100,0.25), 0 20px 50px rgba(0,0,0,0.6); padding: 12px 13px 14px">
+    <div style="display: flex; align-items: center; gap: 8px; padding-bottom: 9px">
+      <div aria-hidden="true" style="width: 54px; height: 20px; border-radius: 7px; background: linear-gradient(180deg, #FFFFFF, #FFF3B0); box-shadow: 0 0 18px rgba(255,240,170,0.9)"></div>
+      <div aria-hidden="true" style="width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #4A6BFF 0%, #1B1B3A 45%, #050508 70%); box-shadow: 0 0 0 3px #D98AB2, 0 0 0 5px #F7C9DD"></div>
+      <span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: #FF9A2E; box-shadow: 0 0 8px #FF9A2E"></span>
+      <span style="margin-inline-start: auto; font-family: 'Silkscreen', monospace; font-size: 11px; color: #A33A72">DIGI-05</span>
+    </div>
+    <div style="border-radius: 15px; background: #26252B; padding: 8px">
+      <div style="position: relative; height: 290px; border-radius: 9px; overflow: hidden; background: #000">
+        <img src="../../images/r1.png" alt="Your shot, still developing" style="width: 100%; height: 100%; object-fit: cover; filter: blur(14px) brightness(0.75) saturate(1.2); transform: scale(1.15)">
+        <span style="position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); text-align: center; font-family: 'Silkscreen', monospace; font-size: 15px; color: #FFFFFF; text-shadow: 0 1px 3px rgba(0,0,0,0.8)">DEVELOPING...</span>
+        <span style="position: absolute; bottom: 7px; right: 9px; font-family: 'Silkscreen', monospace; font-size: 14px; color: #FF9A2E; text-shadow: 0 0 6px rgba(255,120,30,0.9)">11 17 '26</span>
+      </div>
+    </div>
+  </div>
+
+  <h1 style="position: relative; margin: 40px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 40px; text-align: center">Adding the <em style="color: #FF4FA3">flash</em></h1>
+  <p style="position: relative; margin: 8px 40px 0; font-size: 15px; line-height: 1.5; color: #A6A6B3; text-align: center">Re-lighting faces, adding grain and the date stamp. About 20 seconds.</p>
+  <div style="position: relative; width: 210px; height: 5px; margin-top: 22px; border-radius: 999px; background: #24242B">
+    <div style="width: 62%; height: 5px; border-radius: 999px; background: #FF4FA3; box-shadow: 0 0 10px #FF4FA3"></div>
+  </div>
+
+  <a href="Result.dc.html" style="position: absolute; left: 20px; right: 20px; bottom: 30px; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 18px; background: #17171C; border: 1px solid #26262E; text-decoration: none">
+    <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="1.5"></rect><path d="M7 9h10M7 15h10"></path></svg>
+    <span style="font-size: 14px; line-height: 1.45; color: #D9D9E0"><strong style="color: #FFFFFF">Tip:</strong> turn this into a 4-shot booth strip on the next screen.</span>
+  </a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

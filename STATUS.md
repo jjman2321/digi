@@ -4,7 +4,7 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 
 ## 1. Where we are
 - ✅ Research done: 26-chapter "bible" in `docs/research/bible/`, plus the earlier deep dive in `docs/research/earlier/`.
-- ✅ 18 approved screen designs: `docs/design/png/` and `docs/design/screens/`. Live artifact: https://claude.ai/artifact/9QnBF3QkMb3kidRsG3PMnV
+- 🟡 **UI is NOT final. Still brainstorming.** Read `docs/design/README.md` first. It has every version: the Nov 14 mocks, **the owner's pixel-DIGI concept**, **the 11-screen combo** (his preferred base) and the latest 18-screen set (v9). The next step is a UI round with the owner (§3a) before building screens.
 - ✅ AI recipe tested and picked: `docs/model-test/` (README v3 section and `PROMPTS.md`). Test spend: $2.27.
 - 🟡 **App scaffold (WORK IN PROGRESS, not yet typechecked or run):**
   - Expo SDK 58 with deps installed;
@@ -49,6 +49,7 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 
 | Route | Design | Status |
 |---|---|---|
+| (UI not final; see §3a. This table maps to the latest set) | | |
 | `welcome` | 01-Main | built |
 | `pick` (sample flash demo) | 04-Pick / 05-Watch | built |
 | `occasion` | 03-Vibe (single tap) | built |
@@ -97,7 +98,13 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 - `looks` (id, name, model, fallback, prompt, cost_digis, active)
 - `assets` (storage paths; **delete originals after 24 h**, keep outputs until the user deletes them)
 
-## 3b. Interview the owner first (open questions)
+## 3a. UI round first (before any screen code)
+The owner said on Nov 17: "this isn't the last ui I picked that we should work on again we're still brainstorming look at the pixelated uis we worked on and the combo one".
+1. Read `docs/design/README.md`. Look at `history/owner-concept/`, `history/v2-combo-11/overview.jpg`, `history/v0-mocks-nov14/mock-v2-screens.png` and the latest `png/`.
+2. Make the next design round: **combo base plus the pixel direction**, answering the 6 open UI questions in that README with side-by-side options and scores.
+3. Iterate until he picks. Record the pick in §2. Only then build or adjust screens in code. Expect the existing `src/app/` screens to change.
+
+## 3b. Interview the owner (open questions)
 Read the bible first (`docs/research/bible/00-README-summary.md`, then ch. 06, 12, 18, 21, 22 and 24). Then ask **all 20**. Don't guess any of these:
 - Give a recommended default for each question, with a score out of 10, so he can just say "yes".
 - Show visuals where it helps (designs, icon options, sample digis).
