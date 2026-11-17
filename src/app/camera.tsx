@@ -28,7 +28,7 @@ export default function Camera() {
   const [zoom, setZoom] = useState<0 | 0.05 | 0.2>(0.05);
   const [mode, setMode] = useState<Mode>('DIGICAM');
   const [busy, setBusy] = useState(false);
-  const flash = useRef(new Animated.Value(0)).current;
+  const [flash] = useState(() => new Animated.Value(0));
   const roll = useStore((s) => s.roll);
   const freeAi = useStore((s) => s.freeAiLeft);
 

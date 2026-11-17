@@ -5,7 +5,7 @@ import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFont } from '@shopify/react-native-skia';
-import * as MediaLibrary from 'expo-media-library';
+import { Asset as LibraryAsset, requestPermissionsAsync } from 'expo-media-library';
 import * as Sharing from 'expo-sharing';
 import * as Haptics from 'expo-haptics';
 import { C, F } from '@/ui/theme';
@@ -14,6 +14,11 @@ import { developImage, loadImage } from '@/lib/develop';
 import { takePending } from '@/lib/pending';
 import { saveDigi } from '@/lib/files';
 import { addShot, get, set, useStore } from '@/lib/store';
+
+function goAi(u: string) {
+  const s = get();
+  router.push({ pathname: s.aiConsent && s.ageOk ? '/developing' : '/consent', params: { uri: u } });
+}
 
 export default function Develop() {
   const { ai } = useLocalSearchParams<{ ai?: string }>();
@@ -24,13 +29,13 @@ export default function Develop() {
   const [uri, setUri] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
-  const reveal = useRef(new Animated.Value(1)).current;
+  const [reveal] = useState(() => new Animated.Value(1));
   const started = useRef(false);
+  const [pending] = useState(() => takePending());
 
   useEffect(() => {
-    if (started.current || !lcd || !pixel) return;
-    const p = takePending();
-    if (!p) return setErr('No photo to develop.');
+    const p = pending;
+    if (started.current || !lcd || !pixel || !p) return;
     started.current = true;
     (async () => {
       try {
@@ -45,19 +50,15 @@ export default function Develop() {
         setErr(e instanceof Error ? e.message : 'Something went wrong.');
       }
     })();
-  }, [lcd, pixel, stampOn, ai, reveal]);
-
-  const goAi = (u: string) => {
-    const s = get();
-    router.push({ pathname: s.aiConsent && s.ageOk ? '/developing' : '/consent', params: { uri: u } });
-  };
+  }, [lcd, pixel, stampOn, ai, reveal, pending]);
+  const shownErr = pending ? err : 'No photo to develop.';
 
   const save = async () => {
     if (!uri) return;
     if (Platform.OS === 'web') return setSaved(true);
-    const perm = await MediaLibrary.requestPermissionsAsync(true);
+    const perm = await requestPermissionsAsync(true);
     if (!perm.granted) return;
-    await MediaLibrary.saveToLibraryAsync(uri);
+    await LibraryAsset.create(uri);
     setSaved(true);
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
   };
@@ -78,8 +79,8 @@ export default function Develop() {
       <View style={st.frame}>
         {uri ? <Image source={{ uri }} style={StyleSheet.absoluteFill} contentFit="contain" /> : null}
         <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: '#fff', opacity: reveal }]} />
-        {!uri && !err && <Text style={st.developing}>DEVELOPING…</Text>}
-        {err && <Text style={[st.developing, { color: C.bad }]}>{err}</Text>}
+        {!uri && !shownErr && <Text style={st.developing}>DEVELOPING…</Text>}
+        {shownErr && <Text style={[st.developing, { color: C.bad }]}>{shownErr}</Text>}
       </View>
 
       <View style={st.actions}>

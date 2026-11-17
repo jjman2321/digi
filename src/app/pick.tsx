@@ -1,5 +1,5 @@
 // Onboarding 1/3: try the flash on a sample photo before anything else (no permissions yet).
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
@@ -13,7 +13,7 @@ const after = require('../../assets/samples/sample-after.jpg');
 
 export default function Pick() {
   const [shot, setShot] = useState(false);
-  const flash = useRef(new Animated.Value(0)).current;
+  const [flash] = useState(() => new Animated.Value(0));
 
   const fire = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});

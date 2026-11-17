@@ -6,10 +6,17 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 - ✅ Research done: 26-chapter "bible" in `docs/research/bible/`, plus the earlier deep dive in `docs/research/earlier/`.
 - ✅ **UI direction picked (round 3, Nov 17):** combo base + the owner's chunky pixel DIGI. Boards and single screens: `docs/design/round3/`. Other screens get redrawn in this style as they're built.
 - ✅ AI recipe tested and picked: `docs/model-test/` (README v3 section and `PROMPTS.md`). Test spend: $2.27.
-- 🟡 **App scaffold (WORK IN PROGRESS, not yet typechecked or run):**
-  - Expo SDK 58 with deps installed;
-  - design kit (`src/ui/`), store, the Skia develop pass;
-  - screens: `welcome`, `pick`, `occasion`, `source`, `camera`, `develop`.
+- ✅ **Build step 1 (Nov 17):**
+  - `npx tsc --noEmit` and `npx expo lint` both pass, with 0 errors.
+  - `app.json` is set up:
+    - name "Digi" and bundle id `pink.digi.app`;
+    - dark UI;
+    - camera and add-photos permission strings from ch. 22; no microphone, no full-library read;
+    - icon A (light) + black (dark) + tinted.
+  - Metro is configured for the web preview.
+  - Screenshots: `docs/screenshots/step1/`.
+  - Existing screens still use the old design. They get rebuilt to round 3–9 picks in step 4.
+  - Known bug: the stamp apostrophe shows as a box; fix in step 2.
 - ⬜ Everything in §5 "Build order".
 
 ## 2. Decisions (owner's words, dated)
