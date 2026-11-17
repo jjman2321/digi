@@ -414,6 +414,20 @@ function pickLook() {
     <div style="flex-grow:1"></div><div style="padding:0 20px 28px"><div class="btn">Use Digicam</div></div></div>`;
 }
 
+// ---------- round 8: free AI allowance options (Mobbin: Universe, Ahead, Riveo, Canva) ----------
+function freeCard(kind) {
+  const counter = { once: '1 FREE DIGI ✦', tiers: '3 FREE DIGIS ✦', weekly: '2 FREE DIGIS ✦ · +1 FRI' }[kind];
+  const body = {
+    once: `<div class="serif" style="font-size:32px;line-height:1.05">Your free <span class="pink">digi</span></div><div style="font-size:15px;color:#B4B4C0;margin:8px 0 16px">One AI re-light on us. The camera's free forever.</div>`,
+    tiers: `<div class="serif" style="font-size:32px;line-height:1.05">3 free <span class="pink">digis</span></div><div style="font-size:15px;color:#B4B4C0;margin:8px 0 16px">Try AI re-light and Live digi. The camera's free forever.</div><div style="font-size:12px;color:#9A9AA8;margin-bottom:12px">1 free digi in some countries</div>`,
+    weekly: `<div class="serif" style="font-size:32px;line-height:1.05">Free digi every <span class="pink">Friday</span></div><div style="font-size:15px;color:#B4B4C0;margin:8px 0 14px">2 to start. +1 every Friday, just in time for the party.</div>
+      <div style="border-radius:16px;background:#1C1C22;padding:14px"><div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700"><span>This week</span><span style="color:#FF7DBE">2 left</span></div><div style="height:8px;border-radius:4px;background:#2E2E36;margin:10px 0 8px"><div style="width:100%;height:100%;border-radius:4px;background:#FF4FA3"></div></div><div style="font-size:12px;color:#B4B4C0">Refills Fri · saves up to 3 (enough for a Live digi)</div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding:12px 14px;border-radius:16px;background:#1C1C22"><div><div style="font-size:15px;font-weight:700">Invite a friend · +2 digis</div><div style="font-size:12px;color:#B4B4C0">When they make their first digi</div></div><span style="height:40px;padding:0 14px;border-radius:999px;background:#2A1420;color:#FF7DBE;font-weight:700;font-size:14px;display:flex;align-items:center">Invite</span></div><div style="height:14px"></div>`,
+  }[kind];
+  const vf = `<span class="pix" style="position:absolute;top:9px;left:10px;font-size:11px;padding:2px 7px;border-radius:4px;background:#FF4FA3;color:#1A0010">${counter}</span>`;
+  return camera({ ...PICK, vfOverlay: vf, overlay: sheet(`${body}<div class="btn">Re-light a photo ✦</div>`) });
+}
+
 const ONB_A = camera({ ...PICK, photo: 'r2.png', photoFilter: 'brightness(1.12) saturate(.75)', vfOverlay: vfLabel('A NORMAL PHONE PIC'), overlay: coach('Tap it.') });
 const ONB_B = camera({ ...PICK, photo: 'r2.png', photoFilter: 'contrast(1.3) saturate(1.25) brightness(.92)', vfOverlay: vfLabel("THAT'S A DIGI", true) + `<span class="stamp" style="position:absolute;bottom:10px;right:10px;font-size:15px">11 17 '26</span>`,
   overlay: `<div style="position:absolute;inset:0;pointer-events:none">${confetti()}</div>` + sheet(`<div class="serif" style="font-size:30px;line-height:1.05">Now shoot <span class="pink">your</span> party</div><div style="font-size:15px;color:#B4B4C0;margin:8px 0 18px">Digi needs the camera. Photos stay on your phone.</div><div class="btn">Use my camera</div>`) });
@@ -467,6 +481,7 @@ const SCREENS = {
   'q6-beforeafter': paywall('beforeafter'),
   'q6-pixel': paywall('pixel'),
   'r7-look': pickLook(),
+  'r8-free-once': freeCard('once'), 'r8-free-tiers': freeCard('tiers'), 'r8-free-weekly': freeCard('weekly'),
   'r6-q1': R6_Q1, 'r6-q2': R6_Q2, 'r6-q3': R6_Q3, 'r6-gender': R6_G, 'r6-q4': R6_Q4, 'r6-ready': R6_READY,
   'r6-pay-a': payA(), 'r6-pay-b': payB(), 'r6-pack': payPack(),
   'r5-q1': Q1, 'r5-q2': Q2, 'r5-q3': Q3, 'r5-q4': Q4, 'r5-ready': ready(),
