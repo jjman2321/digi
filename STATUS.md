@@ -98,10 +98,11 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 - `assets` (storage paths; **delete originals after 24 h**, keep outputs until the user deletes them)
 
 ## 3b. Interview the owner first (open questions)
-Read the bible first (`docs/research/bible/00-README-summary.md`, then ch. 06, 12, 18, 21, 22 and 24). Then ask **only these**, one short message:
+Read the bible first (`docs/research/bible/00-README-summary.md`, then ch. 06, 12, 18, 21, 22 and 24). Then ask **all 20**. Don't guess any of these:
 - Give a recommended default for each question, with a score out of 10, so he can just say "yes".
-- Ask the questions in two batches of 5 at most.
-- Record his answers in §2 with his words and the date. Then build.
+- Show visuals where it helps (designs, icon options, sample digis).
+- Ask in batches of 5: 1–5, 6–10, 11–15, 16–20.
+- Record every answer in §2 with his words and the date. Then build.
 
 1. **Look and feel:** keep the approved designs as they are, or anything that bugs him? Show `docs/design/png/` side by side.
 2. **Launch looks:** which 6 free looks and which AI looks at launch? Default from ch. 10/18: Digicam Flash, Y2K, Film, Strip, Xmas, NYE, plus "✦ AI Re-light".
@@ -112,7 +113,17 @@ Read the bible first (`docs/research/bible/00-README-summary.md`, then ch. 06, 1
 7. **Brand voice:** check 3 sample lines from ch. 18 (onboarding, paywall, push).
 8. **Shared rolls:** v1.1 as planned, or are they core for him?
 9. **His time:** hours a day for testing, and when he can install a dev build on his iPhone.
-10. **Accounts ready?** Apple Developer (Grasp Labs), Expo, Supabase, RevenueCat. Which exist already?
+10. **Accounts ready?** Apple Developer (Grasp Labs), Expo, Supabase, RevenueCat, OpenRouter. Which exist already?
+11. **App icon:** show 3 options. Default: the pink digicam with the pixel "digi" logo. No look-alike of any real camera brand.
+12. **Watermark:** a small `DIGI.PINK` mark on free shares, removed by Plus, and never on guests' roll photos. OK? Same question for the date stamp format (`11 17 '26`, orange LCD, bottom right).
+13. **Sign-in:** start anonymous (no account), and ask for Sign in with Apple only for rolls or restore. OK?
+14. **Age rating:** 18+ only, with the age check at the first AI use (ch. 22). Or allow 17+ for the free camera only?
+15. **Photo storage:** delete the uploaded original photo 24 h after the AI job; keep AI results until the user deletes them; never train on photos. OK? Also the support email (e.g. `hi@digi.pink`).
+16. **Live digi:** 5 s, silent or with a sound (a flash "pop" sound effect only, no licensed music)? Costs 3 digis, at 480p plus the finish. OK?
+17. **Strip:** 4 poses, vertical; free shows the date only, Plus adds themed frames. Which 3 frame themes at launch?
+18. **Notifications:** which pushes are OK? Default: "your digi is ready", the trial reminder (start + 40 h), and at most 1 a week for new looks. No guilt or streak pushes.
+19. **Marketing:** will he post from his own phone or face, or faceless accounts only? Budget for UGC creators and ads after launch (paid ads are allowed now)? Use PostHog for analytics (a key name exists in the environment)?
+20. **After v1:** priority order for v1.1: shared rolls, Android, Arabic UI, weddings/event pack, more looks weekly. And the success bar for deciding to keep investing (default: D7 ≥ 8%, refunds < 4%, AI cost < 10% of revenue).
 
 ## 4. Owner setup (never paste keys in chat)
 1. **Apple Developer account** for Grasp Labs LLC, and enrol in the App Store Small Business Program (15% instead of 30%).
