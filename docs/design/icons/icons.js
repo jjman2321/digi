@@ -46,6 +46,8 @@ const ICONS = {
   'c-date': `<div class="i" style="background:radial-gradient(120% 120% at 30% 20%,#FF8CC6 0%,#FF4FA3 45%,#E62D86 100%);flex-direction:column;gap:40px">
       <div style="padding:40px 70px;border-radius:60px;background:#1A0010;box-shadow:inset 0 6px 20px rgba(0,0,0,.6)"><span style="font-family:LCD;font-size:300px;color:#FF9A2E;text-shadow:0 0 30px rgba(255,120,30,.9)">'26</span></div>
       ${logo(10, '#1A0010', null)}</div>`,
+  // E: black with pink DIGI only (owner idea)
+  'e-black': `<div class="i" style="background:radial-gradient(110% 110% at 50% 30%,#1E1018 0%,#0B0B0E 70%)">${logo(29, '#FF4FA3', '#5A1A3A')}</div>`,
   // D: night version: black, pink DIGI, orange stamp
   'd-night': `<div class="i" style="background:radial-gradient(110% 110% at 50% 30%,#2A1420 0%,#0B0B0E 70%);flex-direction:column;gap:70px">${logo(26, '#FF4FA3', '#5A1A3A')}<span style="font-family:LCD;font-size:120px;color:#FF9A2E;text-shadow:0 0 24px rgba(255,120,30,.9)">11 17 '26</span></div>`,
 };
