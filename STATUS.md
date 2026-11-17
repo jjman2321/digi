@@ -18,6 +18,10 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 | Nov 17 | UI round 3 picks: "Yeah not bad except paywall too much white space". Took the recommended option on all 6: **pink body**; **big pixel DIGI on top** (body reads "DIGI-05"); **MODE + T/W** buttons (no REC); **mode tabs PHOTO · STRIP · ✦ AI · LIVE ✦ + a look swatch** by the shutter; **"Tap it." onboarding** (Tap it → Occasion → How did you find us → Camera; age + consent at the first AI tap); **paywall = pixel DIGI + their own digi** in the pink camera. Designs: `docs/design/round3/`. |
 | Nov 17 | Logo: "yes the first 1 but make sure the D doesnt look like an o". **The owner's chunky concept DIGI, in pink**, with a flat-sided D. |
 | Nov 17 | "timeline in pawayal is useless". **No trial timeline on the paywall.** The dated line under the button stays ("Then $39.99/year. Not charged until {date}. Cancel anytime."), plus the reminder push. |
+| Nov 17 | Interview Q1 (look and feel): answered by UI round 3 (rows above). |
+| Nov 17 | Q2 "6 free + 2 AI". **Free looks:** Digicam, Film 400, Y2K Glow, Club B&W, Paparazzi, Xmas Lights (NYE Glitter from Dec 26). **AI:** Flash Re-light ✦ and Live digi ✦. Strip is a mode, not a look. |
+| Nov 17 | Q3 "A/B test". **Paywall A/B:** Yearly $39.99 + 3-day trial pre-selected vs Weekly $6.99 + 3-day trial pre-selected; judge on revenue per install at 30/90 days. Party Pack $5.99 link on both. |
+| Nov 17 | Q4 "Yes, as is". **3 free AI digis once per device** (App Attest, reinstall doesn't refill). AI photo 1 digi, strip 2, Live digi 3. |
 | Nov 17 | "ok let's do it don't build with the contest in mind anymore or its rules". **No contest.** Build Digi as a business. Kiwi is shelved; Kilma is a 2027 maybe. |
 | Nov 17 | "we should have it in v1 but we should use the cheapest best models so our margins are good". **Live digi (AI video) is in v1.** |
 | Nov 17 | Round-1 AI output looked "mid". Round 3 approved: Klein + style ref + punchy finish. Results must "not look AI". |
