@@ -1,0 +1,151 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#141114;--paper:#fbf7f4;--pink:#ff4f9a;--pink2:#ffd3e6;--muted:#7a7077;--line:#ece4e8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1b171a;font-family:Inter,system-ui,sans-serif;padding:48px 40px 56px;color:var(--ink)}
+h1.t{font:400 34px 'Archivo Black';color:#fff;margin-bottom:6px}
+p.s{color:#bfb3ba;font-size:16px;margin-bottom:34px}
+.row{display:flex;gap:34px;align-items:flex-start}
+.cap{color:#e9dfe4;font-weight:600;font-size:15px;margin-top:14px;text-align:center}
+.phone{width:360px;height:760px;border-radius:46px;background:#000;padding:10px;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.scr{width:100%;height:100%;border-radius:37px;background:var(--paper);overflow:hidden;position:relative;display:flex;flex-direction:column}
+.status{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 26px;font-size:14px;font-weight:600}
+.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#000;border-radius:20px}
+.logo{font:400 30px 'Archivo Black';letter-spacing:-1px}
+.logo i{color:var(--pink);font-style:normal}
+.pad{padding:8px 20px}
+.h{font:400 24px 'Archivo Black';line-height:1.05;letter-spacing:-.5px}
+.sub{color:var(--muted);font-size:13.5px;margin-top:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.card{border-radius:16px;overflow:hidden;position:relative;height:150px;background:#ddd}
+.card img{width:100%;height:100%;object-fit:cover}
+.card span{position:absolute;left:8px;bottom:8px;background:rgba(0,0,0,.62);color:#fff;font-size:12px;font-weight:600;padding:4px 8px;border-radius:999px}
+.card.sel{outline:3px solid var(--pink);outline-offset:-3px}
+.tag{position:absolute;right:8px;top:8px;background:var(--pink);color:#fff;font-size:10.5px;font-weight:700;padding:3px 7px;border-radius:999px}
+.tabbar{margin-top:auto;height:74px;border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;font-size:11px;color:var(--muted);padding-bottom:12px}
+.tabbar b{display:block;font-size:20px;text-align:center;color:var(--ink)}
+.tabbar .on{color:var(--pink)} .tabbar .on b{color:var(--pink)}
+.btn{display:block;text-align:center;background:var(--ink);color:#fff;font-weight:700;font-size:16px;padding:16px;border-radius:16px}
+.btn.pink{background:var(--pink)}
+.btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.slot{height:150px;border-radius:16px;overflow:hidden;position:relative}
+.slot img{width:100%;height:100%;object-fit:cover}
+.slot.empty{border:2px dashed #d9cdd3;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;flex-direction:column;gap:4px}
+.slot.empty b{font-size:26px;color:var(--pink)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:#4a4248;margin:16px 0 12px;line-height:1.35}
+.box{width:20px;height:20px;border-radius:6px;background:var(--pink);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px}
+.lookpill{display:inline-flex;gap:6px;align-items:center;background:var(--pink2);color:#a3175a;font-weight:600;font-size:12.5px;padding:6px 10px;border-radius:999px;margin-top:10px}
+.result{margin:6px 16px 0;border-radius:18px;overflow:hidden;position:relative;height:330px;background:#000}
+.result img{width:100%;height:100%;object-fit:cover}
+.stamp{position:absolute;right:14px;bottom:12px;font:400 26px VT323;color:#ff9a2e;text-shadow:0 0 6px rgba(255,140,40,.8)}
+.wm{position:absolute;left:12px;bottom:12px;color:rgba(255,255,255,.8);font:400 13px 'Archivo Black'}
+.actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 16px 0}
+.act{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:10px 4px;text-align:center;font-size:12px;font-weight:600}
+.act b{display:block;font-size:19px;margin-bottom:2px}
+.group{margin:12px 16px 0;background:var(--ink);color:#fff;border-radius:16px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.group img{width:46px;height:72px;object-fit:cover;border-radius:6px}
+.group div{font-size:12.5px;line-height:1.35;color:#d9d0d5}.group strong{color:#fff;font-size:14px;display:block}
+.pw-hero{height:250px;position:relative;overflow:hidden}
+.pw-hero img{width:100%;height:100%;object-fit:cover}
+.pw-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,var(--paper) 100%)}
+.close{position:absolute;top:52px;right:18px;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;z-index:2}
+.feat{font-size:13.5px;line-height:1.9;margin-top:8px}
+.feat span{color:var(--pink);font-weight:700;margin-right:6px}
+.plan{border:1.5px solid var(--line);border-radius:16px;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;margin-top:10px;background:#fff}
+.plan.sel{border:2px solid var(--pink)}
+.plan b{font-size:15px}.plan small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.plan .p{font-weight:700;font-size:15px;text-align:right}
+.badge{background:var(--pink);color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:999px;margin-left:6px;vertical-align:2px}
+.fine{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.45}
+.browser{height:58px;background:#f1edef;display:flex;align-items:flex-end;padding:0 14px 8px;margin-top:-44px;padding-top:44px;height:96px}
+.url{flex:1;background:#fff;border-radius:12px;font-size:13px;color:#555;padding:8px 12px;text-align:center}
+.url b{color:var(--ink)}
+.web{padding:16px 18px}
+.from{font-size:13px;color:var(--muted);margin-bottom:10px}
+.from b{color:var(--ink)}
+.webimg{border-radius:16px;overflow:hidden;height:300px;position:relative}
+.webimg img{width:100%;height:100%;object-fit:cover}
+.appbadge{margin-top:12px;background:#000;color:#fff;border-radius:12px;padding:10px;text-align:center;font-size:13px;font-weight:600}
+.small{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
+.report{font-size:11px;color:#aaa;text-align:center;margin-top:8px;text-decoration:underline}
+</style></head><body>
+<h1 class="t">Digi · v1 screen designs</h1>
+<p class="s">Draft for approval · real test images · people are AI-made and fictional · prices are placeholders</p>
+<div class="row">
+
+<!-- 1 HOME -->
+<div><div class="phone"><div class="scr"><div class="notch"></div>
+<div class="status"><span>9:41</span><span>●●● ▮</span></div>
+<div class="pad" style="display:flex;justify-content:space-between;align-items:center"><div class="logo">digi<i>.</i></div><div style="font-size:13px;font-weight:600;background:var(--pink2);color:#a3175a;padding:6px 10px;border-radius:999px">3 free left</div></div>
+<div class="pad"><div class="h">Pick a look</div><div class="sub">Your photo becomes the shot you wish you took.</div>
+<div class="grid">
+<div class="card sel"><img src="l1_digicam.jpg"><span>Digicam flash</span><div class="tag">TRENDING</div></div>
+<div class="card"><img src="strip.jpg" style="object-position:top"><span>Photo strip</span></div>
+<div class="card"><img src="l4_xmas.jpg"><span>Christmas party</span><div class="tag">NEW</div></div>
+<div class="card"><img src="l5_paparazzi.jpg"><span>Paparazzi night</span></div>
+</div></div>
+<div class="tabbar"><div class="on"><b>◉</b>Looks</div><div><b>▦</b>My digis</div><div><b>♡</b>Profile</div></div>
+</div></div><div class="cap">1 · Home: pick a look</div></div>
+
+<!-- 2 ADD PHOTOS -->
+<div><div class="phone"><div class="scr"><div class="notch"></div>
+<div class="status"><span>9:41</span><span>●●● ▮</span></div>
+<div class="pad"><div style="font-size:14px;color:var(--muted)">‹ Back</div>
+<div class="h" style="margin-top:10px">Add your pics</div><div class="sub">1 to 4 photos. Group shots work best.</div>
+<div class="lookpill">◉ Look: Digicam flash</div>
+<div class="slots">
+<div class="slot"><img src="src.jpg"></div>
+<div class="slot"><img src="p2.jpg"></div>
+<div class="slot empty"><b>+</b>Add photo</div>
+<div class="slot empty"><b>+</b>Add photo</div>
+</div>
+<div class="check"><div class="box">✓</div><div><b>Everyone in these photos said yes.</b> Photos are sent to our AI to make your digi and deleted after 24 h. <u>Privacy</u></div></div>
+<div class="btn pink">Make it digi</div>
+<div class="fine">Takes about 30 seconds · uses 1 free digi</div>
+</div>
+</div></div><div class="cap">2 · Add photos + consent</div></div>
+
+<!-- 3 RESULT -->
+<div><div class="phone"><div class="scr"><div class="notch"></div>
+<div class="status"><span>9:41</span><span>●●● ▮</span></div>
+<div class="pad" style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:14px;color:var(--muted)">‹ Looks</div><div style="font-weight:700">Your digi</div><div style="font-size:14px;color:var(--muted)">···</div></div>
+<div class="result"><img src="l1_digicam.jpg"><div class="wm">digi.pink</div></div>
+<div class="actions"><div class="act"><b>↓</b>Save</div><div class="act"><b>↗</b>Share link</div><div class="act"><b>↻</b>Redo</div></div>
+<div class="group"><img src="strip.jpg"><div><strong>Make a group strip</strong>Send a link, friends add a selfie, get one strip of everyone.</div></div>
+<div class="pad" style="margin-top:8px"><div class="btn ghost">Try another look</div></div>
+</div></div><div class="cap">3 · Result + share</div></div>
+
+<!-- 4 PAYWALL -->
+<div><div class="phone"><div class="scr"><div class="notch"></div>
+<div class="close">✕</div>
+<div class="pw-hero"><img src="l5_paparazzi.jpg"></div>
+<div class="pad" style="margin-top:-30px;position:relative">
+<div class="h">Digi Plus</div>
+<div class="feat"><div><span>✓</span>All looks, new drops every week</div><div><span>✓</span>Group strips with friends</div><div><span>✓</span>No watermark, full quality</div></div>
+<div class="plan sel"><div><b>Yearly<span class="badge">SAVE 77%</span></b><small>$29.99 a year · about $0.58 a week</small></div><div class="p">$29.99</div></div>
+<div class="plan"><div><b>Weekly</b><small>Cancel anytime</small></div><div class="p">$4.99</div></div>
+<div class="plan"><div><b>Party pack</b><small>20 digis, one-time, no renewal</small></div><div class="p">$6.99</div></div>
+<div class="btn pink" style="margin-top:12px">Continue</div>
+<div class="fine">Renews automatically until cancelled. Cancel anytime in Settings.<br>We remind you before any renewal. Restore · Terms · Privacy</div>
+</div>
+</div></div><div class="cap">4 · Paywall (honest, no countdown)</div></div>
+
+<!-- 5 SHARE PAGE -->
+<div><div class="phone"><div class="scr"><div class="notch"></div>
+<div class="status" style="position:relative;z-index:2"><span>9:41</span><span>●●● ▮</span></div>
+<div class="browser"><div class="url"><b>digi.pink</b>/s/k7Qx2</div></div>
+<div class="web">
+<div class="from"><b>Sara</b> sent you a digi ✨</div>
+<div class="webimg"><img src="l4_xmas.jpg"></div>
+<div class="lookpill">◉ Look: Christmas party</div>
+<div class="btn pink" style="margin-top:12px">Try this look on your pics</div>
+<div class="appbadge">Get Digi on the App Store</div>
+<div class="small">Made with Digi · link expires in 30 days</div>
+<div class="report">Report this</div>
+</div>
+</div></div><div class="cap">5 · Share link (web)</div></div>
+
+</div></body></html>

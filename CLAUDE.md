@@ -8,7 +8,7 @@ It is a real business. **No contest:** ignore every Ship or Die rule, deadline a
 **Start of every session:** read `STATUS.md` (where we are, decisions, next steps). Then read `AGENTS.md` (Expo SDK 58 rules: check the v58 docs, don't trust memory).
 
 **Before any feature:**
-- **UI:** `docs/research/bible/24-ui-design.md` (P0/P1 fix list, visual rules) and the approved screens in `docs/design/png/` (source HTML in `docs/design/screens/`).
+- **UI:** **not final, still brainstorming.** Read `docs/design/README.md` first: the full version history, the owner's pixel-DIGI concept, **the combo** (his preferred base) and the open UI questions. Then `docs/research/bible/24-ui-design.md` (P0/P1 fix list, visual rules).
 - **Tech and AI:** `docs/research/bible/21-tech-ai-cost.md` and `docs/model-test/README.md` + `PROMPTS.md` (the tested AI recipe).
 - **Copy:** `docs/research/bible/18-wording-copy.md`.
 - **Money:** `docs/research/bible/06-monetization-packs.md`.
@@ -63,4 +63,4 @@ A medical student, founder of Grasp Labs LLC, with limited coding experience.
 ## Working style
 - Before a big feature, write a short plan (files, data, how to test) in chat and wait for his go.
 - Prefer simple, boring code. When something fails, show the error and the fix, then explain it simply.
-- Check UI in the web preview: `npx expo start --web`, then Playwright screenshots at 390×844. Compare against `docs/design/png/`.
+- Check UI in the web preview: `npx expo start --web`, then Playwright screenshots at 390×844. Compare against the picked design in `docs/design/`.

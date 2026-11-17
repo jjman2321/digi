@@ -1,0 +1,275 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0C;--panel:#16161A;--panel2:#1F1F25;--line:rgba(255,255,255,.08);--text:#F5F3F7;--muted:#9C98A3;--pink:#FF4FA3;--pink2:#FF8CC6;--glow:rgba(255,79,163,.55)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#111014;font-family:Inter,system-ui,sans-serif;color:var(--text);padding:56px 48px 64px}
+.top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px}
+.top h1{font:400 56px 'Instrument Serif';letter-spacing:-.5px}
+.top h1 i{color:var(--pink)}
+.top p{color:var(--muted);font-size:15px;max-width:620px;text-align:right;line-height:1.5}
+.row{display:flex;gap:36px;align-items:flex-start}
+.cap{margin-top:16px;text-align:center}
+.cap b{display:block;font-size:15px;font-weight:600}
+.cap span{font-size:12.5px;color:var(--muted)}
+.phone{width:330px;height:714px;border-radius:52px;background:#000;padding:9px;box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 0 1.5px #2a2a30}
+.scr{position:relative;width:100%;height:100%;border-radius:44px;overflow:hidden;background:var(--bg)}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:104px;height:30px;border-radius:20px;background:#000;z-index:50}
+.sb{position:absolute;top:0;left:0;right:0;height:50px;display:flex;justify-content:space-between;align-items:center;padding:4px 30px 0;font-size:14.5px;font-weight:600;z-index:40}
+.sb .r{display:flex;gap:5px;align-items:center}
+.sb .bat{width:24px;height:11.5px;border:1.3px solid currentColor;border-radius:3.5px;position:relative;opacity:.95}
+.sb .bat:after{content:"";position:absolute;inset:1.5px;right:4px;background:currentColor;border-radius:1.5px}
+.home{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:120px;height:4.5px;border-radius:3px;background:rgba(255,255,255,.85);z-index:40}
+.glass{background:rgba(30,30,36,.62);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.ic{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ic svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.btn{display:flex;align-items:center;justify-content:center;height:54px;border-radius:27px;font-weight:700;font-size:16px}
+.btn.pink{background:var(--pink);color:#fff;box-shadow:0 10px 30px var(--glow)}
+.btn.white{background:#fff;color:#0A0A0C}
+.btn.ghost{background:var(--panel2);color:var(--text)}
+img{display:block}
+.grain:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.18;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.stamp{font:400 22px VT323;color:#FF9A2E;text-shadow:0 0 7px rgba(255,140,40,.85);letter-spacing:1px}
+
+/* 1 onboarding */
+.ob{padding:84px 22px 0;text-align:center}
+.ob h2{font:400 34px/1.05 'Instrument Serif'}
+.ob h2 i{color:var(--pink2)}
+.ob p{color:var(--muted);font-size:13.5px;margin-top:10px;line-height:1.45}
+.fan{position:relative;height:262px;margin-top:22px}
+.fan .c{position:absolute;top:20px;width:150px;height:200px;border-radius:18px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.6)}
+.fan .c img{width:100%;height:100%;object-fit:cover}
+.fan .c1{left:4px;transform:rotate(-9deg);top:40px;opacity:.85}
+.fan .c3{right:4px;transform:rotate(9deg);top:40px;opacity:.85}
+.fan .c2{left:50%;transform:translateX(-50%);width:164px;height:220px;top:0;z-index:2;outline:2px solid var(--pink);outline-offset:3px}
+.cams{display:flex;justify-content:center;gap:12px;margin-top:2px}
+.cam{width:62px;height:44px;border-radius:12px;background:var(--panel2);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+.cam.on{background:#fff}
+.cam svg{width:26px;height:26px}
+.ob .nm{margin-top:14px;font-size:12px;letter-spacing:2.5px;font-weight:700}
+.ob .ds{color:var(--muted);font-size:12.5px;margin-top:4px}
+.ob .foot{position:absolute;left:22px;right:22px;bottom:34px;display:flex;align-items:center;justify-content:space-between}
+.dots{display:flex;gap:6px}.dots i{width:6px;height:6px;border-radius:50%;background:#3a3a42}.dots i.on{width:18px;border-radius:4px;background:#fff}
+.nextb{height:46px;padding:0 22px;border-radius:23px;background:#fff;color:#000;font-weight:700;display:flex;align-items:center;gap:8px;font-size:15px}
+
+/* 2 camera */
+.vf{position:absolute;top:0;left:0;right:0;height:540px;border-radius:0 0 34px 34px;overflow:hidden}
+.vf img{width:100%;height:100%;object-fit:cover;filter:saturate(1.25) contrast(1.12) brightness(1.08)}
+.vf .flashv{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(255,255,255,.18),rgba(0,0,0,.45) 75%)}
+.camtop{position:absolute;top:54px;left:16px;right:16px;display:flex;justify-content:space-between;z-index:5}
+.pill{height:38px;padding:0 14px;border-radius:19px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600}
+.pill .dot{width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink)}
+.vf .stamp{position:absolute;right:18px;bottom:62px}
+.zoom{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:4px;padding:4px;border-radius:20px;z-index:5}
+.zoom span{width:34px;height:28px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--muted)}
+.zoom span.on{background:rgba(255,255,255,.14);color:#FFD34D}
+.side{position:absolute;bottom:14px;z-index:5}
+.looks{position:absolute;top:556px;left:0;right:0;display:flex;gap:18px;justify-content:center;font-size:11.5px;font-weight:700;letter-spacing:1.6px;color:var(--muted)}
+.looks .on{color:#fff}
+.looks .on:after{content:"";display:block;width:5px;height:5px;border-radius:50%;background:var(--pink);margin:5px auto 0;box-shadow:0 0 8px var(--pink)}
+.shut{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);width:78px;height:78px;border-radius:50%;border:4px solid #fff;display:flex;align-items:center;justify-content:center}
+.shut i{width:62px;height:62px;border-radius:50%;background:#fff}
+.roll{position:absolute;bottom:42px;left:30px;width:52px;height:52px}
+.roll img{position:absolute;width:44px;height:52px;object-fit:cover;border-radius:9px;border:2px solid #fff}
+.roll img:first-child{transform:rotate(-10deg);left:-4px;opacity:.6}
+.roll b{position:absolute;right:-8px;top:-8px;background:var(--pink);font-size:11px;padding:2px 6px;border-radius:9px}
+.import{position:absolute;bottom:46px;right:30px}
+.left{position:absolute;bottom:20px;left:30px;font-size:10.5px;color:var(--muted);font-weight:600;letter-spacing:.3px}
+
+/* 3 developing */
+.dev{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 30px;text-align:center}
+.devcard{width:220px;height:290px;border-radius:24px;position:relative;overflow:hidden;box-shadow:0 0 80px rgba(255,79,163,.35)}
+.devcard img{width:100%;height:100%;object-fit:cover;filter:blur(18px) saturate(1.6);transform:scale(1.2)}
+.devcard .t{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:16px;color:rgba(255,255,255,.92)}
+.dev h3{font:400 28px 'Instrument Serif';margin-top:34px}
+.dev p{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.5}
+.prog{width:200px;height:4px;border-radius:2px;background:#26262c;margin-top:22px;overflow:hidden}
+.prog i{display:block;width:64%;height:100%;background:linear-gradient(90deg,var(--pink),var(--pink2));box-shadow:0 0 10px var(--pink)}
+.tipc{position:absolute;bottom:40px;left:22px;right:22px;padding:14px 16px;border-radius:18px;font-size:12.5px;color:var(--muted);display:flex;gap:10px;align-items:center;text-align:left}
+.tipc b{color:#fff}
+
+/* 4 result */
+.rhead{position:absolute;top:54px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.rhead .t{font-weight:600;font-size:15px}
+.rimg{position:absolute;top:104px;left:14px;right:14px;height:380px;border-radius:26px;overflow:hidden}
+.rimg img{width:100%;height:100%;object-fit:cover}
+.rimg .stamp{position:absolute;right:16px;bottom:12px}
+.rimg .wm{position:absolute;left:14px;bottom:13px;font-weight:800;font-size:13px;color:rgba(255,255,255,.85);letter-spacing:-.2px}
+.rimg .wm i{color:var(--pink);font-style:normal}
+.tag{position:absolute;top:12px;left:12px;font-size:11px;font-weight:700;padding:5px 10px;border-radius:12px}
+.tal{position:absolute;top:500px;left:16px;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.6px}
+.thumbs{position:absolute;top:522px;left:16px;right:0;display:flex;gap:10px}
+.th{width:66px;flex:none;text-align:center}
+.th img{width:66px;height:66px;border-radius:16px;object-fit:cover}
+.th.on img{outline:2px solid var(--pink);outline-offset:2px}
+.th span{display:block;font-size:10.5px;color:var(--muted);margin-top:6px;font-weight:500}
+.th.on span{color:#fff}
+.racts{position:absolute;bottom:30px;left:16px;right:16px;display:flex;gap:10px}
+.racts .btn{flex:1}
+.racts .sq{flex:none;width:54px;height:54px;border-radius:50%;background:var(--panel2);display:flex;align-items:center;justify-content:center}
+
+/* 5 roll */
+.rollbg{position:absolute;inset:0}
+.rollbg img{width:100%;height:100%;object-fit:cover;filter:blur(2px) brightness(.45) saturate(1.2)}
+.sheet{position:absolute;left:0;right:0;bottom:0;border-radius:32px 32px 44px 44px;background:#141418;padding:12px 20px 34px;border-top:1px solid var(--line)}
+.grab{width:38px;height:5px;border-radius:3px;background:#3a3a42;margin:0 auto 14px}
+.sheet h3{font:400 30px 'Instrument Serif'}
+.sheet .sub{color:var(--muted);font-size:13px;margin-top:4px}
+.film{display:flex;gap:6px;margin:16px 0 14px;align-items:center}
+.film i{flex:1;height:30px;border-radius:5px;background:#24242a;position:relative}
+.film i.on{background:linear-gradient(180deg,var(--pink),#c22d76)}
+.film i.on:after{content:"";position:absolute;inset:6px 0;border-top:2px dotted rgba(255,255,255,.35);border-bottom:2px dotted rgba(255,255,255,.35)}
+.meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:16px}
+.meta b{color:#fff}
+.who{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:18px;background:var(--panel2);margin-bottom:10px}
+.av{display:flex}
+.av span{width:32px;height:32px;border-radius:50%;border:2px solid var(--panel2);margin-left:-9px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.av span:first-child{margin-left:0}
+.devt{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:var(--panel2);margin-bottom:16px}
+.devt .clock{width:36px;height:36px;border-radius:12px;background:rgba(255,79,163,.15);display:flex;align-items:center;justify-content:center}
+.devt b{font-size:14px}.devt small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+/* 6 paywall */
+.pwhero{position:absolute;top:0;left:0;right:0;height:270px;overflow:hidden}
+.strips{position:absolute;top:50px;left:50%;transform:translateX(-50%);width:420px;height:260px}
+.strips img{position:absolute;width:96px;height:240px;object-fit:cover;object-position:top;border-radius:10px;border:3px solid #f4f1ea;box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.pwfade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,12,0) 45%,var(--bg) 96%)}
+.pwx{position:absolute;top:54px;right:18px;z-index:6}
+.pwb{position:absolute;top:238px;left:20px;right:20px}
+.pwb h2{font:400 34px/1 'Instrument Serif'}
+.pwb h2 i{color:var(--pink2)}
+.feats{margin:12px 0 14px}
+.feats div{display:flex;gap:10px;align-items:center;font-size:13px;margin-bottom:7px}
+.feats svg{width:18px;height:18px;flex:none}
+.plan{display:flex;align-items:center;justify-content:space-between;border-radius:18px;padding:11px 15px;background:var(--panel);border:1.5px solid var(--line);margin-bottom:9px;position:relative}
+.plan.on{border-color:var(--pink);background:rgba(255,79,163,.08)}
+.plan b{font-size:15px}.plan small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.plan .pr{text-align:right;font-weight:700;font-size:15px}
+.plan .badge{position:absolute;top:-9px;right:14px;background:var(--pink);font-size:10px;font-weight:800;padding:3px 8px;border-radius:9px;letter-spacing:.4px}
+.radio{width:20px;height:20px;border-radius:50%;border:2px solid #4a4a52;margin-right:12px;flex:none}
+.plan.on .radio{border:6px solid var(--pink)}
+.pl{display:flex;align-items:center}
+.fine{text-align:center;font-size:10.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+</style></head><body>
+<div class="top"><h1>Digi <i>·</i> v1 screens</h1><p>Researched from Mobbin: Lapse (camera + "develop roll"), Once (camera picker), Halide (look sheet), Google Arts &amp; Culture (result + "try another style"), Locket Gold &amp; Cal AI (paywall). Real test images · AI-made fictional people · prices are drafts.</p></div>
+<div class="row">
+
+<!-- 1 ONBOARDING: pick your camera -->
+<div><div class="phone"><div class="scr">
+<div class="island"></div><div class="sb"><span>9:41</span><span class="r"><svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4a8.5 8.5 0 0112 0M4 6.6a5 5 0 017 0"/><circle cx="7.5" cy="9.2" r="1" fill="#fff" stroke="none"/></svg> <span class="bat"></span></span></div>
+<div class="ob">
+<h2>Pick your <i>party camera</i></h2>
+<p>Every look is shot like a real flash camera. You can switch any time.</p>
+<div class="fan">
+ <div class="c c1"><img src="l5_paparazzi.jpg"></div>
+ <div class="c c3"><img src="l4_xmas.jpg"></div>
+ <div class="c c2 grain"><img src="l1_digicam.jpg"></div>
+</div>
+<div class="cams">
+ <div class="cam"><svg viewBox="0 0 26 26"><rect x="3" y="7" width="20" height="14" rx="3" fill="#9C98A3"/><circle cx="13" cy="14" r="4.2" fill="#1F1F25"/><rect x="5" y="4" width="6" height="3" rx="1" fill="#9C98A3"/></svg></div>
+ <div class="cam on"><svg viewBox="0 0 26 26"><rect x="3" y="7" width="20" height="14" rx="3" fill="#0A0A0C"/><circle cx="13" cy="14" r="4.2" fill="#FF4FA3"/><rect x="16" y="9" width="4" height="2.4" rx="1" fill="#fff"/></svg></div>
+ <div class="cam"><svg viewBox="0 0 26 26"><rect x="4" y="3" width="18" height="20" rx="3" fill="#9C98A3"/><rect x="7" y="6" width="12" height="5" rx="1" fill="#1F1F25"/><rect x="7" y="13" width="12" height="5" rx="1" fill="#1F1F25"/></svg></div>
+</div>
+<div class="nm">DIGICAM FLASH</div>
+<div class="ds">Harsh flash, grain and the orange date. Made for nights out.</div>
+<div class="foot"><div class="dots"><i></i><i class="on"></i><i></i><i></i><i></i></div><div class="nextb">Next <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div></div>
+</div>
+<div class="home"></div>
+</div></div><div class="cap"><b>1 · Onboarding: pick your camera</b><span>Once-style picker, our real results</span></div></div>
+
+<!-- 2 CAMERA -->
+<div><div class="phone"><div class="scr">
+<div class="island"></div><div class="sb"><span>9:41</span><span class="r"><svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4a8.5 8.5 0 0112 0M4 6.6a5 5 0 017 0"/><circle cx="7.5" cy="9.2" r="1" fill="#fff" stroke="none"/></svg> <span class="bat"></span></span></div>
+<div class="vf grain"><img src="src.jpg"><div class="flashv"></div>
+ <div class="camtop">
+  <div class="ic glass"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M18 8v6M15 11h6"/></svg></div>
+  <div class="pill glass"><span class="dot"></span>Tonight's roll · 18 left</div>
+  <div class="ic glass"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="#FFD34D" stroke="#FFD34D"/></svg></div>
+ </div>
+ <div class="stamp">'26 11 28</div>
+ <div class="zoom glass"><span>.5</span><span class="on">1×</span><span>2</span></div>
+</div>
+<div class="looks"><span>Y2K</span><span>FILM</span><span class="on">DIGICAM</span><span>STRIP</span><span>XMAS</span></div>
+<div class="roll"><img src="l2_film.jpg"><img src="l1_digicam.jpg"><b>6</b></div>
+<div class="shut"><i></i></div>
+<div class="import"><div class="ic" style="background:#1F1F25;width:46px;height:46px"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/></svg></div></div>
+<div class="home"></div>
+</div></div><div class="cap"><b>2 · Camera</b><span>Lapse-style: shoot live or import, swipe looks</span></div></div>
+
+<!-- 3 DEVELOPING -->
+<div><div class="phone"><div class="scr">
+<div class="island"></div><div class="sb"><span>9:41</span><span class="r"><svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4a8.5 8.5 0 0112 0M4 6.6a5 5 0 017 0"/><circle cx="7.5" cy="9.2" r="1" fill="#fff" stroke="none"/></svg> <span class="bat"></span></span></div>
+<div class="dev">
+ <div class="devcard"><img src="l1_digicam.jpg"><div class="t">Developing your digi…</div></div>
+ <h3>Adding the flash ✦</h3>
+ <p>Re-lighting faces, adding grain<br>and the date stamp. ~20 seconds.</p>
+ <div class="prog"><i></i></div>
+</div>
+<div class="tipc glass"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF8CC6" stroke-width="2" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span><b>Tip:</b> turn this into a 4-shot photo strip on the next screen.</span></div>
+<div class="home"></div>
+</div></div><div class="cap"><b>3 · Developing</b><span>Lapse "developing snaps" moment</span></div></div>
+
+<!-- 4 RESULT -->
+<div><div class="phone"><div class="scr">
+<div class="island"></div><div class="sb"><span>9:41</span><span class="r"><svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4a8.5 8.5 0 0112 0M4 6.6a5 5 0 017 0"/><circle cx="7.5" cy="9.2" r="1" fill="#fff" stroke="none"/></svg> <span class="bat"></span></span></div>
+<div class="rhead"><div class="ic glass"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></div><span class="t">Your digi</span><div class="ic glass"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1" fill="#fff"/><circle cx="12" cy="12" r="1" fill="#fff"/><circle cx="19" cy="12" r="1" fill="#fff"/></svg></div></div>
+<div class="rimg grain"><img src="l1_digicam.jpg"><div class="tag glass">DIGICAM FLASH</div><div class="wm">digi<i>.</i>pink</div></div>
+<div class="tal">TRY ANOTHER LOOK</div>
+<div class="thumbs">
+ <div class="th on"><img src="l1_digicam.jpg"><span>Digicam</span></div>
+ <div class="th"><img src="strip.jpg" style="object-position:top"><span>Strip</span></div>
+ <div class="th"><img src="l4_xmas.jpg"><span>Xmas</span></div>
+ <div class="th"><img src="l5_paparazzi.jpg"><span>Paparazzi</span></div>
+ <div class="th"><img src="l6_y2k.jpg"><span>Y2K</span></div>
+</div>
+<div class="racts">
+ <div class="sq"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></div>
+ <div class="btn pink"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" style="margin-right:8px"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share with the group</div>
+</div>
+<div class="home"></div>
+</div></div><div class="cap"><b>4 · Result</b><span>Arts &amp; Culture-style "try another look" row</span></div></div>
+
+<!-- 5 DIGI ROLL -->
+<div><div class="phone"><div class="scr">
+<div class="island"></div><div class="sb"><span>9:41</span><span class="r"><svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4a8.5 8.5 0 0112 0M4 6.6a5 5 0 017 0"/><circle cx="7.5" cy="9.2" r="1" fill="#fff" stroke="none"/></svg> <span class="bat"></span></span></div>
+<div class="rollbg"><img src="l2_film.jpg"></div>
+<div class="sheet">
+ <div class="grab"></div>
+ <h3>Tonight's roll</h3>
+ <div class="sub">Sara's birthday · started 9:12 PM</div>
+ <div class="film"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+ <div class="meta"><span><b>6</b> of 24 shots taken</span><span>Photos stay hidden</span></div>
+ <div class="who"><div class="av"><span style="background:#FF4FA3">S</span><span style="background:#7C5CFF">L</span><span style="background:#2EC4B6">M</span><span style="background:#F7B32B;color:#000">+2</span></div><span style="font-size:13px;color:var(--muted)">5 friends in this roll</span></div>
+ <div class="devt"><div class="clock"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF8CC6" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><b>Develops tomorrow, 9 AM</b><small>Everyone sees the roll at the same time</small></div></div>
+ <div class="btn white"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" style="margin-right:8px"><path d="M10 14a4 4 0 005.66 0l3-3a4 4 0 00-5.66-5.66l-1 1M14 10a4 4 0 00-5.66 0l-3 3a4 4 0 005.66 5.66l1-1"/></svg>Invite friends · digi.pink/r/k7Q</div>
+</div>
+<div class="home"></div>
+</div></div><div class="cap"><b>5 · Digi Roll</b><span>Lapse "develop roll in…" + group invites</span></div></div>
+
+<!-- 6 PAYWALL -->
+<div><div class="phone"><div class="scr">
+<div class="island"></div><div class="sb"><span>9:41</span><span class="r"><svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4a8.5 8.5 0 0112 0M4 6.6a5 5 0 017 0"/><circle cx="7.5" cy="9.2" r="1" fill="#fff" stroke="none"/></svg> <span class="bat"></span></span></div>
+<div class="pwhero"><div class="strips">
+ <img src="strip.jpg" style="left:40px;top:30px;transform:rotate(-12deg)">
+ <img src="strip.jpg" style="left:160px;top:0;z-index:2">
+ <img src="strip.jpg" style="left:280px;top:30px;transform:rotate(12deg)">
+</div><div class="pwfade"></div></div>
+<div class="pwx ic glass"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+<div class="pwb">
+ <h2>Every party, <i>digi’d</i></h2>
+ <div class="feats">
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5 9-10"/></svg>All AI looks + a new drop every week</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5 9-10"/></svg>Photo strips &amp; unlimited Digi Rolls</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2.4" stroke-linecap="round"><path d="M5 12l5 5 9-10"/></svg>No watermark, full quality</div>
+ </div>
+ <div class="plan on"><span class="badge">SAVE 89%</span><div class="pl"><span class="radio"></span><div><b>Yearly</b><small>$0.77 / week</small></div></div><div class="pr">$39.99</div></div>
+ <div class="plan"><div class="pl"><span class="radio"></span><div><b>Weekly</b><small>Cancel anytime</small></div></div><div class="pr">$6.99</div></div>
+ <div class="plan"><div class="pl"><span class="radio"></span><div><b>Party Pack</b><small>25 AI digis · one-time</small></div></div><div class="pr">$5.99</div></div>
+ <div class="btn pink" style="margin-top:4px;height:50px">Continue</div>
+ <div class="fine">Renews until cancelled · Restore · Terms · Privacy</div>
+</div>
+<div class="home"></div>
+</div></div><div class="cap"><b>6 · Paywall</b><span>Locket Gold / Cal AI clarity, no countdown</span></div></div>
+
+</div></body></html>

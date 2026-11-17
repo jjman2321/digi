@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Digi camera permission</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600;700&amp;family=Silkscreen:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FF7DBE}a:hover{color:#FFB3D6}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #0B0B0E; display: flex; flex-direction: column; align-items: center; font-family: 'Inter', system-ui, sans-serif; color: #FFFFFF; overflow: hidden; position: relative">
+  <div aria-hidden="true" style="position: absolute; top: 120px; left: 70px; width: 250px; height: 250px; border-radius: 50%; background: radial-gradient(circle, rgba(255,79,163,0.32) 0%, rgba(255,79,163,0) 70%)"></div>
+
+  <div style="position: relative; margin-top: 120px; width: 170px; height: 170px; display: flex; align-items: center; justify-content: center">
+    <svg aria-hidden="true" width="170" height="170" viewBox="0 0 170 170" style="position: absolute; top: 0; left: 0">
+      <path d="M10 46V22a12 12 0 0 1 12-12h24M124 10h24a12 12 0 0 1 12 12v24M160 124v24a12 12 0 0 1-12 12h-24M46 160H22a12 12 0 0 1-12-12v-24" stroke="#FF4FA3" stroke-width="5" stroke-linecap="round" fill="none"></path>
+    </svg>
+    <div style="width: 96px; height: 96px; border-radius: 28px; background: linear-gradient(160deg, #FDE1EE 0%, #F7B9D6 50%, #EE9CC2 100%); box-shadow: inset 0 2px 0 rgba(255,255,255,0.85), 0 14px 30px rgba(255,79,163,0.35); display: flex; align-items: center; justify-content: center">
+      <div style="width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #4A6BFF 0%, #1B1B3A 45%, #050508 70%); box-shadow: 0 0 0 5px #D98AB2, 0 0 0 8px #F7C9DD"></div>
+    </div>
+  </div>
+
+  <h1 style="position: relative; margin: 44px 0 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 40px; line-height: 1.05; text-align: center">Let Digi <em style="color: #FF4FA3">see</em><br>the party</h1>
+  <p style="position: relative; margin: 12px 44px 0; font-size: 15px; line-height: 1.5; color: #A6A6B3; text-align: center">Digi needs your camera to shoot. Here's how we treat your photos:</p>
+
+  <div style="position: relative; display: flex; flex-direction: column; gap: 14px; margin-top: 26px; padding: 0 34px; align-self: stretch">
+    <div style="display: flex; gap: 12px; align-items: flex-start">
+      <span style="width: 32px; height: 32px; border-radius: 10px; background: #2A1420; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></span>
+      <span style="font-size: 15px; line-height: 1.45"><strong>Only the shots you take.</strong> <span style="color: #A6A6B3">We never browse your camera roll.</span></span>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: flex-start">
+      <span style="width: 32px; height: 32px; border-radius: 10px; background: #2A1420; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M5.6 5.6l12.8 12.8"></path></svg></span>
+      <span style="font-size: 15px; line-height: 1.45"><strong>Never used to train AI.</strong> <span style="color: #A6A6B3">Your faces stay your faces.</span></span>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: flex-start">
+      <span style="width: 32px; height: 32px; border-radius: 10px; background: #2A1420; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg></span>
+      <span style="font-size: 15px; line-height: 1.45"><strong>Delete anything, any time.</strong> <span style="color: #A6A6B3">Originals are removed after 30 days.</span></span>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; bottom: 26px; display: flex; flex-direction: column; gap: 6px">
+    <a href="Camera.dc.html" style="display: flex; align-items: center; justify-content: center; height: 56px; border-radius: 999px; background: #FF4FA3; box-shadow: 0 10px 30px rgba(255,79,163,0.45); color: #1A0010; font-size: 17px; font-weight: 700; text-decoration: none">Allow camera</a>
+    <a href="Camera.dc.html" style="display: flex; align-items: center; justify-content: center; height: 44px; color: #A6A6B3; font-size: 15px; font-weight: 600; text-decoration: none">Not now</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
