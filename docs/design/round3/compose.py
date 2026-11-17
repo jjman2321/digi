@@ -71,3 +71,12 @@ board('board-q6-paywall', '6 · Paywall top (all with Apple-safe pricing)', [
     (R + 'q6-beforeafter.png', 'Before / after', 8, 'Shows the AI. A bit busy.', False),
     (R + 'q6-pixel.png', 'Pixel DIGI + their digi', 9, 'Brand + "that\'s yours". Least text.', True),
 ])
+
+board('board-logo', 'Which is our DIGI logo?', [
+    (R + 'logo-concept-pink.png', 'Your concept, in pink', 9, 'Chunky, thick strokes. Brand pink.', True),
+    (R + 'logo-concept-mint.png', 'Your concept, original mint', 7.5, 'Exact original. Mint clashes with pink.', False),
+    (R + 'logo-v1-silk.png', 'v1: DIGI.pink', 7.5, 'Shows the domain. Thinner, less bold.', False),
+])
+board('board-q6-paywall-v2', 'Paywall, tightened (dated timeline fills the gap)', [
+    (R + 'q6-pixel.png', 'Pixel DIGI + their digi', 9, 'No dead space. Price biggest.', True),
+])

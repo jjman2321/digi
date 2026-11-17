@@ -36,24 +36,39 @@ const GLYPH = {
   I: ['11111', '00100', '00100', '00100', '00100', '00100', '11111'],
   G: ['01111', '10000', '10000', '10111', '10001', '10001', '01111'],
 };
-function pixelLogo(px, color = '#FF4FA3', shadow = '#8E1F5A') {
-  const word = 'DIGI';
-  const cols = word.length * 5 + (word.length - 1);
-  let rects = '';
-  [...word].forEach((ch, i) => {
-    GLYPH[ch].forEach((row, y) =>
-      [...row].forEach((on, x) => {
-        if (on === '1') {
-          const X = (i * 6 + x) * px, Y = y * px;
-          rects += `<rect x="${X + px * 0.35}" y="${Y + px * 0.35}" width="${px}" height="${px}" fill="${shadow}"/>`;
-          rects += `<rect x="${X}" y="${Y}" width="${px}" height="${px}" fill="${color}"/>`;
-        }
-      }),
-    );
-  });
-  const w = cols * px + px * 0.4, h = 7 * px + px * 0.4;
+// Logo styles: 'concept' = the owner's chunky DIGI (thick strokes, stepped corners),
+// 'silk' = v1's Silkscreen "DIGI.pink", 'thin' = round-3 first try (rejected).
+let LOGO = 'concept';
+let LOGO_COLOR = '#FF4FA3';
+const CHUNKY = {
+  D: ['011111100', '111111110', '111000111', '111000111', '111000111', '111000111', '111000111', '111111110', '011111100'],
+  I: ['111', '111', '111', '111', '111', '111', '111', '111', '111'],
+  G: ['011111110', '111111111', '111000000', '111000000', '111001111', '111000111', '111000111', '111111111', '011111110'],
+};
+function pixelLogo(px, color, shadow = '#8E1F5A') {
+  color = color || LOGO_COLOR;
+  if (LOGO === 'silk') {
+    const fs = px * 5.4;
+    return `<span role="img" aria-label="DIGI.pink" style="display:inline-flex;align-items:baseline;gap:2px"><span class="pix" style="font-size:${fs}px;color:${color};letter-spacing:1px;line-height:1">DIGI</span><span class="pix" style="font-size:${fs * 0.45}px;color:#FFB3D6">.PINK</span></span>`;
+  }
+  const chunky = LOGO === 'concept';
+  const G = chunky ? CHUNKY : GLYPH;
+  const rows = chunky ? 9 : 7;
+  const u = chunky ? (px * 7) / 9 : px;
+  let rects = '', x0 = 0;
+  for (const ch of 'DIGI') {
+    G[ch].forEach((row, y) => [...row].forEach((on, x) => {
+      if (on !== '1') return;
+      const X = (x0 + x) * u, Y = y * u;
+      if (!chunky) rects += `<rect x="${X + u * 0.35}" y="${Y + u * 0.35}" width="${u}" height="${u}" fill="${shadow}"/>`;
+      rects += `<rect x="${X}" y="${Y}" width="${u + 0.3}" height="${u + 0.3}" fill="${color}"/>`;
+    }));
+    x0 += G[ch][0].length + 1;
+  }
+  const w = (x0 - 1) * u + u * 0.4, h = rows * u + u * 0.4;
   return `<svg role="img" aria-label="DIGI" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" shape-rendering="crispEdges">${rects}</svg>`;
 }
+const withLogo = (style, color, fn) => { const a = LOGO, b = LOGO_COLOR; LOGO = style; LOGO_COLOR = color; const out = fn(); LOGO = a; LOGO_COLOR = b; return out; };
 
 // ---------- body skins ----------
 const SKIN = {
@@ -193,7 +208,7 @@ function paywall(hero) {
       <span class="stamp" style="position:absolute;bottom:10px;right:12px;font-size:14px">11 17 '26</span></div>`;
   } else {
     top = `<div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:2px">${pixelLogo(5)}
-      <div style="width:250px;border-radius:24px;background:${SKIN.pink.bg};padding:9px;transform:rotate(-3deg);box-shadow:0 14px 30px rgba(255,79,163,.25)"><div style="position:relative;height:170px;border-radius:12px;overflow:hidden;border:6px solid #26252B"><img src="${img('r1.png')}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.25) saturate(1.2)"><span class="stamp" style="position:absolute;bottom:6px;right:8px;font-size:12px">11 17 '26</span></div></div></div>`;
+      <div style="width:270px;border-radius:24px;background:${SKIN.pink.bg};padding:9px;transform:rotate(-3deg);box-shadow:0 14px 30px rgba(255,79,163,.25)"><div style="position:relative;height:196px;border-radius:12px;overflow:hidden;border:6px solid #26252B"><img src="${img('r1.png')}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.25) saturate(1.2)"><span class="stamp" style="position:absolute;bottom:6px;right:8px;font-size:12px">11 17 '26</span></div></div></div>`;
   }
   const opt = (sel, name, price, per, sub, badge) => `<div style="position:relative;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;border:2px solid ${sel ? '#FF4FA3' : '#2E2E36'};background:${sel ? '#2A1420' : '#17171C'}">
       ${badge ? `<span style="position:absolute;top:-10px;right:14px;padding:2px 8px;border-radius:999px;background:#FF4FA3;color:#1A0010;font-size:11px;font-weight:700">${badge}</span>` : ''}
@@ -212,6 +227,7 @@ function paywall(hero) {
       </div>
     </div>
     <div style="flex-grow:1"></div>
+    <div style="display:flex;padding:16px 20px 14px;gap:6px">${[['Today', 'Every AI look'], ['Nov 19', 'We remind you'], ['Nov 20', 'First charge']].map(([d, t], i) => `<div style="flex:1"><div style="height:4px;border-radius:2px;background:${i === 0 ? '#FF4FA3' : '#3A3A44'};margin-bottom:6px"></div><div style="font-size:13px;font-weight:700">${d}</div><div style="font-size:12px;color:#B4B4C0">${t}</div></div>`).join('')}</div>
     <div style="padding:0 20px 26px">
       <div class="btn">Start my 3 free days</div>
       <div style="text-align:center;font-size:12px;color:#B4B4C0;margin-top:8px">Then $39.99/year. Not charged until Nov 20. Cancel anytime.</div>
@@ -250,6 +266,10 @@ const SCREENS = {
   'q6-strips': paywall('strips'),
   'q6-beforeafter': paywall('beforeafter'),
   'q6-pixel': paywall('pixel'),
+  'logo-concept-pink': camera({ ...BASE }),
+  'logo-concept-mint': withLogo('concept', '#CDEDEC', () => camera({ ...BASE })),
+  'logo-v1-silk': withLogo('silk', '#FF4FA3', () => camera({ ...BASE })),
+  'logo-thin': withLogo('thin', '#FF4FA3', () => camera({ ...BASE })),
 };
 
 (async () => {
