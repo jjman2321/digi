@@ -4,7 +4,7 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 
 ## 1. Where we are
 - ✅ Research done: 26-chapter "bible" in `docs/research/bible/`, plus the earlier deep dive in `docs/research/earlier/`.
-- 🟡 **UI is NOT final. Still brainstorming.** Read `docs/design/README.md` first. It has every version: the Nov 14 mocks, **the owner's pixel-DIGI concept**, **the 11-screen combo** (his preferred base) and the latest 18-screen set (v9). The next step is a UI round with the owner (§3a) before building screens.
+- ✅ **UI direction picked (round 3, Nov 17):** combo base + the owner's chunky pixel DIGI. Boards and single screens: `docs/design/round3/`. Other screens get redrawn in this style as they're built.
 - ✅ AI recipe tested and picked: `docs/model-test/` (README v3 section and `PROMPTS.md`). Test spend: $2.27.
 - 🟡 **App scaffold (WORK IN PROGRESS, not yet typechecked or run):**
   - Expo SDK 58 with deps installed;
@@ -15,6 +15,9 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 ## 2. Decisions (owner's words, dated)
 | Date | Decision |
 |---|---|
+| Nov 17 | UI round 3 picks: "Yeah not bad except paywall too much white space". Took the recommended option on all 6: **pink body**; **big pixel DIGI on top** (body reads "DIGI-05"); **MODE + T/W** buttons (no REC); **mode tabs PHOTO · STRIP · ✦ AI · LIVE ✦ + a look swatch** by the shutter; **"Tap it." onboarding** (Tap it → Occasion → How did you find us → Camera; age + consent at the first AI tap); **paywall = pixel DIGI + their own digi** in the pink camera. Designs: `docs/design/round3/`. |
+| Nov 17 | Logo: "yes the first 1 but make sure the D doesnt look like an o". **The owner's chunky concept DIGI, in pink**, with a flat-sided D. |
+| Nov 17 | "timeline in pawayal is useless". **No trial timeline on the paywall.** The dated line under the button stays ("Then $39.99/year. Not charged until {date}. Cancel anytime."), plus the reminder push. |
 | Nov 17 | "ok let's do it don't build with the contest in mind anymore or its rules". **No contest.** Build Digi as a business. Kiwi is shelved; Kilma is a 2027 maybe. |
 | Nov 17 | "we should have it in v1 but we should use the cheapest best models so our margins are good". **Live digi (AI video) is in v1.** |
 | Nov 17 | Round-1 AI output looked "mid". Round 3 approved: Klein + style ref + punchy finish. Results must "not look AI". |
@@ -98,7 +101,7 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 - `looks` (id, name, model, fallback, prompt, cost_digis, active)
 - `assets` (storage paths; **delete originals after 24 h**, keep outputs until the user deletes them)
 
-## 3a. UI round first (before any screen code)
+## 3a. UI round first (before any screen code) ✅ done Nov 17, see §2
 The owner said on Nov 17: "this isn't the last ui I picked that we should work on again we're still brainstorming look at the pixelated uis we worked on and the combo one".
 1. Read `docs/design/README.md`. Look at `history/owner-concept/`, `history/v2-combo-11/overview.jpg`, `history/v0-mocks-nov14/mock-v2-screens.png` and the latest `png/`.
 2. Make the next design round: **combo base plus the pixel direction**, answering the 6 open UI questions in that README with side-by-side options and scores.

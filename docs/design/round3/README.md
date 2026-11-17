@@ -11,3 +11,6 @@ Regenerate: `node docs/design/round3/gen.js && python3 docs/design/round3/compos
 | `board-q4-looks.jpg` | Tabs vs tiles vs mode tabs + look swatch |
 | `board-q5-onboarding.jpg` | Onboarding length |
 | `board-q6-paywall.jpg` | Paywall top (all apply the ch. 24 P0 price fixes) |
+| `board-logo.jpg` | Which DIGI logo (picked: concept, pink, flat-sided D) |
+
+**Picked:** the pink box on every board. Final single screens: `png/q2-header.png` (camera; with `q4-hybrid` tabs), `png/q5-*` (onboarding), `png/q6-pixel.png` (paywall, no timeline).

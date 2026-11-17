@@ -41,7 +41,7 @@ const GLYPH = {
 let LOGO = 'concept';
 let LOGO_COLOR = '#FF4FA3';
 const CHUNKY = {
-  D: ['011111100', '111111110', '111000111', '111000111', '111000111', '111000111', '111000111', '111111110', '011111100'],
+  D: ['111111100', '111111110', '111000111', '111000111', '111000111', '111000111', '111000111', '111111110', '111111100'],
   I: ['111', '111', '111', '111', '111', '111', '111', '111', '111'],
   G: ['011111110', '111111111', '111000000', '111000000', '111001111', '111000111', '111000111', '111111111', '011111110'],
 };
@@ -208,7 +208,7 @@ function paywall(hero) {
       <span class="stamp" style="position:absolute;bottom:10px;right:12px;font-size:14px">11 17 '26</span></div>`;
   } else {
     top = `<div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding-top:2px">${pixelLogo(5)}
-      <div style="width:270px;border-radius:24px;background:${SKIN.pink.bg};padding:9px;transform:rotate(-3deg);box-shadow:0 14px 30px rgba(255,79,163,.25)"><div style="position:relative;height:196px;border-radius:12px;overflow:hidden;border:6px solid #26252B"><img src="${img('r1.png')}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.25) saturate(1.2)"><span class="stamp" style="position:absolute;bottom:6px;right:8px;font-size:12px">11 17 '26</span></div></div></div>`;
+      <div style="width:300px;border-radius:26px;background:${SKIN.pink.bg};padding:10px;transform:rotate(-3deg);box-shadow:0 14px 30px rgba(255,79,163,.25)"><div style="position:relative;height:250px;border-radius:12px;overflow:hidden;border:6px solid #26252B"><img src="${img('r1.png')}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.25) saturate(1.2)"><span class="stamp" style="position:absolute;bottom:6px;right:8px;font-size:12px">11 17 '26</span></div></div></div>`;
   }
   const opt = (sel, name, price, per, sub, badge) => `<div style="position:relative;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;border:2px solid ${sel ? '#FF4FA3' : '#2E2E36'};background:${sel ? '#2A1420' : '#17171C'}">
       ${badge ? `<span style="position:absolute;top:-10px;right:14px;padding:2px 8px;border-radius:999px;background:#FF4FA3;color:#1A0010;font-size:11px;font-weight:700">${badge}</span>` : ''}
@@ -227,7 +227,6 @@ function paywall(hero) {
       </div>
     </div>
     <div style="flex-grow:1"></div>
-    <div style="display:flex;padding:16px 20px 14px;gap:6px">${[['Today', 'Every AI look'], ['Nov 19', 'We remind you'], ['Nov 20', 'First charge']].map(([d, t], i) => `<div style="flex:1"><div style="height:4px;border-radius:2px;background:${i === 0 ? '#FF4FA3' : '#3A3A44'};margin-bottom:6px"></div><div style="font-size:13px;font-weight:700">${d}</div><div style="font-size:12px;color:#B4B4C0">${t}</div></div>`).join('')}</div>
     <div style="padding:0 20px 26px">
       <div class="btn">Start my 3 free days</div>
       <div style="text-align:center;font-size:12px;color:#B4B4C0;margin-top:8px">Then $39.99/year. Not charged until Nov 20. Cancel anytime.</div>

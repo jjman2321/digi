@@ -1,6 +1,8 @@
 # Digi UI: history and status
 
-> **The UI is NOT final. We're still brainstorming.**
+> **Round 3 picked (Nov 17):** combo base + the owner's chunky pixel DIGI. See `round3/` and STATUS §2. Earlier notes below are history.
+>
+> ~~The UI is NOT final. We're still brainstorming.~~
 >
 > The owner's direction (Nov 17): continue from **the pixel-style UIs** and **the combo version**, not from the latest 18-screen set alone. **The next step is a UI round with the owner before building screens.** Show options side by side, give honest scores out of 10, and record the pick in `STATUS.md`.
 
