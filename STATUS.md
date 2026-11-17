@@ -97,6 +97,23 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 - `looks` (id, name, model, fallback, prompt, cost_digis, active)
 - `assets` (storage paths; **delete originals after 24 h**, keep outputs until the user deletes them)
 
+## 3b. Interview the owner first (open questions)
+Read the bible first (`docs/research/bible/00-README-summary.md`, then ch. 06, 12, 18, 21, 22 and 24). Then ask **only these**, one short message:
+- Give a recommended default for each question, with a score out of 10, so he can just say "yes".
+- Ask the questions in two batches of 5 at most.
+- Record his answers in §2 with his words and the date. Then build.
+
+1. **Look and feel:** keep the approved designs as they are, or anything that bugs him? Show `docs/design/png/` side by side.
+2. **Launch looks:** which 6 free looks and which AI looks at launch? Default from ch. 10/18: Digicam Flash, Y2K, Film, Strip, Xmas, NYE, plus "✦ AI Re-light".
+3. **Paywall test:** weekly-first vs yearly-first A/B. Default: yes. Prices: $6.99/wk, $39.99/yr, packs $5.99 / $11.99.
+4. **Free allowance:** 3 free AI digis once? Live digi costs 3 digis?
+5. **Markets:** US only at launch, or US + CA/UK/AU? Arabic UI later?
+6. **Domain and handles:** does he own `digi.pink`? Which TikTok and Instagram handles?
+7. **Brand voice:** check 3 sample lines from ch. 18 (onboarding, paywall, push).
+8. **Shared rolls:** v1.1 as planned, or are they core for him?
+9. **His time:** hours a day for testing, and when he can install a dev build on his iPhone.
+10. **Accounts ready?** Apple Developer (Grasp Labs), Expo, Supabase, RevenueCat. Which exist already?
+
 ## 4. Owner setup (never paste keys in chat)
 1. **Apple Developer account** for Grasp Labs LLC, and enrol in the App Store Small Business Program (15% instead of 30%).
 2. **Expo:** create an access token → add `EXPO_TOKEN` in claude.ai environment settings → environment variables.
