@@ -1,0 +1,68 @@
+img,bytedance-seed/seedream-5-5,0.035,18.0,
+img,bytedance-seed/seedream-5-5,0.035,27.4,
+img,black-forest-labs/flux-3-image-klein,0.009,7.9,
+img,black-forest-labs/flux-3-image-klein,0.009,8.5,
+img,black-forest-labs/flux.2-klein-4b,0.021,6.6,
+img,black-forest-labs/flux.2-klein-4b,0.021,6.3,
+img,bytedance-seed/seedream-5-0-flash,0.018,15.1,
+img,google/gemini-3.1-flash-lite-image,,0.3,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,google/gemini-3.1-flash-lite-image,,0.3,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,google/gemini-nano-banana-2.1,,0.3,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,google/gemini-nano-banana-2.1,,0.3,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,bytedance-seed/seedream-5-0-flash,0.018,19.4,
+img,qwen/qwen-image-2.1-turbo,,6.5,"ERR {""error"":{""message"":""Alibaba blocked this request through content moderation.""
+img,bytedance-seed/seedream-5-5,0.043,23.0,
+img,bytedance-seed/seedream-5-5,0.043,24.5,
+img,openai/gpt-image-1-mini,,1.0,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,openai/gpt-image-1-mini,,0.3,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,minimax/minimax-h3-image-highspeed,0.07458,17.3,
+img,minimax/minimax-h3-image-highspeed,0.07499285,16.4,
+img,qwen/qwen-image-2.1-turbo,0.0184,22.1,
+img,krea/krea-2-medium-turbo,,1.0,"ERR {""error"":{""message"":""No provider for krea/krea-2-medium-turbo supports the requested parameter(s): aspect_ratio \""3:4\""
+img,microsoft/mai-image-2.6-flash,0.02277775,15.4,
+img,krea/krea-2-medium-turbo,,0.3,"ERR {""error"":{""message"":""No provider for krea/krea-2-medium-turbo supports the requested parameter(s): aspect_ratio \""3:4\""
+img,microsoft/mai-image-2.6-flash,0.02277775,17.4,
+img,sourceful/riverflow-v2.5-fast,0.074496,57.8,
+img,sourceful/riverflow-v2.5-fast,0.120057,122.4,
+img,google/gemini-3.1-flash-lite-image,,0.3,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,google/gemini-nano-banana-2.1,,0.4,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,openai/gpt-image-1-mini,,0.3,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,google/gemini-3.1-flash-lite-image,,0.4,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,google/gemini-nano-banana-2.1,,0.4,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,krea/krea-2-medium-turbo,,0.3,"ERR {""error"":{""message"":""No provider for krea/krea-2-medium-turbo supports the requested parameter(s): aspect_ratio \""3:4\""
+img,krea/krea-2-medium-turbo,,0.3,"ERR {""error"":{""message"":""No provider for krea/krea-2-medium-turbo supports the requested parameter(s): aspect_ratio \""3:4\""
+img,openai/gpt-image-1-mini,,1.6,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,qwen/qwen-image-2.1-turbo,,10.5,"ERR {""error"":{""message"":""Alibaba blocked this request through content moderation.""
+img,krea/krea-2-medium-turbo,0.015,23.7,
+img,krea/krea-2-medium-turbo,0.015,33.8,
+vid,google/gemini-omni-1.2-flash,,0,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+vid,google/veo-3.1-lite,,0,"ERR {""error"":{""message"":""The request is prohibited due to a violation of provider Terms Of Service.""
+img,black-forest-labs/flux-3-image-klein,0.009,9.1,
+vid,bytedance/seedance-2.0-mini,,0,"ERR {""error"":{""message"":""HTTP 400: The request failed because the input image 'content[1]' may contain real person.""
+vid,bytedance/seedance-2.0-fast,,0,"ERR {""error"":{""message"":""HTTP 400: The request failed because the input image 'content[1]' may contain real person.""
+img,black-forest-labs/flux-3-image-klein,0.009,9.1,
+vid,tbc/mischief-1,0.025,23.3,"{""cost"": 0.025
+vid,minimax/hailuo-3-max,0.25,24.3,"{""cost"": 0.25
+vid,heygen/heygen-video-1,0.05,24.5,"{""cost"": 0.05
+vid,x-ai/grok-imagine-video-1.5-lite,0.11,35.4,"{""cost"": 0.11
+vid,alibaba/wan-3.0,0.15,89.1,"{""cost"": 0.15
+vid,bytedance/seedance-2.5-flash,0.347711,90.9,"{""cost"": 0.347711
+vid,heygen/heygen-video-1,0.05,24.7,"{""cost"": 0.05
+vid,heygen/heygen-video-1,0.05,25.7,"{""cost"": 0.05
+img,black-forest-labs/flux-3-image-klein,0.009,11.5,
+img,black-forest-labs/flux-3-image-klein,0.009,13.3,
+img,bytedance-seed/seedream-5-0-flash,0.018,18.0,
+img,bytedance-seed/seedream-5-0-flash,0.018,18.4,
+img,black-forest-labs/flux.2-klein-4b,0.017,7.0,
+img,bytedance-seed/seedream-5-5,0.051,20.8,
+img,black-forest-labs/flux.2-klein-4b,0.017,7.5,
+img,bytedance-seed/seedream-5-5,0.051,24.8,
+img,black-forest-labs/flux-3-image,0.048,62.4,
+img,black-forest-labs/flux-3-image,0.048,75.4,
+img,black-forest-labs/flux-3-image-klein,0.009,12.1,
+img,black-forest-labs/flux-3-image-klein,0.009,13.9,
+img,bytedance-seed/seedream-5-0-flash,0.018,29.6,
+img,bytedance-seed/seedream-5-0-flash,0.018,30.4,
+vid,heygen/heygen-video-1,0.09,24.1,"{""cost"": 0.09
+vid,heygen/heygen-video-1,0.05,24.8,"{""cost"": 0.05
+vid,heygen/heygen-video-1,0.05,25.4,"{""cost"": 0.05
