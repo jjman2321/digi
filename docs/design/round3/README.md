@@ -18,3 +18,8 @@ Regenerate: `node docs/design/round3/gen.js && python3 docs/design/round3/compos
 ## Round 4 (Nov 17): onboarding + paywall rework from Mobbin
 References: Lapse (camera-first onboarding, first-snap confetti, permission sheet), Kino (unboxing), (Not Boring) Camera (assemble the camera), Unfold (full-bleed photo paywall), Halide (one big CTA + "View all options"), Snapchat Lens+ (sheet over the camera). Avoided: Lovi trial toggle (Apple 3.1.2), Dropbox timeline (owner cut it).
 Boards: `board-r4-onboarding.jpg`, `board-r4-paywall.jpg`; full-size picks: `r4-onb-pick.jpg`, `r4-pay-pick.jpg`.
+
+## Round 5 (Nov 17): onboarding questions + pro paywall
+Owner: "we want to ask some qusstion in the onboardig yea swe haave some data no? pawayls is good but it can defo be a bit more professional?"
+Research: ch. 10 (2–3 questions that change what the user sees + tap-to-advance attribution; Cal AI founder: questions raised conversion; Adapty: personalized onboarding +13–35% ARPU). Mobbin: ABY Journal, Insight Timer, Tabby (question screens), VSCO, Halide (paywalls).
+Flow: `r5-onboarding-flow.jpg`. Paywall: `board-r5-paywall.jpg`, `r5-pay-pick.jpg`.

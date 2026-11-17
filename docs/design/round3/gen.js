@@ -272,6 +272,64 @@ function unbox() {
     <div style="font-size:15px;color:#B4B4C0;margin-top:22px">Tap to unbox</div></div>`;
 }
 
+// ---------- round 5: onboarding questions + pro paywall (Mobbin: ABY, Insight Timer, Tabby, VSCO, Halide) ----------
+// Progress = a pixel battery, like the camera HUD.
+const battery = (filled, total = 5) => `<div style="display:flex;align-items:center;gap:3px" aria-label="Step ${filled} of ${total}"><div style="display:flex;gap:3px;padding:3px;border:2px solid #55555F;border-radius:5px">${Array.from({ length: total }, (_, i) => `<span style="width:18px;height:10px;border-radius:1px;background:${i < filled ? '#FF4FA3' : '#26252B'}"></span>`).join('')}</div><span style="width:3px;height:8px;border-radius:1px;background:#55555F"></span></div>`;
+const qTop = (step) => `<div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px"><div class="ico" style="background:none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></div>${battery(step)}<span style="width:44px;text-align:right;color:#B4B4C0;font-size:15px;font-weight:600">Skip</span></div>`;
+const optRow = (icon, t, sub, sel) => `<div style="display:flex;align-items:center;gap:14px;min-height:68px;padding:12px 16px;border-radius:18px;background:${sel ? '#2A1420' : '#17171C'};border:2px solid ${sel ? '#FF4FA3' : '#24242B'}"><span style="width:40px;height:40px;border-radius:12px;background:#26252B;display:flex;align-items:center;justify-content:center;font-size:20px">${icon}</span><div style="flex-grow:1"><div style="font-size:17px;font-weight:600">${t}</div>${sub ? `<div style="font-size:14px;color:#B4B4C0;margin-top:2px">${sub}</div>` : ''}</div><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${sel ? '#FF4FA3' : '#55555F'}" stroke-width="2.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></div>`;
+function question(step, reply, title, pinkWord, sub, body) {
+  return `<div class="screen">${qTop(step)}<div style="padding:18px 20px 0">
+    ${reply ? `<div style="font-size:15px;font-weight:600;color:#FF7DBE;margin-bottom:8px">${reply}</div>` : ''}
+    <div class="serif" style="font-size:40px;line-height:1.02">${title} <span class="pink">${pinkWord}</span></div>
+    ${sub ? `<div style="font-size:15px;color:#B4B4C0;margin-top:8px">${sub}</div>` : ''}
+    <div style="margin-top:22px">${body}</div></div></div>`;
+}
+const occTile = (t, ph, sel) => `<div style="position:relative;height:132px;border-radius:18px;overflow:hidden;${sel ? 'box-shadow:0 0 0 3px #FF4FA3' : ''}"><img src="${img(ph)}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.15) saturate(1.1)"><div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.75))"></div><span style="position:absolute;left:12px;bottom:10px;font-size:16px;font-weight:700">${t}</span></div>`;
+const Q1 = question(1, '', "What's the first", 'party?', 'We load the looks for it.', `<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">${[['Birthday', 'r5.png', true], ['House party', 'r1.png'], ['Night out', 'r2.png'], ['Holidays', 'r6.png'], ['Wedding', 'r4.png'], ['Just us', 'selfie.png']].map(([t, p, sel]) => occTile(t, p, sel)).join('')}</div>`);
+const bigRow = (icon, t, sub) => optRow(icon, t, sub).replace('min-height:68px', 'min-height:104px').replace('width:40px;height:40px;border-radius:12px;background:#26252B;display:flex;align-items:center;justify-content:center;font-size:20px', 'width:60px;height:60px;border-radius:16px;background:#26252B;display:flex;align-items:center;justify-content:center;font-size:30px').replace('font-size:17px;font-weight:600', 'font-size:19px;font-weight:700');
+const Q2 = question(2, 'Birthday looks, loaded 🎂', 'How often are you', 'out?', "We'll suggest the plan that fits. No pressure.", `<div style="display:flex;flex-direction:column;gap:12px">${bigRow('🪩', 'Every weekend', 'Most Fridays and Saturdays')}${bigRow('📅', 'A couple of times a month', 'Dinners, house parties')}${bigRow('🎉', 'Only big nights', 'Birthdays, holidays, weddings')}</div>`);
+const photoRow = (ph, t, sub, sel) => `<div style="position:relative;height:160px;border-radius:20px;overflow:hidden;${sel ? 'box-shadow:0 0 0 3px #FF4FA3' : ''}"><img src="${img(ph)}" style="width:100%;height:100%;object-fit:cover;object-position:50% 35%;filter:contrast(1.15) saturate(1.1)"><div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.8),rgba(0,0,0,0) 70%)"></div><div style="position:absolute;left:18px;bottom:16px"><div style="font-size:20px;font-weight:700">${t}</div><div style="font-size:14px;color:#E4E4EA;margin-top:2px">${sub}</div></div></div>`;
+const Q3 = question(3, 'Noted.', "Who's in your", 'pics?', 'We set your camera up for it.', `<div style="display:flex;flex-direction:column;gap:12px">${photoRow('selfie.png', 'Mostly me', 'Front flash first')}${photoRow('r2.png', 'Me + a few friends', 'Strip mode first', true)}${photoRow('r1.png', 'The whole group', 'Wide 0.5× first')}</div>`);
+const Q4 = question(4, 'Strip mode it is.', 'How did you find', 'Digi?', 'One tap. It helps a tiny team a lot.', `<div style="display:flex;flex-direction:column;gap:10px">${[['🎵', 'TikTok'], ['📸', 'Instagram'], ['💬', 'A friend'], ['🔎', 'App Store search'], ['✨', 'Somewhere else']].map(([i, t]) => optRow(i, t, '')).join('')}</div>`);
+function ready() {
+  const line = (t) => `<div style="display:flex;align-items:center;gap:8px"><span style="color:#7CF3B5">✓</span>${t}</div>`;
+  return `<div class="screen" style="align-items:center">${qTop(5).replace('Skip', '')}
+    <div class="serif" style="font-size:40px;line-height:1.02;text-align:center;margin-top:18px">Your camera's <span class="pink">ready</span></div>
+    <div style="margin-top:30px;width:350px;border-radius:32px;background:${SKIN.pink.bg};padding:12px;box-shadow:0 14px 40px rgba(255,79,163,.25)">
+      <div style="display:flex;align-items:center;gap:10px;padding:0 4px 10px"><div style="width:62px;height:22px;border-radius:7px;background:linear-gradient(180deg,#FFFBEA,#F3E6B5)"></div><div style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#4A6BFF 0%,#1B1B3A 45%,#050508 70%);box-shadow:0 0 0 4px ${SKIN.pink.ring}"></div><span class="pix" style="margin-left:auto;font-size:12px;color:${SKIN.pink.ink}">DIGI-05</span></div>
+      <div style="border-radius:16px;background:#101012;padding:30px 20px;min-height:330px;display:flex;flex-direction:column;justify-content:center;box-shadow:inset 0 2px 8px rgba(0,0,0,.7)">
+        <div class="pix" style="font-size:17px;line-height:2.3;color:#fff">${line('BIRTHDAY LOOKS')}${line('STRIP MODE')}${line('FLASH ON')}${line('<span style="color:#FF7DBE">3 FREE AI DIGIS ✦</span>')}</div>
+        <div class="stamp" style="text-align:right;font-size:15px;margin-top:6px">11 17 '26</div></div></div>
+    <div style="flex-grow:1"></div>
+    <div style="width:350px;padding-bottom:30px"><div class="btn">Open my camera</div><div style="text-align:center;font-size:13px;color:#9A9AA8;margin-top:10px">Next, iPhone asks for the camera. Photos stay on your phone.</div></div></div>`;
+}
+
+const PICON = {
+  ai: '<svg width="22" height="22" viewBox="0 0 24 24" fill="#FF4FA3"><path d="M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2z"/></svg>',
+  live: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2.2"><rect x="3" y="5" width="13" height="14" rx="3"/><path d="M16 10l5-3v10l-5-3z" fill="#FF4FA3"/></svg>',
+  looks: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2.2"><circle cx="9" cy="9" r="5"/><circle cx="15" cy="9" r="5"/><circle cx="12" cy="15" r="5"/></svg>',
+  mark: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF4FA3" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M4 20 20 4"/></svg>',
+};
+function paywallPro(glass) {
+  const feat = (ic, t) => `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex:1"><span style="width:46px;height:46px;border-radius:14px;background:#2A1420;display:flex;align-items:center;justify-content:center">${ic}</span><span style="font-size:12px;font-weight:600;color:#E4E4EA;text-align:center;line-height:1.2">${t}</span></div>`;
+  const plan = (sel, name, sub, price, per, small, badge) => `<div style="display:flex;align-items:center;gap:12px;padding:14px 14px;${sel ? 'background:#2A1420;box-shadow:inset 0 0 0 2px #FF4FA3;border-radius:16px' : ''}">
+      <span style="width:22px;height:22px;flex-shrink:0;border-radius:50%;border:2px solid ${sel ? '#FF4FA3' : '#55555F'};display:flex;align-items:center;justify-content:center">${sel ? '<span style="width:12px;height:12px;border-radius:50%;background:#FF4FA3"></span>' : ''}</span>
+      <div style="flex-grow:1"><div style="display:flex;align-items:center;gap:8px;font-size:16px;font-weight:700">${name}${badge ? `<span style="font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;background:#FF4FA3;color:#1A0010">${badge}</span>` : ''}</div><div style="font-size:13px;color:#B4B4C0;margin-top:2px">${sub}</div></div>
+      <div style="text-align:right;white-space:nowrap"><div><span style="font-size:22px;font-weight:700">${price}</span><span style="font-size:13px;color:#B4B4C0"> ${per}</span></div><div style="font-size:12px;color:#9A9AA8">${small}</div></div></div>`;
+  const plans = `<div style="border-radius:20px;background:${glass ? 'rgba(23,23,28,.6)' : '#141418'};border:1px solid #24242B;padding:4px">${plan(true, 'Yearly', '3 days free', '$39.99', '/yr', '$0.77 a week', 'BEST VALUE')}<div style="height:1px;background:#24242B;margin:0 14px"></div>${plan(false, 'Weekly', '30 AI digis every week', '$6.99', '/wk', 'Cancel anytime')}</div>`;
+  const hero = `<div style="position:absolute;top:0;left:0;right:0;height:${glass ? 844 : 400}px"><img src="${img('r1.png')}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.28) saturate(1.25) brightness(.95)"><div style="position:absolute;inset:0;background:${glass ? 'linear-gradient(180deg,rgba(11,11,14,.5) 0%,rgba(11,11,14,0) 18%,rgba(11,11,14,.1) 35%,rgba(11,11,14,.85) 55%)' : 'linear-gradient(180deg,rgba(11,11,14,.5) 0%,rgba(11,11,14,0) 20%,rgba(11,11,14,0) 60%,#0B0B0E 100%)'}"></div>${glass ? '' : `<span class="stamp" style="position:absolute;right:18px;bottom:64px;font-size:16px">11 17 '26</span>`}</div>`;
+  const head = `<div style="position:relative;display:flex;justify-content:space-between;align-items:center;padding:12px 16px"><div class="ico" style="background:rgba(0,0,0,.45)">${ICON.x}</div><span style="font-size:14px;font-weight:600">Restore</span></div>`;
+  const inner = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">${pixelLogo(3.6)}<span class="pix" style="font-size:12px;padding:3px 8px;border-radius:5px;background:#FF4FA3;color:#1A0010">PLUS</span></div>
+    <div class="serif" style="font-size:34px;line-height:1.02;margin-bottom:16px">Keep the <span class="pink">flash</span> going</div>
+    <div style="display:flex;gap:6px;margin-bottom:18px">${feat(PICON.ai, '60 AI digis<br>a month')}${feat(PICON.live, 'Live digis')}${feat(PICON.looks, 'Every look')}${feat(PICON.mark, 'No<br>watermark')}</div>
+    ${plans}
+    <div style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:#B4B4C0;margin:14px 0 10px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7CF3B5" stroke-width="2.6" stroke-linecap="round"><path d="M5 12l5 5 9-10"/></svg>Nothing to pay today · not charged until Nov 20</div>
+    <div class="btn">Start my 3 free days</div>
+    <div style="display:flex;justify-content:center;gap:16px;font-size:12px;color:#9A9AA8;margin-top:12px"><span style="color:#FF7DBE;font-weight:600">Just tonight? 25 digis · $5.99</span></div>
+    <div style="display:flex;justify-content:center;gap:16px;font-size:12px;color:#9A9AA8;margin-top:8px"><u>Terms</u><u>Privacy</u><u>Redeem code</u></div>`;
+  return `<div class="screen">${hero}${head}<div style="flex-grow:1"></div><div style="position:relative;margin:0 ${glass ? 12 : 0}px ${glass ? 14 : 0}px;padding:${glass ? '20px 16px 18px' : '0 20px 24px'};${glass ? 'border-radius:30px;background:rgba(17,17,21,.72);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08)' : ''}">${inner}</div></div>`;
+}
+
 const ONB_A = camera({ ...PICK, photo: 'r2.png', photoFilter: 'brightness(1.12) saturate(.75)', vfOverlay: vfLabel('A NORMAL PHONE PIC'), overlay: coach('Tap it.') });
 const ONB_B = camera({ ...PICK, photo: 'r2.png', photoFilter: 'contrast(1.3) saturate(1.25) brightness(.92)', vfOverlay: vfLabel("THAT'S A DIGI", true) + `<span class="stamp" style="position:absolute;bottom:10px;right:10px;font-size:15px">11 17 '26</span>`,
   overlay: `<div style="position:absolute;inset:0;pointer-events:none">${confetti()}</div>` + sheet(`<div class="serif" style="font-size:30px;line-height:1.05">Now shoot <span class="pink">your</span> party</div><div style="font-size:15px;color:#B4B4C0;margin:8px 0 18px">Digi needs the camera. Photos stay on your phone.</div><div class="btn">Use my camera</div>`) });
@@ -324,6 +382,9 @@ const SCREENS = {
   'q6-strips': paywall('strips'),
   'q6-beforeafter': paywall('beforeafter'),
   'q6-pixel': paywall('pixel'),
+  'r5-q1': Q1, 'r5-q2': Q2, 'r5-q3': Q3, 'r5-q4': Q4, 'r5-ready': ready(),
+  'r5-pay-pro': paywallPro(false),
+  'r5-pay-glass': paywallPro(true),
   'r4-unbox': unbox(),
   'r4-onb-a': ONB_A,
   'r4-onb-b': ONB_B,

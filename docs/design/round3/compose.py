@@ -95,3 +95,10 @@ board('board-r4-paywall', 'Paywall v2 (from Unfold, Halide, Snapchat on Mobbin)'
     (R + 'r4-pay-single.png', 'One plan, least text', 8.5, 'Cleanest. A/B shows yearly OR weekly.', False),
     (R + 'q6-pixel.png', 'Round 3 (photo in a frame)', 7, 'Feels like a form under a picture.', False),
 ])
+
+# ---- round 5: questions in onboarding + pro paywall ----
+board('board-r5-paywall', 'Paywall v3: more professional (VSCO + Halide on Mobbin)', [
+    (R + 'r5-pay-pro.png', 'Photo + grouped plans', 9, 'Clean grid, icons, one trust line.', True),
+    (R + 'r5-pay-glass.png', 'Frosted glass card', 8.5, 'Very premium. Photo shows less.', False),
+    (R + 'r4-pay-bleed.png', 'v2 (last round)', 8, 'Good, but plain checkmarks.', False),
+])
