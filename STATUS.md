@@ -1,86 +1,139 @@
-# Digi: status and handoff (Nov 17, 2026)
+# Digi: status, decisions and build spec
 
-Repo: jjman2321/digi (moved from jjman2321/MMTEST `digi/`). Style reference for the AI recipe: `docs/model-test/style_ref.png`.
+Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi/`.
 
-**Read this first in a new session.**
+## 1. Where we are
+- ✅ Research done: 26-chapter "bible" in `docs/research/bible/`, plus the earlier deep dive in `docs/research/earlier/`.
+- ✅ 18 approved screen designs: `docs/design/png/` and `docs/design/screens/`. Live artifact: https://claude.ai/artifact/9QnBF3QkMb3kidRsG3PMnV
+- ✅ AI recipe tested and picked: `docs/model-test/` (README v3 section and `PROMPTS.md`). Test spend: $2.27.
+- 🟡 **App scaffold (WORK IN PROGRESS, not yet typechecked or run):**
+  - Expo SDK 58 with deps installed;
+  - design kit (`src/ui/`), store, the Skia develop pass;
+  - screens: `welcome`, `pick`, `occasion`, `source`, `camera`, `develop`.
+- ⬜ Everything in §5 "Build order".
 
-## Decisions the owner made
-- **Build Digi** (a party camera: 2005 digicam flash, an orange date stamp, booth strips, AI re-light, Live digi videos).
-- **No contest.** Ignore the Ship or Die rules and timings completely. Build it as a real business.
-- **Live digi (AI video) is in v1.** Use the cheapest good models, and keep margins high.
-- Kiwi is shelved. Kilma is a possible second app for 2027.
-- The owner's own words: earlier v7 Camera/Looks "the old one was way better", and round-1 AI output looked "mid". So keep the approved v6 camera layout, and keep the look punchy rather than murky.
-
-## Sources of truth
-| What | Where |
+## 2. Decisions (owner's words, dated)
+| Date | Decision |
 |---|---|
-| Niche research (26 chapters, about 278K words) | `docs/research/00-summary.md` (full 26 chapters stay in jjman2321/MMTEST `research/digi-bible-2026-11/`). Start with §1, §12 (UI fix list) and §16 |
-| UI design and fix list | `docs/research/24-ui-design.md` |
-| Tech stack and costs | `docs/research/21-tech-ai-cost.md` |
-| **AI model test and the winning recipe** | `docs/model-test/README.md` (v3 section) |
-| Approved screen designs (18 screens) | Claude Design artifact https://claude.ai/artifact/9QnBF3QkMb3kidRsG3PMnV |
+| Nov 17 | "ok let's do it don't build with the contest in mind anymore or its rules". **No contest.** Build Digi as a business. Kiwi is shelved; Kilma is a 2027 maybe. |
+| Nov 17 | "we should have it in v1 but we should use the cheapest best models so our margins are good". **Live digi (AI video) is in v1.** |
+| Nov 17 | Round-1 AI output looked "mid". Round 3 approved: Klein + style ref + punchy finish. Results must "not look AI". |
+| Nov 16 | Camera and Looks: "the old one was way better". **Keep the v6 camera layout**: big viewfinder, text mode tabs, shutter in the middle, roll pill. No extra clutter. |
+| Nov 16 | Wants the pixel "digi" logo visible (Permission screen, camera body). |
 
-## The AI recipe (tested; total test spend $2.27)
-**Photo ("✦ AI re-light"):**
-- Model: `black-forest-labs/flux-3-image-klein` on OpenRouter, **$0.009 per image**, about 9 s.
-- Input: the user photo plus `style_ref.png` (a 2005 flash reference) as image 2.
-- Prompt: the exact prompts in `docs/model-test/PROMPTS.md`.
-- Then the finish (`docs/model-test/finish3.py`):
-  - person segmentation flash "pop" (iOS Vision `VNGeneratePersonSegmentationRequest` on device);
-  - darker background with glowing point lights;
-  - punchy contrast and saturation;
-  - light sensor sim;
-  - the DSEG7 stamp and the `DIGI.PINK` mark.
-- Fallback: `bytedance-seed/seedream-5-0-flash` ($0.018).
-- These providers refuse photos of people: Gemini, OpenAI, Qwen (sometimes), and for video Veo and Seedance 2.0.
+**What changed now there's no contest** (overrides those parts of the research):
+- **Paywall:** test **weekly-first vs yearly-first**. Weekly with a 3-day trial is the top-LTV setup in Photo & Video. Yearly-first was only for contest scoring.
+- **Paid ads** are allowed once revenue per install is known: Meta and TikTok first, then Apple Ads.
+- **Storefronts:** start with US (plus CA, UK, AU after a privacy/legal check). Add Gulf and Egypt after a data-law check.
+- **No Dec 13 "trial switch", no $297 cash cap, no "in-window" maths.**
+- **Timing:** aim to be **live by about Dec 10** for the Christmas/NYE party season. Then weddings and events (Apr–Sep).
 
-**Live digi:**
-- Model: `heygen/heygen-video-1`, 480p, 5 s, 3:4, first frame = the popped photo. **$0.05 per clip**, about 25 s.
-- Then `docs/model-test/vfinish2.sh`: 15 fps, CCD noise, MJPEG blockiness, a white flash pop and the stamp.
-- 768p was worse: faces drifted more.
-- Fallback: `x-ai/grok-imagine-video-1.5-lite` ($0.11).
+## 3. Product spec v1
+**Name and ASO:** "Digi: Photo Booth & Digicam". Subtitle: "Y2K Flash Camera, Party Strips". Plan name: **Digi Plus**. Keywords: ch. 12.
 
-**Pricing idea:** photo 1 digi, strip 2, Live digi 3. Margins are about 90% or more.
+**Flow** (ch. 24 §12, about 7 taps to the first real digi):
+1. Welcome
+2. Try the flash on a sample (no permission yet)
+3. Occasion (1 tap)
+4. How did you find us (1 tap)
+5. Camera (the system camera prompt fires here)
+6. First real digi develops (free)
+7. "✦ Re-light it with AI · free"
+8. Age (18+)
+9. Consent
+10. Developing
+11. Result
+12. Paywall, once, with ✕ visible from 0 s
 
-**Still to do:** test 20 real photos with consent before launch.
+**Screens** (map to `docs/design/png/NN-*.png`):
 
-## Stack (from ch. 21)
-- **App:** Expo SDK 58 + Expo Router + TypeScript.
-- **Camera and develop:** `expo-camera`, then a Skia develop pass.
-- **Backend:** Supabase (anonymous auth, Postgres + RLS, Storage, Edge Functions that call OpenRouter server-side; never put the key in the app).
-- **Payments:** RevenueCat, with the digis balance as Virtual Currency.
-- **Builds:** EAS.
+| Route | Design | Status |
+|---|---|---|
+| `welcome` | 01-Main | built |
+| `pick` (sample flash demo) | 04-Pick / 05-Watch | built |
+| `occasion` | 03-Vibe (single tap) | built |
+| `source` | (new) | built |
+| `age` | 02-Age (blank, neutral; shown at first AI use) | todo |
+| `consent` | 08-Consent (box unticked, names partners, deletion time, "Free digi 1 of 3") | todo |
+| `camera` | 13-Camera (v6) | built, needs a device test |
+| `develop` (free digi + actions) | 11-Result | built |
+| `developing` (AI job, "Ping me" toggle) | 09-Developing | todo |
+| `result` (AI digi, Before chip, Share, "Make it live ✦ 3", "Make it a strip ✦ 2") | 11-Result | todo |
+| `live` (Live digi player and share) | (new; ch. 24 style) | todo |
+| `paywall` | 12-Paywall (fix per ch. 24 P0 #1) | todo |
+| `looks` (sheet; "✦ 1 / ✦ 2" badges, never "PRO") | 14-Looks | todo |
+| `strip` | 15-Booth | todo |
+| `share` | 16-Story | todo |
+| `roll` (local gallery) | 18-Gallery | todo |
+| `settings` (Plus hub, Restore, Help, Delete data) | (new) | todo |
+| Shared rolls (host QR, guests join on web, reveal at 10 AM) | 17-Roll | **v1.1** |
 
-Read `AGENTS.md` here first. Expo APIs changed, so check the v58 docs.
+**Money** (RevenueCat):
 
-## What exists in this repo (scaffold, WORK IN PROGRESS, not typechecked or run yet)
-- Expo SDK 58 app (`create-expo-app`). Deps installed: camera, Skia, image-picker, media-library, sharing, haptics, file-system, svg, linear-gradient, Google fonts (Instrument Serif, Inter, Silkscreen), expo-sqlite, expo-asset. `public/canvaskit.wasm` is there for Skia on web.
-- `src/ui/theme.ts` (tokens) and `src/ui/kit.tsx` (buttons, TopBar, StepDots, Headline, PixelLogo, CamBody, Stamp, todayStamp).
-- `src/lib/store.ts` (a persisted store), `develop.ts` (Skia develop shader and stamp), `files.ts`, `pending.ts`.
-- Screens in `src/app/`:
-  - `_layout`, `index` (redirect);
-  - onboarding: `welcome`, `pick` (sample flash demo), `occasion`, `source`;
-  - `camera` (v6 layout);
-  - `develop` (free digi plus "Re-light with AI").
-- **Not built yet:**
-  - screens: `consent`, `developing` (AI job), `paywall`, `looks`, `strip`, `roll`, `settings`;
-  - age check;
-  - Supabase functions and migrations;
-  - RevenueCat;
-  - the Live digi flow;
-  - the iOS segmentation module;
-  - app.json (bundle id, permission strings, name "Digi: Photo Booth & Digicam").
-- `assets/samples/*` are AI-made demo photos (no real people). `assets/fonts/DSEG7Classic-Bold.ttf` (OFL).
+| Product | Details |
+|---|---|
+| Digi Plus Weekly | $6.99, 3-day trial, 30 digis a week |
+| Digi Plus Yearly | $39.99, 60 digis a month |
+| Party Pack | $5.99, 25 digis |
+| Big Night | $11.99, 60 digis |
+| Free | 3 AI digis, one time |
 
-## Next steps
-1. `npx tsc --noEmit` and `npx expo lint`. Fix errors. Run the web preview with Playwright screenshots at 390×844.
-2. Finish the screens (consent, developing, result, paywall, looks, strip, roll, settings), following ch. 24's P0 list.
-3. Supabase: migrations (profiles, jobs, looks) and the edge functions `digi-ai` (Klein → Seedream fallback, moderation, auto-refund) and `live-digi` (HeyGen → Grok fallback).
-4. RevenueCat: products and the digis currency. Paywall: test weekly-first vs yearly-first (no contest constraint now).
-5. iOS segmentation (a local Expo module in Swift), then EAS builds.
+- **Costs in digis:** AI photo 1, strip 2, Live digi 3.
+- **Paywall copy:**
+  - the price is the biggest text;
+  - a dated trial timeline: "You won't be charged until <date>";
+  - a reminder at trial start + 40 h;
+  - "Best value", never "SAVE 89%".
 
-## Owner setup needed (never paste keys in chat)
-- **Apple Developer account** (Grasp Labs LLC) and the App Store Connect app record.
-- **Expo account:** add `EXPO_TOKEN` in claude.ai environment settings → environment variables.
-- **Supabase project:** the OpenRouter key goes in Supabase Edge Function secrets as `OPENROUTER_API_KEY`.
-- **RevenueCat account:** the public iOS SDK key goes in app config. The secret key goes in Supabase secrets.
+**AI pipeline** (Supabase Edge Functions; recipe in `docs/model-test/PROMPTS.md`):
+- **`digi-ai`:** check auth + balance → moderate (cheap vision JSON: people count, possible minor, nudity; ch. 21 §5) → Klein + `style_ref.png` → fallback Seedream Flash → store → spend 1 digi (idempotent) → on failure, refund.
+- **`live-digi`:** same checks → HeyGen 480p 5 s 3:4 (first frame = the popped photo) → fallback Grok lite → store → spend 3.
+- **On the phone after AI:** segmentation pop → sensor finish → stamp. Video: the 15 fps / grain / flash-pop finish. Ports of `docs/model-test/finish3.py` and `vfinish2.sh`.
+- **Logging:** a `jobs` table (user, kind, model, cost_usd, ms, status, error).
+
+**Data** (Postgres, RLS on everything):
+- `profiles` (anon user, occasion, source, age_ok, consent_at)
+- `jobs`
+- `looks` (id, name, model, fallback, prompt, cost_digis, active)
+- `assets` (storage paths; **delete originals after 24 h**, keep outputs until the user deletes them)
+
+## 4. Owner setup (never paste keys in chat)
+1. **Apple Developer account** for Grasp Labs LLC, and enrol in the App Store Small Business Program (15% instead of 30%).
+2. **Expo:** create an access token → add `EXPO_TOKEN` in claude.ai environment settings → environment variables.
+3. **Supabase:** create a project (EU or US region) → add `OPENROUTER_API_KEY` under Supabase → Edge Functions → Secrets.
+4. **RevenueCat:**
+   - create a project;
+   - add the iOS public SDK key as `EXPO_PUBLIC_REVENUECAT_IOS_KEY` in environment variables;
+   - add the secret key in Supabase secrets as `REVENUECAT_SECRET_KEY`.
+5. **App Store Connect:**
+   - create the app "Digi: Photo Booth & Digicam" and the 4 products above;
+   - create an App Store Connect API key for EAS submit (stored in EAS, not chat).
+
+## 5. Build order (next steps)
+1. **Get the scaffold green:** `npx tsc --noEmit` and `npx expo lint`. Fix everything. Set up `app.json`:
+   - name and bundle id `pink.digi.app`;
+   - camera and photos permission strings from ch. 22;
+   - icon: the pink camera with the pixel "digi" logo;
+   - dark UI.
+
+   Then take web preview screenshots of every built screen.
+2. **Finish the free loop:**
+   - the camera and develop pass on a device via an EAS dev build;
+   - the strip (4 timed shots composed in Skia);
+   - the roll, saving and sharing.
+3. **Backend:** Supabase migrations and the `digi-ai` and `live-digi` Edge Functions with moderation, fallbacks, refunds and logging. Test them with the AI-made samples in `assets/samples/`.
+4. **Screens:** `age`, `consent`, `developing`, `result`, `live` and `looks`.
+5. **Money:**
+   - RevenueCat products and currency;
+   - the paywall (weekly-first vs yearly-first experiment);
+   - the out-of-digis sheet (pack first vs Plus first);
+   - Settings with Restore.
+6. **iOS segmentation module** for the flash pop.
+7. **The 20-photo real-face test:** the owner's friends, with consent. Gate: faces kept in at least 18 of 20.
+8. **Release:** TestFlight → App Store, with the In-App Event, 3 Custom Product Pages and the launch content plan (ch. 14–17).
+9. **v1.1:** shared rolls with web guest join, Live Activity, more looks weekly, Android.
+
+## 6. How to test (keep `docs/MANUAL-TESTS.md` updated)
+- Web preview: `npx expo start --web`, then screenshots at 390×844 against `docs/design/png/`.
+- Device: EAS development build on the owner's iPhone, then TestFlight.
+- AI: run each look on the 20-photo set. Log cost and face check in `docs/model-test/`.
