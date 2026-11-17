@@ -40,7 +40,7 @@ A medical student, founder of Grasp Labs LLC, with limited coding experience.
 2. **Faces must not change.** Every AI path keeps people's identity. Test it on the 20-photo set before shipping a model or prompt change.
 3. **Consent and age:**
    - The consent screen before the first AI use names the AI partners and how long photos are kept.
-   - 18+ only.
+   - 13+ app, no birthday screen (owner, Nov 17). The consent tick says everyone in the photo is 18+ and agreed.
    - No kids, no nudity. Moderate the input before AI, and auto-refund digis on any failure.
 4. **No dark patterns:**
    - The trial is honest, with real dates and a reminder.
