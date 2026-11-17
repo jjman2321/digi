@@ -14,3 +14,7 @@ Regenerate: `node docs/design/round3/gen.js && python3 docs/design/round3/compos
 | `board-logo.jpg` | Which DIGI logo (picked: concept, pink, flat-sided D) |
 
 **Picked:** the pink box on every board. Final single screens: `png/q2-header.png` (camera; with `q4-hybrid` tabs), `png/q5-*` (onboarding), `png/q6-pixel.png` (paywall, no timeline).
+
+## Round 4 (Nov 17): onboarding + paywall rework from Mobbin
+References: Lapse (camera-first onboarding, first-snap confetti, permission sheet), Kino (unboxing), (Not Boring) Camera (assemble the camera), Unfold (full-bleed photo paywall), Halide (one big CTA + "View all options"), Snapchat Lens+ (sheet over the camera). Avoided: Lovi trial toggle (Apple 3.1.2), Dropbox timeline (owner cut it).
+Boards: `board-r4-onboarding.jpg`, `board-r4-paywall.jpg`; full-size picks: `r4-onb-pick.jpg`, `r4-pay-pick.jpg`.

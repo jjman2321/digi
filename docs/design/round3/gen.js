@@ -131,8 +131,8 @@ function camera(o) {
     </div>
     <div style="border-radius:18px;background:#26252B;padding:9px;box-shadow:inset 0 2px 8px rgba(0,0,0,.6)">
       <div style="position:relative;height:${screenH}px;border-radius:10px;overflow:hidden;background:#000">
-        <img src="${img('r1.png')}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.08) saturate(1.12)">
-        ${hud}${zoomChips}
+        <img src="${img(o.photo || 'r1.png')}" style="width:100%;height:100%;object-fit:cover;filter:${o.photoFilter || 'contrast(1.08) saturate(1.12)'}">
+        ${o.vfOverlay ? '' : hud + zoomChips}${o.vfOverlay || ''}
         <span class="stamp" style="position:absolute;bottom:10px;right:10px;font-size:15px">11 17 '26</span>
       </div>
     </div>${bar}
@@ -171,7 +171,7 @@ function camera(o) {
     <div class="pix" style="text-align:center;font-size:11px;color:#B4B4C0;padding-top:10px">3 FREE DIGIS ✦</div>
   </div>`;
 
-  return `<div class="screen">${top}${body}${looksUi}${controls}<div style="height:26px"></div></div>`;
+  return `<div class="screen">${top}${body}${looksUi}${controls}<div style="height:26px"></div>${o.overlay || ''}</div>`;
 }
 
 // ---------- onboarding: shutter-first welcome (ch. 18 A1 + ch. 24 §12) ----------
@@ -246,6 +246,65 @@ function pickOne(title, pinkWord, sub, items, photos) {
 }
 
 const BASE = { skin: 'pink', logo: 'header', hw: 'bar', looks: 'tabs' };
+const PICK = { ...BASE, looks: 'hybrid' };
+
+// ---------- round 4: onboarding + paywall rework (Mobbin: Lapse, Kino, Unfold, Halide, Snapchat) ----------
+const sheet = (inner, h) => `<div style="position:absolute;inset:0;background:rgba(0,0,0,.45)"></div>
+  <div style="position:absolute;left:0;right:0;bottom:0;${h ? `height:${h}px;` : ''}border-radius:28px 28px 0 0;background:#17171C;box-shadow:0 -10px 40px rgba(0,0,0,.6);padding:10px 20px 30px">
+  <div style="width:40px;height:5px;border-radius:3px;background:#3A3A44;margin:0 auto 14px"></div>${inner}</div>`;
+const chip = (t, sel) => `<span style="height:44px;padding:0 16px;border-radius:999px;background:${sel ? '#FF4FA3' : '#26252B'};color:${sel ? '#1A0010' : '#fff'};font-size:15px;font-weight:600;display:inline-flex;align-items:center">${t}</span>`;
+const coach = (t) => `<div style="position:absolute;left:50%;bottom:178px;transform:translateX(-50%);white-space:nowrap;padding:10px 16px;border-radius:14px;background:#fff;color:#1A0010;font-size:16px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.5)">${t}<span style="position:absolute;left:50%;bottom:-7px;margin-left:-7px;width:14px;height:14px;background:#fff;transform:rotate(45deg)"></span></div>`;
+const confetti = () => { let c = ''; const cols = ['#FF4FA3', '#FFD43B', '#7CF3B5', '#FF9A2E', '#fff']; for (let i = 0; i < 26; i++) { const x = (i * 53) % 380, y = 60 + ((i * 97) % 420), r = (i * 37) % 180; c += `<span style="position:absolute;left:${x}px;top:${y}px;width:${i % 3 ? 8 : 12}px;height:${i % 2 ? 4 : 10}px;background:${cols[i % 5]};transform:rotate(${r}deg);border-radius:2px"></span>`; } return c; };
+const vfLabel = (t, pink) => `<span class="pix" style="position:absolute;top:9px;left:10px;font-size:11px;padding:2px 7px;border-radius:4px;background:${pink ? '#FF4FA3' : 'rgba(0,0,0,.6)'};color:${pink ? '#1A0010' : '#fff'}">${t}</span>`;
+
+function unbox() {
+  const bars = Array.from({ length: 34 }, (_, i) => `<span style="width:${i % 3 ? 2 : 4}px;height:44px;background:#5A1A3A"></span>`).join('');
+  return `<div class="screen" style="align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#2A1420,#0B0B0E 70%)">
+    <div style="width:320px;height:560px;border-radius:10px;background:linear-gradient(170deg,#FBD3E6,#F2A7CA);box-shadow:0 30px 60px rgba(0,0,0,.6),inset 0 0 0 2px rgba(255,255,255,.4);padding:22px;display:flex;flex-direction:column;color:#5A1A3A;position:relative">
+      <div style="display:flex;justify-content:space-between;align-items:center"><div style="display:flex;gap:1px;align-items:flex-end">${bars}</div><span class="stamp" style="font-size:16px;padding:4px 8px;background:#1A0010;border-radius:4px">11 17 '26</span></div>
+      <div style="margin-top:30px">${pixelLogo(11, '#C21F70')}</div>
+      <div class="pix" style="font-size:15px;margin-top:14px">DIGI-05</div>
+      <div style="font-size:15px;font-weight:700;margin-top:4px">Digital party camera</div>
+      <div style="display:flex;gap:8px;margin-top:22px">${['FLASH', 'CCD', 'DATE', 'STRIP'].map((t) => `<span class="pix" style="font-size:11px;padding:5px 8px;border:2px solid #C21F70;border-radius:6px">${t}</span>`).join('')}</div>
+      <div style="flex-grow:1"></div>
+      <div style="border-top:3px dashed #C21F70;padding-top:14px;text-align:center"><div class="pix" style="font-size:15px">▽ OPEN HERE ▽</div></div>
+    </div>
+    <div style="font-size:15px;color:#B4B4C0;margin-top:22px">Tap to unbox</div></div>`;
+}
+
+const ONB_A = camera({ ...PICK, photo: 'r2.png', photoFilter: 'brightness(1.12) saturate(.75)', vfOverlay: vfLabel('A NORMAL PHONE PIC'), overlay: coach('Tap it.') });
+const ONB_B = camera({ ...PICK, photo: 'r2.png', photoFilter: 'contrast(1.3) saturate(1.25) brightness(.92)', vfOverlay: vfLabel("THAT'S A DIGI", true) + `<span class="stamp" style="position:absolute;bottom:10px;right:10px;font-size:15px">11 17 '26</span>`,
+  overlay: `<div style="position:absolute;inset:0;pointer-events:none">${confetti()}</div>` + sheet(`<div class="serif" style="font-size:30px;line-height:1.05">Now shoot <span class="pink">your</span> party</div><div style="font-size:15px;color:#B4B4C0;margin:8px 0 18px">Digi needs the camera. Photos stay on your phone.</div><div class="btn">Use my camera</div>`) });
+const ONB_C = camera({ ...PICK, overlay: sheet(`<div class="serif" style="font-size:30px;line-height:1.05">What's <span class="pink">tonight?</span></div><div style="font-size:15px;color:#B4B4C0;margin:6px 0 14px">One tap. We'll set your first looks.</div><div style="display:flex;flex-wrap:wrap;gap:8px">${['🎂 Birthday', '🏠 House party', '🌃 Night out', '🎄 Holidays', '💍 Wedding', '✌️ Just us'].map((t) => chip(t)).join('')}</div><div style="font-size:13px;color:#9A9AA8;margin-top:16px">Next: how did you find Digi? (1 tap)</div>`) });
+
+function paywallBleed(single) {
+  const hero = `<div style="position:absolute;top:0;left:0;right:0;height:${single ? 520 : 440}px">
+      <img src="${img('r1.png')}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.28) saturate(1.25) brightness(.95)">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,11,14,.55) 0%,rgba(11,11,14,0) 22%,rgba(11,11,14,0) 55%,#0B0B0E 100%)"></div>
+      <span class="stamp" style="position:absolute;right:18px;bottom:${single ? 120 : 90}px;font-size:17px">11 17 '26</span>
+      <span class="pix" style="position:absolute;left:18px;bottom:${single ? 122 : 92}px;font-size:11px;padding:3px 8px;border-radius:4px;background:#FF4FA3;color:#1A0010">YOURS ✦</span></div>`;
+  const head = `<div style="position:relative;display:flex;justify-content:space-between;align-items:center;padding:12px 16px"><div class="ico" style="background:rgba(0,0,0,.45)">${ICON.x}</div><div style="display:flex;align-items:center;gap:6px">${pixelLogo(3.2)}<span class="pix" style="font-size:11px;padding:3px 7px;border-radius:5px;background:#FF4FA3;color:#1A0010">PLUS</span></div><span style="width:44px;font-size:14px;font-weight:600;color:#fff;text-align:right">Restore</span></div>`;
+  const foot = (cta, line) => `<div class="btn">${cta}</div><div style="text-align:center;font-size:12px;color:#B4B4C0;margin-top:8px">${line}</div>`;
+  if (single) {
+    return `<div class="screen">${hero}${head}<div style="flex-grow:1"></div><div style="position:relative;padding:0 20px 26px">
+      <div class="serif" style="font-size:38px;line-height:1">Keep the <span class="pink">flash</span> going</div>
+      <div style="font-size:15px;color:#B4B4C0;margin:10px 0 16px">60 AI digis a month · every look · no watermark</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px"><span style="font-size:34px;font-weight:700">$39.99</span><span style="font-size:17px;color:#B4B4C0">/ year</span><span style="margin-left:auto;font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px;background:#2A1420;color:#FF7DBE">3 DAYS FREE</span></div>
+      <div style="font-size:13px;color:#9A9AA8;margin-bottom:16px">About $0.77 a week</div>
+      ${foot('Start my 3 free days', 'Not charged until Nov 20. Cancel anytime.')}
+      <div style="display:flex;justify-content:center;gap:18px;margin-top:10px;font-size:14px;font-weight:600;color:#FF7DBE"><span>Other plans</span><span>25 digis · $5.99</span></div>
+      <div style="text-align:center;font-size:12px;color:#9A9AA8;margin-top:8px"><u>Terms</u> · <u>Privacy</u></div></div></div>`;
+  }
+  const row = (sel, name, price, per, sub, badge) => `<div style="position:relative;display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;border:2px solid ${sel ? '#FF4FA3' : '#2E2E36'};background:${sel ? '#2A1420' : 'rgba(23,23,28,.9)'}">${badge ? `<span style="position:absolute;top:-10px;right:14px;padding:2px 8px;border-radius:999px;background:#FF4FA3;color:#1A0010;font-size:11px;font-weight:700">${badge}</span>` : ''}<span style="width:22px;height:22px;border-radius:50%;border:2px solid ${sel ? '#FF4FA3' : '#55555F'};display:flex;align-items:center;justify-content:center">${sel ? '<span style="width:12px;height:12px;border-radius:50%;background:#FF4FA3"></span>' : ''}</span><div style="flex-grow:1"><div style="font-size:15px;font-weight:600">${name}</div><div style="font-size:13px;color:#B4B4C0">${sub}</div></div><div style="white-space:nowrap"><span style="font-size:22px;font-weight:700">${price}</span><span style="font-size:14px;color:#B4B4C0"> ${per}</span></div></div>`;
+  return `<div class="screen">${hero}${head}<div style="flex-grow:1"></div><div style="position:relative;padding:0 20px 26px">
+    <div class="serif" style="font-size:36px;line-height:1;margin-bottom:12px">Keep the <span class="pink">flash</span> going</div>
+    <div style="display:flex;gap:14px;font-size:14px;color:#fff;margin-bottom:14px">${['60 AI digis/mo', 'Every look', 'No watermark'].map((t) => `<span style="display:flex;align-items:center;gap:4px">${ICON.check.replace('18', '15').replace('18', '15')}${t}</span>`).join('')}</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">${row(true, 'Yearly', '$39.99', '/ yr', '3 days free · ~$0.77/wk', 'BEST VALUE')}${row(false, 'Weekly', '$6.99', '/ wk', '30 AI digis a week')}</div>
+    ${foot('Start my 3 free days', 'Then $39.99/year. Not charged until Nov 20. Cancel anytime.')}
+    <div style="text-align:center;font-size:14px;font-weight:600;color:#FF7DBE;margin-top:8px">Just tonight? 25 digis · $5.99 →</div>
+    <div style="text-align:center;font-size:12px;color:#9A9AA8;margin-top:6px"><u>Terms</u> · <u>Privacy</u></div></div></div>`;
+}
+
 const SCREENS = {
   'q1-pink': camera({ ...BASE }),
   'q1-silver': camera({ ...BASE, skin: 'silver' }),
@@ -265,6 +324,12 @@ const SCREENS = {
   'q6-strips': paywall('strips'),
   'q6-beforeafter': paywall('beforeafter'),
   'q6-pixel': paywall('pixel'),
+  'r4-unbox': unbox(),
+  'r4-onb-a': ONB_A,
+  'r4-onb-b': ONB_B,
+  'r4-onb-c': ONB_C,
+  'r4-pay-bleed': paywallBleed(false),
+  'r4-pay-single': paywallBleed(true),
   'logo-concept-pink': camera({ ...BASE }),
   'logo-concept-mint': withLogo('concept', '#CDEDEC', () => camera({ ...BASE })),
   'logo-v1-silk': withLogo('silk', '#FF4FA3', () => camera({ ...BASE })),

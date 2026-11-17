@@ -80,3 +80,18 @@ board('board-logo', 'Which is our DIGI logo?', [
 board('board-q6-paywall-v2', 'Paywall, tightened (dated timeline fills the gap)', [
     (R + 'q6-pixel.png', 'Pixel DIGI + their digi', 9, 'No dead space. Price biggest.', True),
 ])
+
+# ---- round 4 (Mobbin rework: Lapse, Kino, Unfold, Halide, Snapchat) ----
+board('board-r4-onboarding', 'Onboarding v2 (from Lapse + Kino on Mobbin)', [
+    ([R + 'r4-onb-a.png', R + 'r4-onb-b.png', R + 'r4-onb-c.png'],
+     'The camera IS the onboarding (Lapse)', 9, 'Tap it, flash, confetti. Camera ask + "tonight?" are sheets.', True),
+    ([R + 'r4-unbox.png', R + 'r4-onb-a.png', R + 'r4-onb-b.png'],
+     'Unbox first, then same (Kino)', 8, 'Fun brand moment, but one extra tap.', False),
+    ([R + 'q5-welcome.png', R + 'q5-occasion.png', R + 'q5-source.png'],
+     'Round 3: 3 separate screens', 7, 'Works, but feels like forms.', False),
+])
+board('board-r4-paywall', 'Paywall v2 (from Unfold, Halide, Snapchat on Mobbin)', [
+    (R + 'r4-pay-bleed.png', 'Their digi, full screen + 2 plans', 9, 'Photo sells it. Yearly vs weekly side by side.', True),
+    (R + 'r4-pay-single.png', 'One plan, least text', 8.5, 'Cleanest. A/B shows yearly OR weekly.', False),
+    (R + 'q6-pixel.png', 'Round 3 (photo in a frame)', 7, 'Feels like a form under a picture.', False),
+])
