@@ -428,6 +428,45 @@ function freeCard(kind) {
   return camera({ ...PICK, vfOverlay: vf, overlay: sheet(`${body}<div class="btn">Re-light a photo ✦</div>`) });
 }
 
+// ---------- round 9: sign-in + age (Mobbin: Slopes, Once, Lapse, Locket) ----------
+const appleBtn = (t) => `<div style="height:54px;border-radius:999px;background:#fff;color:#000;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;gap:8px"><svg width="18" height="20" viewBox="0 0 17 20" fill="#000"><path d="M14 10.6c0-2.4 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9C3.700 5 2 6 1.100 7.600c-1.900 3.200-.5 8 1.300 10.600.9 1.300 1.900 2.700 3.300 2.700 1.300-.1 1.800-.9 3.400-.9 1.600 0 2 .9 3.400.8 1.400 0 2.300-1.300 3.200-2.600 1-1.500 1.400-2.900 1.400-3-.1 0-2.800-1.100-2.800-4.200zM11.500 3.300c.7-.9 1.200-2.100 1.100-3.300-1 0-2.300.7-3 1.600-.7.800-1.300 2-1.100 3.200 1.100.1 2.300-.6 3-1.500z"/></svg>${t}</div>`;
+const darkBtn = (t) => `<div style="height:54px;border-radius:999px;background:#26252B;color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center">${t}</div>`;
+function signLater() {
+  return camera({ ...PICK, overlay: sheet(`<div class="pix" style="font-size:12px;color:#FF7DBE">HOSTING A ROLL? SAVE YOUR STUFF</div>
+    <div class="serif" style="font-size:32px;line-height:1.05;margin-top:6px">Keep your digis, <span class="pink">find your friends</span></div>
+    <div style="font-size:15px;color:#B4B4C0;margin:8px 0 16px">Your roll, digis and Plus follow you to any phone.</div>
+    ${appleBtn('Continue with Apple')}<div style="height:10px"></div>
+    <div style="height:54px;border-radius:16px;background:#1C1C22;border:1.5px solid #2E2E36;display:flex;align-items:center;padding:0 16px;font-size:16px;color:#9A9AA8">your@email.com<span style="margin-left:auto;width:34px;height:34px;border-radius:50%;background:#FF4FA3;color:#1A0010;display:flex;align-items:center;justify-content:center;font-weight:800">→</span></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;color:#E4E4EA"><span style="width:22px;height:22px;border-radius:6px;border:2px solid #55555F"></span>Send me new looks (about 1 email a week)</div>
+    <div style="text-align:center;font-size:15px;font-weight:600;color:#B4B4C0;margin-top:14px">Not now</div>`) });
+}
+function signUpfront() {
+  return `<div class="screen" style="align-items:center;background:radial-gradient(120% 60% at 50% 30%,#3A1028 0%,#0B0B0E 65%)">
+    <div style="padding-top:60px">${pixelLogo(6)}</div>
+    <div class="serif" style="font-size:38px;text-align:center;line-height:1.05;margin-top:18px">Your party's<br><span class="pink">camera</span></div>
+    <div style="position:relative;width:390px;height:330px;margin-top:10px">${print('r2.png', -9, 40, 30, 130, 'BIRTHDAY', 'contrast(1.2) saturate(1.2)')}${print('r1.png', 8, 222, 30, 130, 'HOUSE PARTY', 'contrast(1.2)')}${print('r5.png', -1, 118, 10, 160, 'YOURS ✦', 'contrast(1.25) saturate(1.2)')}</div>
+    <div style="flex-grow:1"></div>
+    <div style="width:350px;padding-bottom:28px">${appleBtn('Continue with Apple')}<div style="height:10px"></div>${darkBtn('Continue with Google')}<div style="height:10px"></div>${darkBtn('📸  Invited? Join a roll')}
+      <div style="text-align:center;font-size:12px;color:#9A9AA8;margin-top:12px">By continuing you agree to the <u>Terms</u> and <u>Privacy</u></div></div></div>`;
+}
+function signPhone() {
+  return `<div class="screen">${qTop(1).replace(battery(1), '')}<div style="padding:16px 20px 0">
+    <div class="serif" style="font-size:40px;line-height:1.02">What's your <span class="pink">number?</span></div>
+    <div style="font-size:15px;color:#B4B4C0;margin-top:8px">Friends find you by it. We text a code.</div>
+    <div style="display:flex;gap:10px;margin-top:26px"><div style="height:58px;padding:0 14px;border-radius:16px;background:#1C1C22;display:flex;align-items:center;font-size:17px;font-weight:600">🇺🇸 +1</div><div style="flex:1;height:58px;border-radius:16px;background:#1C1C22;display:flex;align-items:center;padding:0 16px;font-size:18px;color:#9A9AA8">(555) 000-0000</div></div></div>
+    <div style="flex-grow:1"></div><div style="padding:0 20px 28px"><div class="btn">Send code</div><div style="text-align:center;font-size:12px;color:#9A9AA8;margin-top:10px">~$0.05 per text for us · needs contacts access to find friends</div></div></div>`;
+}
+function ageGate(state) {
+  if (state === 'blocked') {
+    return camera({ ...PICK, overlay: sheet(`<div style="text-align:center"><div class="serif" style="font-size:32px;line-height:1.05">AI looks are <span class="pink">18+</span></div><div style="font-size:15px;color:#B4B4C0;margin:10px 0 18px">Every free camera, look and strip is still yours.</div></div><div class="btn">Back to the camera</div>`) });
+  }
+  const col = (vals, sel) => `<div style="flex:1;display:flex;flex-direction:column;gap:6px;align-items:center">${vals.map((v, i) => `<span style="font-size:${i === 2 ? 22 : 17}px;font-weight:${i === 2 ? 700 : 500};color:${i === 2 ? '#fff' : '#55555F'}">${v}</span>`).join('')}</div>`;
+  return camera({ ...PICK, overlay: sheet(`<div class="serif" style="font-size:32px;line-height:1.05">Quick one: your <span class="pink">birthday?</span></div>
+    <div style="font-size:15px;color:#B4B4C0;margin:8px 0 14px">AI looks are 18+. We don't show this to anyone.</div>
+    <div style="position:relative;border-radius:16px;background:#1C1C22;padding:14px 0;display:flex"><div style="position:absolute;left:10px;right:10px;top:50%;height:40px;margin-top:-20px;border-radius:10px;background:#26252B"></div><div style="position:relative;display:flex;width:100%">${col(['', '', 'Month', '', ''])}${col(['', '', 'Year', '', ''])}</div></div>
+    <div style="height:16px"></div><div class="btn" style="opacity:.45">Continue</div>`) });
+}
+
 const ONB_A = camera({ ...PICK, photo: 'r2.png', photoFilter: 'brightness(1.12) saturate(.75)', vfOverlay: vfLabel('A NORMAL PHONE PIC'), overlay: coach('Tap it.') });
 const ONB_B = camera({ ...PICK, photo: 'r2.png', photoFilter: 'contrast(1.3) saturate(1.25) brightness(.92)', vfOverlay: vfLabel("THAT'S A DIGI", true) + `<span class="stamp" style="position:absolute;bottom:10px;right:10px;font-size:15px">11 17 '26</span>`,
   overlay: `<div style="position:absolute;inset:0;pointer-events:none">${confetti()}</div>` + sheet(`<div class="serif" style="font-size:30px;line-height:1.05">Now shoot <span class="pink">your</span> party</div><div style="font-size:15px;color:#B4B4C0;margin:8px 0 18px">Digi needs the camera. Photos stay on your phone.</div><div class="btn">Use my camera</div>`) });
@@ -481,6 +520,7 @@ const SCREENS = {
   'q6-beforeafter': paywall('beforeafter'),
   'q6-pixel': paywall('pixel'),
   'r7-look': pickLook(),
+  'r9-sign-later': signLater(), 'r9-sign-upfront': signUpfront(), 'r9-sign-phone': signPhone(), 'r9-age': ageGate('ask'), 'r9-age-blocked': ageGate('blocked'),
   'r8-free-once': freeCard('once'), 'r8-free-tiers': freeCard('tiers'), 'r8-free-weekly': freeCard('weekly'),
   'r6-q1': R6_Q1, 'r6-q2': R6_Q2, 'r6-q3': R6_Q3, 'r6-gender': R6_G, 'r6-q4': R6_Q4, 'r6-ready': R6_READY,
   'r6-pay-a': payA(), 'r6-pay-b': payB(), 'r6-pack': payPack(),
