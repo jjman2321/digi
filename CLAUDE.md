@@ -63,4 +63,5 @@ A medical student, founder of Grasp Labs LLC, with limited coding experience.
 ## Working style
 - Before a big feature, write a short plan (files, data, how to test) in chat and wait for his go.
 - Prefer simple, boring code. When something fails, show the error and the fix, then explain it simply.
+- **Always show the Mobbin reference next to each design** (owner, Nov 17: "alsywa refence mobbin init"). Save references in `docs/design/research/mobbin/`.
 - Check UI in the web preview: `npx expo start --web`, then Playwright screenshots at 390×844. Compare against the picked design in `docs/design/`.
