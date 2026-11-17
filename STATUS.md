@@ -38,6 +38,10 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 | Nov 17 | Q15: "no one cares tho thats not a selling point for our icp". **Privacy is not a marketing message.** Backend default per ch. 21/22: delete the uploaded original right after the job, keep results 30 days unless saved, never train on photos. Mentioned only where the law requires it (one consent line, privacy policy). Support email: hi@digi.pink (placeholder, not confirmed). |
 | Nov 17 | Q16/Q17: "we'll see and test". **Start with the defaults and test:** Live digi 5 s with our own 1-second flash "pop", no music; strip frames Classic (free), Holiday, Y2K. |
 | Nov 17 | Name: "After Dark ✦". **The paid re-light effect is called "After Dark ✦"** (mode tabs: PHOTO · STRIP · AFTER DARK ✦ · LIVE ✦; button "Make it After Dark ✦"). Research: Instagram ships a free "AI Flash Filter" (Picsart blog), and TikTok says "digicam"/#DigicamEffect. "Night Flash" clashes with flashlight apps and "Blackout" with black-screen camera apps; After Dark has no App Store clash. "flash camera / flash effect / digicam" go in ASO keywords instead. |
+| Nov 17 | Q11 icon: "A main + black for dark mode". **Icon = the chunky white DIGI on hot pink (`docs/design/icons/png/a-logo.png`); dark-mode icon = pink DIGI on black (`e-black.png`).** Both ship in the binary for a later App Store icon test. |
+| Nov 17 | Q18 "Yes, all of those". **Pushes:** "Your digi is ready"; Free digi Friday (weekly refill); trial reminder at start + 40 h; new looks at most 1 a week, opt-in only; never guilt or streak pushes. |
+| Nov 17 | Q19 marketing: "we'll discuss this later". **Open.** Default on the table: brand + founder accounts, creators on gift codes + rev share, no paid ads until revenue per install is known, PostHog without photo data. |
+| Nov 17 | Q20 "Yes". **After v1:** new looks weekly + a weddings pack, then Android. Keep investing if D7 ≥ 8%, refunds < 4%, AI cost < 10% of revenue. |
 | Nov 17 | Interview Q1 (look and feel): answered by UI round 3 (rows above). |
 | Nov 17 | Q2 "6 free + 2 AI". **Free looks:** Digicam, Film 400, Y2K Glow, Club B&W, Paparazzi, Xmas Lights (NYE Glitter from Dec 26). **AI:** Flash Re-light ✦ and Live digi ✦. Strip is a mode, not a look. |
 | Nov 17 | Q3 "A/B test". **Paywall A/B:** Yearly $39.99 + 3-day trial pre-selected vs Weekly $6.99 + 3-day trial pre-selected; judge on revenue per install at 30/90 days. Party Pack $5.99 link on both. |
@@ -131,7 +135,7 @@ The owner said on Nov 17: "this isn't the last ui I picked that we should work o
 2. Make the next design round: **combo base plus the pixel direction**, answering the 6 open UI questions in that README with side-by-side options and scores.
 3. Iterate until he picks. Record the pick in §2. Only then build or adjust screens in code. Expect the existing `src/app/` screens to change.
 
-## 3b. Interview the owner (open questions)
+## 3b. Interview the owner (open questions) ✅ done Nov 17 (Q19 marketing deferred), answers in §2
 Read the bible first (`docs/research/bible/00-README-summary.md`, then ch. 06, 12, 18, 21, 22 and 24). Then ask **all 20**. Don't guess any of these:
 - Give a recommended default for each question, with a score out of 10, so he can just say "yes".
 - Show visuals where it helps (designs, icon options, sample digis).
