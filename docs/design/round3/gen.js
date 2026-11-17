@@ -397,6 +397,23 @@ function payPack() {
     <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:#1C1C22"><div style="flex-grow:1"><div style="font-size:15px;font-weight:700">Digi Plus · 60 digis a month</div><div style="font-size:12px;color:#B4B4C0">3 days free, then $39.99/year</div></div><span style="height:40px;padding:0 14px;border-radius:999px;background:#2A1420;color:#FF7DBE;font-weight:700;font-size:14px;display:flex;align-items:center">See Plus</span></div>`) });
 }
 
+// ---------- round 7: "Pick your look" replaces "How often" (Mobbin: Halide Pick Your Look, Once camera picker) ----------
+function pickLook() {
+  const looks = [['Digicam', 'contrast(1.3) saturate(1.25) brightness(.95)', true], ['Film 400', 'sepia(.4) saturate(1.3) contrast(1.05) brightness(1.02)'], ['Y2K Glow', 'hue-rotate(300deg) saturate(1.5) brightness(1.08)'], ['Club B&W', 'grayscale(1) contrast(1.4)']];
+  const sw = (t, f, sel) => `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:76px"><div style="width:68px;height:68px;border-radius:18px;overflow:hidden;${sel ? 'box-shadow:0 0 0 3px #0B0B0E,0 0 0 6px #FF4FA3' : ''}"><img src="${img('r2.png')}" style="width:100%;height:100%;object-fit:cover;filter:${f}"></div><span style="font-size:13px;font-weight:${sel ? 800 : 600};color:${sel ? '#fff' : '#B4B4C0'}">${t}</span></div>`;
+  return `<div class="screen">${qTop(2).replace(battery(2), battery(2, 6))}
+    <div style="padding:16px 20px 0"><div style="font-size:15px;font-weight:600;color:#FF7DBE;min-height:20px;margin-bottom:6px">Birthday looks, loaded 🎂</div>
+      <div class="serif" style="font-size:40px;line-height:1.02">Pick your <span class="pink">look</span></div>
+      <div style="font-size:15px;color:#B4B4C0;margin-top:8px">Same photo, 4 looks. Change it any time.</div></div>
+    <div style="margin:20px 16px 0;border-radius:30px;background:${SKIN.pink.bg};padding:11px;box-shadow:0 14px 40px rgba(255,79,163,.2)">
+      <div style="border-radius:16px;background:#26252B;padding:8px"><div style="position:relative;height:372px;border-radius:9px;overflow:hidden">
+        <img src="${img('r2.png')}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.3) saturate(1.25) brightness(.95)">
+        <span class="pix" style="position:absolute;top:9px;left:10px;font-size:11px;padding:2px 7px;border-radius:4px;background:#FF4FA3;color:#1A0010">DIGICAM</span>
+        <span class="stamp" style="position:absolute;right:10px;bottom:8px;font-size:15px">11 17 '26</span></div></div></div>
+    <div style="display:flex;justify-content:space-between;padding:18px 18px 0">${looks.map(([t, f, sel]) => sw(t, f, sel)).join('')}</div>
+    <div style="flex-grow:1"></div><div style="padding:0 20px 28px"><div class="btn">Use Digicam</div></div></div>`;
+}
+
 const ONB_A = camera({ ...PICK, photo: 'r2.png', photoFilter: 'brightness(1.12) saturate(.75)', vfOverlay: vfLabel('A NORMAL PHONE PIC'), overlay: coach('Tap it.') });
 const ONB_B = camera({ ...PICK, photo: 'r2.png', photoFilter: 'contrast(1.3) saturate(1.25) brightness(.92)', vfOverlay: vfLabel("THAT'S A DIGI", true) + `<span class="stamp" style="position:absolute;bottom:10px;right:10px;font-size:15px">11 17 '26</span>`,
   overlay: `<div style="position:absolute;inset:0;pointer-events:none">${confetti()}</div>` + sheet(`<div class="serif" style="font-size:30px;line-height:1.05">Now shoot <span class="pink">your</span> party</div><div style="font-size:15px;color:#B4B4C0;margin:8px 0 18px">Digi needs the camera. Photos stay on your phone.</div><div class="btn">Use my camera</div>`) });
@@ -449,6 +466,7 @@ const SCREENS = {
   'q6-strips': paywall('strips'),
   'q6-beforeafter': paywall('beforeafter'),
   'q6-pixel': paywall('pixel'),
+  'r7-look': pickLook(),
   'r6-q1': R6_Q1, 'r6-q2': R6_Q2, 'r6-q3': R6_Q3, 'r6-gender': R6_G, 'r6-q4': R6_Q4, 'r6-ready': R6_READY,
   'r6-pay-a': payA(), 'r6-pay-b': payB(), 'r6-pack': payPack(),
   'r5-q1': Q1, 'r5-q2': Q2, 'r5-q3': Q3, 'r5-q4': Q4, 'r5-ready': ready(),
