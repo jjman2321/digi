@@ -30,6 +30,8 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 | Nov 17 | Countries: "just do both cnina and egypt". **Every storefront, China and Egypt included.** Owner accepts the Egypt risk (ch. 22 §7: data law + cybercrime Art. 29 apply to him personally; the LLC doesn't cover criminal law). China goes live only if Apple accepts it without an ICP filing number; it doesn't block other countries. Moderation, report and 48-hour removal are his protection, so they must ship in v1. |
 | Nov 17 | Q9 "1–2 h/day, this week". **1–2 hours a day; can install a test build this week.** |
 | Nov 17 | Q10 "Apple Developer (Grasp Labs), Supabase". **These two exist.** Still to create: Expo, RevenueCat, OpenRouter (key "digi-prod", $100 limit). |
+| Nov 17 | Free allowance: "A: 2 + 1 every Friday". **2 free AI digis to start, +1 every Friday, banked up to 3 (enough for a Live digi); +2 per invited friend who makes a first digi.** Same everywhere; the camera is always free (Mobbin: Ahead, Riveo). Replaces "3 free once". Design: `round3/r8-free-allowance.jpg`. |
+| Nov 17 | Q12 "Yes, as is". **Small orange `digi.pink` bottom-left on free shares; Plus removes it; never on guests' roll photos. Date stamp `11 17 '26` bottom-right, free to edit or turn off.** |
 | Nov 17 | Interview Q1 (look and feel): answered by UI round 3 (rows above). |
 | Nov 17 | Q2 "6 free + 2 AI". **Free looks:** Digicam, Film 400, Y2K Glow, Club B&W, Paparazzi, Xmas Lights (NYE Glitter from Dec 26). **AI:** Flash Re-light ✦ and Live digi ✦. Strip is a mode, not a look. |
 | Nov 17 | Q3 "A/B test". **Paywall A/B:** Yearly $39.99 + 3-day trial pre-selected vs Weekly $6.99 + 3-day trial pre-selected; judge on revenue per install at 30/90 days. Party Pack $5.99 link on both. |
