@@ -18,6 +18,9 @@
       },
       "config": {
         "usesNonExemptEncryption": false
+      },
+      "runtimeVersion": {
+        "policy": "appVersion"
       }
     },
     "android": {
@@ -78,6 +81,15 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "owner": "ditchsubs",
+    "extra": {
+      "eas": {
+        "projectId": "be245600-1c23-4393-a4e8-a44aa65b1dc4"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/be245600-1c23-4393-a4e8-a44aa65b1dc4"
     }
   }
 }

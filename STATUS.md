@@ -49,6 +49,8 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 | Nov 17 | Q18 "Yes, all of those". **Pushes:** "Your digi is ready"; Free digi Friday (weekly refill); trial reminder at start + 40 h; new looks at most 1 a week, opt-in only; never guilt or streak pushes. |
 | Nov 17 | Q19 marketing: "we'll discuss this later". **Open.** Default on the table: brand + founder accounts, creators on gift codes + rev share, no paid ads until revenue per install is known, PostHog without photo data. |
 | Nov 17 | Q20 "Yes". **After v1:** new looks weekly + a weddings pack, then Android. Keep investing if D7 ≥ 8%, refunds < 4%, AI cost < 10% of revenue. |
+| Nov 18 | Expo: token added as `EXPO_TOKEN` (robot "calude", account ditchsubs). Asked "does tatt even matter fr anything?" → no: users see the Apple seller (Grasp Labs LLC), not the Expo account. **Project lives at `@ditchsubs/digi`** (ID be245600-1c23-4393-a4e8-a44aa65b1dc4); it can move to a Grasp Labs Expo account later. |
+| Nov 17 | "can we have it that i can access the app with out ther terminal?" **Yes: TestFlight + EAS Update.** The owner taps the Digi icon; updates arrive on app open. Optional web link for quick design checks. |
 | Nov 17 | Interview Q1 (look and feel): answered by UI round 3 (rows above). |
 | Nov 17 | Q2 "6 free + 2 AI". **Free looks:** Digicam, Film 400, Y2K Glow, Club B&W, Paparazzi, Xmas Lights (NYE Glitter from Dec 26). **AI:** Flash Re-light ✦ and Live digi ✦. Strip is a mode, not a look. |
 | Nov 17 | Q3 "A/B test". **Paywall A/B:** Yearly $39.99 + 3-day trial pre-selected vs Weekly $6.99 + 3-day trial pre-selected; judge on revenue per install at 30/90 days. Party Pack $5.99 link on both. |

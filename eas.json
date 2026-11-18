@@ -1,0 +1,27 @@
+{
+  "cli": {
+    "version": ">= 16.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "testflight": {
+      "distribution": "store",
+      "channel": "preview",
+      "autoIncrement": true,
+      "ios": { "resourceClass": "default" }
+    },
+    "production": {
+      "distribution": "store",
+      "channel": "production",
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "testflight": {
+      "ios": {}
+    },
+    "production": {
+      "ios": {}
+    }
+  }
+}
