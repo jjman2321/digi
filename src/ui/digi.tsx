@@ -4,8 +4,10 @@ import { Modal, Pressable, StyleSheet, Text, View, ViewStyle } from 'react-nativ
 import { Image, ImageSource } from 'expo-image';
 import { router } from 'expo-router';
 import Svg, { Path, Rect } from 'react-native-svg';
+import * as WebBrowser from 'expo-web-browser';
 import { C, F, R } from './theme';
 import { tap } from './kit';
+import { FillCell, PressScale, Rise, SlideIn, TypeText } from './motion';
 
 // The owner's chunky DIGI (Nov 17: "the first 1 but make sure the D doesnt look like an o"): 9-row pixel glyphs.
 const GLYPHS: Record<'D' | 'I' | 'G', string[]> = {
@@ -60,7 +62,7 @@ export function Battery({ filled, total = 6 }: { filled: number; total?: number 
     <View accessible accessibilityLabel={`Step ${filled} of ${total}`} style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}>
       <View style={{ flexDirection: 'row', gap: 3, padding: 3, borderWidth: 2, borderColor: '#55555F', borderRadius: 5 }}>
         {Array.from({ length: total }, (_, i) => (
-          <View key={i} style={{ width: 16, height: 10, borderRadius: 1, backgroundColor: i < filled ? C.pink : '#26252B' }} />
+          <FillCell key={i} on={i < filled} fresh={i === filled - 1} style={{ width: 16, height: 10, borderRadius: 1 }} />
         ))}
       </View>
       <View style={{ width: 3, height: 8, borderRadius: 1, backgroundColor: '#55555F' }} />
@@ -96,11 +98,13 @@ export function Question({
         )}
       </View>
       <View style={q.head}>
-        <Text style={q.reply}>{reply ?? ' '}</Text>
-        <Text accessibilityRole="header" style={q.title}>
-          {title} <Text style={q.pink}>{pink}</Text>
-        </Text>
-        {helper ? <Text style={q.helper}>{helper}</Text> : null}
+        {reply ? <TypeText text={reply} style={q.reply} delay={120} /> : <Text style={q.reply}> </Text>}
+        <Rise delay={40}>
+          <Text accessibilityRole="header" style={q.title}>
+            {title} <Text style={q.pink}>{pink}</Text>
+          </Text>
+        </Rise>
+        {helper ? <Rise delay={90}><Text style={q.helper}>{helper}</Text></Rise> : null}
       </View>
       <View style={q.body}>{children}</View>
       <View style={{ flex: 1 }} />
@@ -109,42 +113,48 @@ export function Question({
   );
 }
 
-export function OptionTile({ title, sub, lead, selected, onPress, minHeight = 100 }: { title: string; sub?: string; lead?: (sel: boolean) => ReactNode; selected?: boolean; onPress: () => void; minHeight?: number }) {
+export function OptionTile({ title, sub, lead, selected, onPress, minHeight = 100, index = 0 }: { title: string; sub?: string; lead?: (sel: boolean) => ReactNode; selected?: boolean; onPress: () => void; minHeight?: number; index?: number }) {
   return (
-    <Pressable
+    <SlideIn index={index}>
+    <PressScale
       accessibilityRole="button"
       accessibilityState={{ selected }}
       onPress={() => { tap(); onPress(); }}
-      style={({ pressed }) => [q.tile, { minHeight }, selected && q.tileSel, pressed && { transform: [{ scale: 0.985 }] }]}>
+      style={[q.tile, { minHeight }, selected && q.tileSel]}>
       {lead ? <View style={{ width: 44, alignItems: 'center' }}>{lead(!!selected)}</View> : null}
       <View style={{ flex: 1 }}>
         <Text style={[q.tileTitle, selected && { color: C.onPink }]}>{title}</Text>
         {sub ? <Text style={[q.tileSub, selected && { color: '#3D0A24' }]}>{sub}</Text> : null}
       </View>
-    </Pressable>
+    </PressScale>
+    </SlideIn>
   );
 }
 
-export function PhotoTile({ source, label, onPress, height = 150, selected, style }: { source: ImageSource | number; label: string; onPress: () => void; height?: number; selected?: boolean; style?: ViewStyle }) {
+export function PhotoTile({ source, label, onPress, height = 150, selected, style, index = 0 }: { source: ImageSource | number; label: string; onPress: () => void; height?: number; selected?: boolean; style?: ViewStyle; index?: number }) {
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={label} onPress={() => { tap(); onPress(); }} style={[{ height, borderRadius: 18, overflow: 'hidden' }, selected && { borderWidth: 3, borderColor: C.pink }, style]}>
-      <Image source={source} style={StyleSheet.absoluteFill} contentFit="cover" />
-      <View style={q.shade} />
-      <Text style={[q.photoLabel, selected && q.photoLabelSel]}>{label}</Text>
-    </Pressable>
+    <SlideIn index={index} style={style}>
+      <PressScale accessibilityRole="button" accessibilityLabel={label} onPress={() => { tap(); onPress(); }} style={[{ height, borderRadius: 18, overflow: 'hidden' }, selected && { borderWidth: 3, borderColor: C.pink }]}>
+        <Image source={source} style={StyleSheet.absoluteFill} contentFit="cover" />
+        <View style={q.shade} />
+        <Text style={[q.photoLabel, selected && q.photoLabelSel]}>{label}</Text>
+      </PressScale>
+    </SlideIn>
   );
 }
 
-export function PhotoRow({ source, title, sub, onPress, selected }: { source: ImageSource | number; title: string; sub: string; onPress: () => void; selected?: boolean }) {
+export function PhotoRow({ source, title, sub, onPress, selected, index = 0 }: { source: ImageSource | number; title: string; sub: string; onPress: () => void; selected?: boolean; index?: number }) {
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={`${title}. ${sub}`} onPress={() => { tap(); onPress(); }} style={[{ height: 158, borderRadius: 20, overflow: 'hidden' }, selected && { borderWidth: 3, borderColor: C.pink }]}>
+    <SlideIn index={index}>
+    <PressScale accessibilityRole="button" accessibilityLabel={`${title}. ${sub}`} onPress={() => { tap(); onPress(); }} style={[{ height: 158, borderRadius: 20, overflow: 'hidden' }, selected && { borderWidth: 3, borderColor: C.pink }]}>
       <Image source={source} style={StyleSheet.absoluteFill} contentFit="cover" contentPosition={{ top: '35%' }} />
       <View style={q.shadeSide} />
       <View style={{ position: 'absolute', left: 18, bottom: 16 }}>
         <Text style={{ fontFamily: F.bodyBold, fontSize: 20, color: '#fff' }}>{title}</Text>
         <Text style={{ fontFamily: F.body, fontSize: 14, color: '#E4E4EA', marginTop: 2 }}>{sub}</Text>
       </View>
-    </Pressable>
+    </PressScale>
+    </SlideIn>
   );
 }
 
@@ -225,3 +235,16 @@ const q = StyleSheet.create({
   glow: { height: 58, borderRadius: R.pill, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center', shadowColor: C.pink, shadowOpacity: 0.55, shadowRadius: 18, shadowOffset: { width: 0, height: 8 } },
   glowText: { fontFamily: F.bodyBold, fontSize: 17, color: C.onPink },
 });
+
+/** Terms · Privacy links (Apple 3.1.2 needs working links on the paywall). Pages live at digi.pink. */
+export function LegalLinks({ prefix, style }: { prefix?: string; style?: object }) {
+  const open = (path: string) => WebBrowser.openBrowserAsync(`https://digi.pink/${path}`).catch(() => {});
+  return (
+    <Text style={[{ fontFamily: F.body, fontSize: 12, color: '#9A9AA8', textAlign: 'center' }, style]}>
+      {prefix}
+      <Text accessibilityRole="link" onPress={() => open('terms')} style={{ textDecorationLine: 'underline' }}>Terms</Text>
+      {' · '}
+      <Text accessibilityRole="link" onPress={() => open('privacy')} style={{ textDecorationLine: 'underline' }}>Privacy</Text>
+    </Text>
+  );
+}

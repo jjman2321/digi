@@ -1,6 +1,7 @@
 // Your After Dark: hold to see the before; Share is primary; Live ✦3 and strip ✦2 next. The paywall shows once after this.
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated, { FadeIn, useAnimatedStyle, useReducedMotion, useSharedValue, withSpring, withTiming } from 'react-native-reanimated';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,6 +11,7 @@ import { Asset as LibraryAsset, requestPermissionsAsync } from 'expo-media-libra
 import Svg, { Path } from 'react-native-svg';
 import { C, F } from '@/ui/theme';
 import { tap } from '@/ui/kit';
+import { EASE_OUT, PopIn, SHEET } from '@/ui/motion';
 import { DemoNote, PackSheet } from '@/ui/money';
 import { takeResult } from '@/lib/pending';
 import { get, set, useStore } from '@/lib/store';
@@ -17,6 +19,14 @@ import { get, set, useStore } from '@/lib/store';
 export default function Result() {
   const [r] = useState(() => takeResult());
   const [before, setBefore] = useState(false);
+  const calm = useReducedMotion();
+  const showBefore = useSharedValue(0);
+  const settle = useSharedValue(calm ? 1 : 0.97);
+  const afterStyle = useAnimatedStyle(() => ({ opacity: 1 - showBefore.value }));
+  const settleStyle = useAnimatedStyle(() => ({ transform: [{ scale: settle.value }] }));
+  useEffect(() => {
+    if (!calm) settle.set(withSpring(1, SHEET));
+  }, [calm, settle]);
   const [saved, setSaved] = useState(false);
   const [pack, setPack] = useState(false);
   const [note, setNote] = useState<string | null>(null);
@@ -49,6 +59,12 @@ export default function Result() {
     setNote(`${what} arrives with the backend in build step 3.`);
   };
 
+  const hold = (on: boolean) => {
+    setBefore(on);
+    if (on) Haptics.selectionAsync().catch(() => {});
+    showBefore.set(withTiming(on ? 1 : 0, { duration: on ? 120 : 200, easing: EASE_OUT }));
+  };
+
   if (!r) {
     router.dismissTo('/camera');
     return null;
@@ -59,12 +75,17 @@ export default function Result() {
         <Pressable accessibilityRole="button" accessibilityLabel="Close" onPress={close} style={st.x}>
           <Svg width={18} height={18} viewBox="0 0 24 24" stroke="#fff" strokeWidth={2.4} strokeLinecap="round"><Path d="M6 6l12 12M18 6 6 18" /></Svg>
         </Pressable>
-        <Text style={st.pix}>AFTER DARK ✦</Text>
+        <PopIn delay={calm ? 0 : 150}><Text style={st.pix}>AFTER DARK ✦</Text></PopIn>
         <Pressable accessibilityRole="button" onPress={() => setNote('The free redo arrives with the backend in build step 3.')} style={st.redo}><Text style={st.redoText}>Redo</Text></Pressable>
       </View>
-      <Pressable accessibilityRole="imagebutton" accessibilityLabel="Your After Dark. Hold to see the before" onPressIn={() => setBefore(true)} onPressOut={() => setBefore(false)} style={st.photo}>
-        <Image source={{ uri: before ? r.before : r.uri }} style={StyleSheet.absoluteFill} contentFit="cover" transition={0} />
-        <Text style={st.hold}>{before ? 'Before' : 'Hold for before'}</Text>
+      <Pressable accessibilityRole="imagebutton" accessibilityLabel="Your After Dark. Hold to see the before" onPressIn={() => hold(true)} onPressOut={() => hold(false)} style={st.photo}>
+        <Animated.View entering={FadeIn.duration(calm ? 150 : 500)} style={[StyleSheet.absoluteFill, settleStyle]}>
+          <Image source={{ uri: r.before }} style={StyleSheet.absoluteFill} contentFit="cover" transition={0} />
+          <Animated.View style={[StyleSheet.absoluteFill, afterStyle]}>
+            <Image source={{ uri: r.uri }} style={StyleSheet.absoluteFill} contentFit="cover" transition={0} />
+          </Animated.View>
+        </Animated.View>
+        <Text style={st.hold}>{before ? 'BEFORE' : 'Hold for before'}</Text>
         {r.preview && <Text style={st.preview}>PREVIEW · real After Dark in step 3</Text>}
       </Pressable>
       <View style={st.row}>

@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { C } from '@/ui/theme';
 import { PhotoTile, Question } from '@/ui/digi';
+import { afterPick } from '@/ui/motion';
 import { DEMO } from '@/lib/demo';
 import { Occasion, set, useStore } from '@/lib/store';
 
@@ -23,8 +24,8 @@ export default function OccasionScreen() {
     <SafeAreaView style={st.root} edges={['top', 'bottom']}>
       <Question step={1} title="What's the first" pink="party?" helper="We'll load looks for it." foot="All good if it changes" onSkip={next}>
         <View style={st.grid}>
-          {OPTIONS.map(([k, label, img]) => (
-            <PhotoTile key={k} source={img} label={label} selected={picked === k} style={st.cell} onPress={() => { set({ occasion: k }); next(); }} />
+          {OPTIONS.map(([k, label, img], i) => (
+            <PhotoTile key={k} index={i} source={img} label={label} selected={picked === k} style={st.cell} onPress={() => { set({ occasion: k }); afterPick(next); }} />
           ))}
         </View>
       </Question>

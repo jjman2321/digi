@@ -1,6 +1,7 @@
 // Onboarding 1: "Tap it." The first flash happens on a sample photo, before any question or permission (Lapse pattern, ch. 24 §12).
 import { useState } from 'react';
-import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
 import { Image } from 'expo-image';
 import { Asset } from 'expo-asset';
 import { router } from 'expo-router';
@@ -9,7 +10,8 @@ import * as Haptics from 'expo-haptics';
 import { useFont } from '@shopify/react-native-skia';
 import { C, F } from '@/ui/theme';
 import { CamBody, GhostButton, PrimaryButton, todayStamp } from '@/ui/kit';
-import { LcdStamp, PixelDigi, SerifTitle, Sheet } from '@/ui/digi';
+import { LcdStamp, LegalLinks, PixelDigi, SerifTitle, Sheet } from '@/ui/digi';
+import { Bob, Confetti, PressScale } from '@/ui/motion';
 import { developImage, loadImage } from '@/lib/develop';
 
 const before = require('../../assets/samples/sample-before.jpg');
@@ -17,7 +19,11 @@ const before = require('../../assets/samples/sample-before.jpg');
 export default function Hello() {
   const lcd = useFont(require('../../assets/fonts/DSEG7Classic-Bold.ttf'), 40);
   const pixel = useFont(require('@expo-google-fonts/silkscreen/700Bold/Silkscreen_700Bold.ttf'), 30);
-  const [flash] = useState(() => new Animated.Value(0));
+  const calm = useReducedMotion();
+  const flash = useSharedValue(0);
+  const dev = useSharedValue(0);
+  const flashStyle = useAnimatedStyle(() => ({ opacity: flash.value }));
+  const devStyle = useAnimatedStyle(() => ({ opacity: dev.value }));
   const [after, setAfter] = useState<string | null>(null);
   const [sheet, setSheet] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -26,20 +32,23 @@ export default function Hello() {
     if (busy || after) return setSheet(true);
     setBusy(true);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy).catch(() => {});
-    flash.setValue(1);
-    Animated.timing(flash, { toValue: 0, duration: 520, useNativeDriver: true }).start();
+    // One flash per capture, never chained: 80 ms in, 150 ms out (no white burst under Reduce Motion).
+    if (!calm) flash.set(withSequence(withTiming(0.95, { duration: 80 }), withTiming(0, { duration: 150 })));
     try {
       const a = Asset.fromModule(before);
       await a.downloadAsync();
       const img = await loadImage(a.localUri ?? a.uri);
       const out = developImage(img, { stamp: todayStamp(), brand: true, lcdFont: lcd, pixelFont: pixel, maxSide: 1200 });
+      dev.set(0);
       setAfter(`data:image/jpeg;base64,${out.base64}`);
+      // The digi develops over the plain photo (Lapse: blurred card → sharp photo).
+      dev.set(withTiming(1, { duration: calm ? 300 : 1000 }));
     } catch {
       setAfter(null);
     }
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
+    setTimeout(() => Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {}), calm ? 300 : 1000);
     setBusy(false);
-    setTimeout(() => setSheet(true), 650);
+    setTimeout(() => setSheet(true), calm ? 500 : 1400);
   };
 
   return (
@@ -49,26 +58,32 @@ export default function Hello() {
       </View>
       <CamBody style={{ marginHorizontal: 14 }}>
         <View style={st.view}>
-          <Image source={after ? { uri: after } : before} style={StyleSheet.absoluteFill} contentFit="cover" transition={0} />
+          <Image source={before} style={StyleSheet.absoluteFill} contentFit="cover" transition={0} />
+          {after ? (
+            <Animated.View style={[StyleSheet.absoluteFill, devStyle]}>
+              <Image source={{ uri: after }} style={StyleSheet.absoluteFill} contentFit="cover" transition={0} />
+            </Animated.View>
+          ) : null}
           <Text style={[st.tag, after && st.tagPink]}>{after ? "THAT'S A DIGI" : 'A NORMAL PHONE PIC'}</Text>
           {!after && <LcdStamp text={todayStamp()} style={st.stamp} />}
-          <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: '#fff', opacity: flash }]} />
+          <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: '#fff' }, flashStyle]} />
         </View>
       </CamBody>
 
       <View style={st.bottom}>
         {!after && (
-          <View style={st.coach} pointerEvents="none">
+          <Bob style={st.coach}>
             <Text style={st.coachText}>Tap it.</Text>
             <View style={st.coachTail} />
-          </View>
+          </Bob>
         )}
-        <Pressable accessibilityRole="button" accessibilityLabel="Take photo" onPress={fire} style={st.shutter}>
+        <PressScale accessibilityRole="button" accessibilityLabel="Take photo" scaleTo={0.92} onPressIn={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {})} onPress={fire} style={st.shutter}>
           <View style={st.shutterIn} />
-        </Pressable>
-        <Text style={st.legal}>By continuing you agree to the Terms and Privacy Policy.</Text>
+        </PressScale>
+        <LegalLinks prefix="By continuing you agree to our " style={st.legal} />
       </View>
 
+      {after ? <Confetti /> : null}
       <Sheet visible={sheet} onClose={() => setSheet(false)}>
         <SerifTitle pre="That's a" pink="digi." />
         <Text style={st.sheetSub}>Flash, grain, the orange date. Now set up yours: 5 quick taps.</Text>

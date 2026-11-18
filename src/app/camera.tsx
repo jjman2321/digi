@@ -14,6 +14,7 @@ import { C, F } from '@/ui/theme';
 import { CamBody, PrimaryButton, tap, todayStamp } from '@/ui/kit';
 import { LcdStamp, PixelDigi } from '@/ui/digi';
 import { FreeSheet } from '@/ui/money';
+import { PressScale } from '@/ui/motion';
 import { setPending } from '@/lib/pending';
 import { LOOKS } from '@/lib/demo';
 import { get, Look, refillFreeDigis, set, useStore } from '@/lib/store';
@@ -53,7 +54,7 @@ export default function Camera() {
 
   const pop = () => {
     flash.setValue(1);
-    Animated.timing(flash, { toValue: 0, duration: 380, useNativeDriver: true }).start();
+    Animated.timing(flash, { toValue: 0, duration: 150, useNativeDriver: true }).start();
   };
 
   const go = (uri: string, source: 'camera' | 'library' | 'sample') => {
@@ -124,7 +125,7 @@ export default function Camera() {
         </Pressable>
       </View>
       <View style={{ alignItems: 'center', paddingBottom: 10 }}>
-        <Pressable accessibilityRole="button" accessibilityLabel="Your roll" onPress={() => router.push('/roll')} style={st.pill}>
+        <Pressable accessibilityRole="button" accessibilityLabel="Your roll" onPress={() => router.push('/roll')} style={st.pill} hitSlop={{ top: 6, bottom: 6 }}>
           <View style={st.dot} />
           <Text style={st.pillText}>{roll.length ? `My roll · ${roll.length}` : 'Just me'}</Text>
           <Text style={[st.pillText, { color: C.mute }]}>⌄</Text>
@@ -211,9 +212,9 @@ export default function Camera() {
             </Svg>
           )}
         </Pressable>
-        <Pressable accessibilityRole="button" accessibilityLabel={paid ? `Take photo for ${mode.replace(' ✦', '')}` : 'Take photo'} onPress={shoot} style={st.shutter}>
+        <PressScale accessibilityRole="button" accessibilityLabel={paid ? `Take photo for ${mode.replace(' ✦', '')}` : 'Take photo'} scaleTo={0.92} onPressIn={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(() => {})} onPress={shoot} style={st.shutter}>
           <View style={[st.shutterIn, paid && { backgroundColor: C.pink }]} />
-        </Pressable>
+        </PressScale>
         <Pressable accessibilityRole="button" accessibilityLabel={`Look: ${LOOKS[look].name}. Tap for the next look`} onPress={nextLook} style={st.swatchWrap}>
           <View style={st.swatch}><Image source={LOOKS[look].img} style={StyleSheet.absoluteFill} contentFit="cover" /></View>
           <Text style={st.swatchText}>{LOOKS[look].name} ⌃</Text>

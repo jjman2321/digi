@@ -1,6 +1,7 @@
 // Digi Plus paywall, pick A "their prints" (owner, Nov 17). Billed price is the biggest price (Apple 3.1.2),
 // ✕ and Restore visible from frame 1, real dates, auto-renew line, no toggle, "Best value" not "Save X%".
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Animated, { useAnimatedStyle, useReducedMotion, useSharedValue, withDelay, withSpring } from 'react-native-reanimated';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
@@ -8,19 +9,30 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Svg, { Path, Rect } from 'react-native-svg';
 import { C, F } from '@/ui/theme';
 import { tap } from '@/ui/kit';
-import { GlowButton, PixelDigi, SerifTitle, dayLabel } from '@/ui/digi';
+import { GlowButton, LegalLinks, PixelDigi, SerifTitle, dayLabel } from '@/ui/digi';
 import { DemoNote, PackSheet } from '@/ui/money';
+import { Rise, SHEET } from '@/ui/motion';
 import { DEMO } from '@/lib/demo';
 import { useStore } from '@/lib/store';
 
 type Plan = 'yearly' | 'weekly';
 
-function Print({ source, rot, label, w, style }: { source: number | { uri: string }; rot: string; label: string; w: number; style: object }) {
+/** A print that starts stacked in the middle and fans out to its tilt (Photoroom/Opal paywall entrance). */
+function Print({ source, rot, label, w, style, order, toX }: { source: number | { uri: string }; rot: number; label: string; w: number; style: object; order: number; toX: number }) {
+  const calm = useReducedMotion();
+  const p = useSharedValue(calm ? 1 : 0);
+  useEffect(() => {
+    if (!calm) p.set(withDelay(order * 70, withSpring(1, SHEET)));
+  }, [calm, order, p]);
+  const a = useAnimatedStyle(() => ({
+    opacity: Math.min(1, p.value * 2),
+    transform: [{ translateX: (1 - p.value) * -toX }, { translateY: (1 - p.value) * 40 }, { rotate: `${rot * p.value}deg` }],
+  }));
   return (
-    <View style={[st.print, { width: w, transform: [{ rotate: rot }] }, style]}>
+    <Animated.View style={[st.print, { width: w }, style, a]}>
       <Image source={source} style={{ width: w - 14, height: Math.round((w - 14) * 1.18) }} contentFit="cover" />
       <Text style={st.printLabel}>{label}</Text>
-    </View>
+    </Animated.View>
   );
 }
 
@@ -59,10 +71,11 @@ export default function Paywall() {
       </View>
       <ScrollView contentContainerStyle={st.scroll} bounces={false}>
         <View style={st.prints}>
-          <Print source={DEMO.r2} rot="-10deg" label="FILM 400" w={118} style={{ left: 10, top: 22 }} />
-          <Print source={DEMO.r1} rot="9deg" label="LIVE ✦" w={118} style={{ right: 10, top: 22 }} />
-          <Print source={mine ? { uri: mine.uri } : DEMO.r1} rot="-1.5deg" label="YOURS ✦" w={156} style={{ alignSelf: 'center', top: 0 }} />
+          <Print source={DEMO.r2} rot={-10} label="FILM 400" w={118} style={{ left: 10, top: 22 }} order={0} toX={-95} />
+          <Print source={DEMO.r1} rot={9} label="LIVE ✦" w={118} style={{ right: 10, top: 22 }} order={1} toX={95} />
+          <Print source={mine ? { uri: mine.uri } : DEMO.r1} rot={-1.5} label="YOURS ✦" w={156} style={{ alignSelf: 'center', top: 0 }} order={2} toX={0} />
         </View>
+        <Rise delay={320}>
         <View style={st.brand}>
           <PixelDigi unit={3.2} />
           <Text style={st.plusTag}>PLUS</Text>
@@ -77,9 +90,10 @@ export default function Paywall() {
           <PlanTile name="Yearly" price="$39.99" per="/yr" sub="3 days free · $0.77/wk" badge="BEST VALUE" sel={plan === 'yearly'} onPress={() => setPlan('yearly')} />
           <PlanTile name="Weekly" price="$6.99" per="/wk" sub="Cancel anytime" sel={plan === 'weekly'} onPress={() => setPlan('weekly')} />
         </View>
+        </Rise>
         <GlowButton label={plan === 'yearly' ? 'Start my 3 free days' : 'Get Weekly · $6.99'} onPress={() => setNote(true)} />
         <Text style={st.date}>{plan === 'yearly' ? `🔔 Reminder on ${dayLabel(40)} · first charge ${dayLabel(72)}` : 'Renews weekly. Cancel anytime in Settings.'}</Text>
-        <Text style={st.legal}>Auto-renews until you cancel in Settings · <Text style={st.link}>Terms</Text> · <Text style={st.link}>Privacy</Text></Text>
+        <LegalLinks prefix="Auto-renews until you cancel in Settings · " style={st.legal} />
         <Pressable accessibilityRole="button" onPress={() => setPack(true)} style={st.packLink}><Text style={st.packText}>Just tonight? 25 digis · $5.99</Text></Pressable>
       </ScrollView>
       <PackSheet visible={pack} onClose={() => setPack(false)} onBuy={() => { setPack(false); setNote(true); }} />
@@ -114,7 +128,6 @@ const st = StyleSheet.create({
   planSub: { fontFamily: F.body, fontSize: 12, color: C.sub, marginTop: 3 },
   date: { fontFamily: F.body, fontSize: 13, color: C.sub, textAlign: 'center', marginTop: 10 },
   legal: { fontFamily: F.body, fontSize: 12, color: '#9A9AA8', textAlign: 'center', marginTop: 6 },
-  link: { textDecorationLine: 'underline' },
   packLink: { minHeight: 44, alignItems: 'center', justifyContent: 'center', marginTop: 4 },
   packText: { fontFamily: F.bodyBold, fontSize: 14, color: '#FF7DBE' },
 });
