@@ -20,7 +20,7 @@ import { developImage, loadImage } from '@/lib/develop';
 import { saveDigi } from '@/lib/files';
 import { addShot, get, set } from '@/lib/store';
 
-const sampleAfter = require('../../assets/samples/sample-after.jpg');
+const sampleAfter = require('../../assets/samples/sample2-after.jpg');
 const STAGES = ['Reading the room', 'Killing the lights', 'Firing the flash'];
 const VIEW_H = 340;
 

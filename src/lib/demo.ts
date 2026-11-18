@@ -6,6 +6,7 @@ export const DEMO = {
   r5: require('../../assets/images/demo/r5.jpg'),
   r6: require('../../assets/images/demo/r6.jpg'),
   selfie: require('../../assets/images/demo/selfie.jpg'),
+  girls: require('../../assets/samples/sample2-before.jpg'),
 };
 export const LOOKS = {
   digicam: { name: 'Digicam', img: require('../../assets/images/demo/look-digicam.jpg') },

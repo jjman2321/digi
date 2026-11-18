@@ -19,7 +19,7 @@ import { setPending } from '@/lib/pending';
 import { LOOKS } from '@/lib/demo';
 import { get, Look, refillFreeDigis, set, useStore } from '@/lib/store';
 
-const sample = require('../../assets/samples/sample-before.jpg');
+const sample = require('../../assets/samples/sample2-before.jpg');
 const MODES = ['PHOTO', 'STRIP', 'AFTER DARK ✦', 'LIVE ✦'] as const;
 type Mode = (typeof MODES)[number];
 const ZOOMS = [0, 0.05, 0.2] as const; // .5×, 1×, 2× on the back camera

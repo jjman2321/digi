@@ -39,7 +39,7 @@ export function PackSheet({ visible, onClose, onBuy }: { visible: boolean; onClo
     <Sheet visible={visible} onClose={onClose}>
       <Text style={m.pix}>0 DIGIS LEFT · CAMERA’S STILL FREE</Text>
       <SerifTitle pre="Party" pink="tonight?" center />
-      <Text style={[m.sub, { textAlign: 'center' }]}>Pay once. Your digis never expire.</Text>
+      <Text style={[m.sub, { textAlign: 'center' }]}>Pay once. Cheaper than one disposable.</Text>
       <View style={{ flexDirection: 'row', gap: 10, marginTop: 6 }}>
         <View style={[m.pack, m.packSel]}>
           <Text style={m.badge}>PAY ONCE</Text>

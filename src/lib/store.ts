@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from 'react';
 import { Platform } from 'react-native';
 
-export type Occasion = 'birthday' | 'house_party' | 'night_out' | 'holiday' | 'wedding' | 'just_us';
+export type Occasion = 'night_out' | 'everyday' | 'birthday' | 'girls_night' | 'house_party' | 'holiday';
 export type Look = 'digicam' | 'film400' | 'y2kglow' | 'clubbw';
 export type Who = 'me' | 'few' | 'group';
 export type Shot = { id: string; uri: string; createdAt: number; kind: 'digi' | 'ai' | 'live' | 'strip'; look: string };

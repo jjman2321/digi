@@ -22,3 +22,14 @@ Add each feature's click-through checklist here when it ships.
 5. There is **no** microphone question, ever.
 6. Take a photo, then tap **Save**. iPhone asks only to *add* photos ("Digi saves your finished photos and strips to your library"), not to see your whole library.
 7. Open the Photos app. The digi is there with the orange date and DIGI.PINK.
+
+## Rebuild, motion and ICP pass (Nov 18). Web: https://digi.expo.app, phone: TestFlight once set up
+1. First screen: the sample is **two girls at a birthday** tagged "YOUR IPHONE". Tap the pink shutter. You get a white flash and a buzz, the photo develops over about 1 second, confetti falls, and the tag says "YOUR IPHONE, BUT 2006".
+2. Tap **Let's go**. The question is "What are you shooting first?" with 6 photo tiles: Night out, Everyday, Birthday, Girls' night, My own party, Holidays. There's no Wedding tile. The tiles slide in one after another. Tap one and it turns pink, then moves on by itself.
+3. Pick your look: the line on top matches your pick ("Night-out looks, loaded"). Tap each of the 4 looks; the photo changes.
+4. Who's in your pics → Which describes you (optional) → How did you find Digi (Pinterest is there, YouTube isn't). The battery on top fills one pink cell per step.
+5. Camera ready: the screen types out its lines with ticks, then **Open my camera**.
+6. Tap **AFTER DARK ✦**, then **Try After Dark ✦**, then shoot. On the consent screen the button stays off until you tick the box.
+7. Developing: a pink scan line, 3 steps that tick, then a pop into the result. Hold the photo to see the before.
+8. Tap **Make it Live ✦ 3** with too few digis. The Party Pack sheet says "Pay once. Cheaper than one disposable."
+9. iPhone Settings → Accessibility → Motion → Reduce Motion **on**. Redo steps 1–2: there's no white flash, no confetti, and screens fade instead of sliding.

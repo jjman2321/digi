@@ -12,7 +12,7 @@ import { PopIn, Rise, TypeText } from '@/ui/motion';
 import { LOOKS } from '@/lib/demo';
 import { set, useStore } from '@/lib/store';
 
-const OCC: Record<string, string> = { birthday: 'BIRTHDAY', house_party: 'HOUSE PARTY', night_out: 'NIGHT OUT', holiday: 'HOLIDAY', wedding: 'WEDDING', just_us: 'PARTY' };
+const OCC: Record<string, string> = { night_out: 'NIGHT OUT', everyday: 'EVERYDAY', birthday: 'BIRTHDAY', girls_night: 'GIRLS NIGHT', house_party: 'PARTY', holiday: 'HOLIDAY' };
 const MODE = { me: 'FRONT FLASH', few: 'STRIP MODE', group: 'WIDE 0.5×' } as const;
 
 const CHAR_MS = 35;

@@ -10,8 +10,8 @@ import { LOOKS } from '@/lib/demo';
 import { Look, set, useStore } from '@/lib/store';
 
 const REPLY: Record<string, string> = {
-  birthday: 'Birthday looks, loaded 🎂', house_party: 'House party looks, loaded', night_out: 'Night-out looks, loaded',
-  holiday: 'Holiday looks, loaded 🎄', wedding: 'Wedding looks, loaded', just_us: 'Nice. Just you and yours.',
+  night_out: 'Night-out looks, loaded', everyday: 'Everyday looks, loaded', birthday: 'Birthday looks, loaded 🎂',
+  girls_night: 'Girls’ night looks, loaded', house_party: 'Party looks, loaded 🎉', holiday: 'Holiday looks, loaded 🎄',
 };
 
 export default function LookScreen() {

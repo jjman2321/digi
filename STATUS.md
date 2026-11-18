@@ -1,6 +1,6 @@
 # Digi: status, decisions and build spec
 
-Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi/`.
+Last updated: **Nov 18, 2026**. This repo moved here from jjman2321/MMTEST `digi/`.
 
 ## 1. Where we are
 - ✅ Research done: 26-chapter "bible" in `docs/research/bible/`, plus the earlier deep dive in `docs/research/earlier/`.
@@ -17,6 +17,15 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
   - Screenshots: `docs/screenshots/step1/`.
   - Existing screens still use the old design. They get rebuilt to round 3–9 picks in step 4.
   - Known bug: the stamp apostrophe shows as a box; fix in step 2.
+- ✅ **Rebuild + motion + ICP pass (Nov 18):**
+  - All screens are rebuilt in the picked design, with motion from Mobbin flow videos (Reduce Motion safe).
+  - ICP check against ch. 20:
+    - the sample is now 2 girls at a birthday (a tested After Dark pair, no drink cans);
+    - "Your iPhone, but 2006" hook;
+    - occasion question "What are you shooting first?" (no wedding tile);
+    - Pinterest replaces YouTube in "found us";
+    - Party Pack line "Cheaper than one disposable".
+  - Web preview: https://digi.expo.app. Screenshots: `docs/screenshots/icp/`.
 - ⬜ Everything in §5 "Build order".
 
 ## 2. Decisions (owner's words, dated)
@@ -55,6 +64,7 @@ Last updated: **Nov 17, 2026**. This repo moved here from jjman2321/MMTEST `digi
 | Nov 17 | Q2 "6 free + 2 AI". **Free looks:** Digicam, Film 400, Y2K Glow, Club B&W, Paparazzi, Xmas Lights (NYE Glitter from Dec 26). **AI:** Flash Re-light ✦ and Live digi ✦. Strip is a mode, not a look. |
 | Nov 17 | Q3 "A/B test". **Paywall A/B:** Yearly $39.99 + 3-day trial pre-selected vs Weekly $6.99 + 3-day trial pre-selected; judge on revenue per install at 30/90 days. Party Pack $5.99 link on both. |
 | Nov 17 | Q4 "Yes, as is". **3 free AI digis once per device** (App Attest, reinstall doesn't refill). AI photo 1 digi, strip 2, Live digi 3. |
+| Nov 18 | "make sure everything fits our niche and most importanly our icp" / "and target audience etc". Every screen is checked against ch. 20. **Acquire P1 (digicam girl, 18–26: nights out, everyday), monetise P2 (the host, 22–34: birthdays, her own parties, via the Party Pack).** Onboarding asks "What are you shooting first?": Night out · Everyday · Birthday · Girls' night · My own party · Holidays (no wedding until the v1.1 pack). |
 | Nov 17 | "ok let's do it don't build with the contest in mind anymore or its rules". **No contest.** Build Digi as a business. Kiwi is shelved; Kilma is a 2027 maybe. |
 | Nov 17 | "we should have it in v1 but we should use the cheapest best models so our margins are good". **Live digi (AI video) is in v1.** |
 | Nov 17 | Round-1 AI output looked "mid". Round 3 approved: Klein + style ref + punchy finish. Results must "not look AI". |

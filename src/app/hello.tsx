@@ -14,7 +14,7 @@ import { LcdStamp, LegalLinks, PixelDigi, SerifTitle, Sheet } from '@/ui/digi';
 import { Bob, Confetti, PressScale } from '@/ui/motion';
 import { developImage, loadImage } from '@/lib/develop';
 
-const before = require('../../assets/samples/sample-before.jpg');
+const before = require('../../assets/samples/sample2-before.jpg');
 
 export default function Hello() {
   const lcd = useFont(require('../../assets/fonts/DSEG7Classic-Bold.ttf'), 40);
@@ -64,7 +64,7 @@ export default function Hello() {
               <Image source={{ uri: after }} style={StyleSheet.absoluteFill} contentFit="cover" transition={0} />
             </Animated.View>
           ) : null}
-          <Text style={[st.tag, after && st.tagPink]}>{after ? "THAT'S A DIGI" : 'A NORMAL PHONE PIC'}</Text>
+          <Text style={[st.tag, after && st.tagPink]}>{after ? 'YOUR IPHONE, BUT 2006' : 'YOUR IPHONE'}</Text>
           {!after && <LcdStamp text={todayStamp()} style={st.stamp} />}
           <Animated.View pointerEvents="none" style={[StyleSheet.absoluteFill, { backgroundColor: '#fff' }, flashStyle]} />
         </View>

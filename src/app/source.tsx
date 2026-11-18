@@ -8,7 +8,7 @@ import { Question } from '@/ui/digi';
 import { afterPick, PressScale, SlideIn } from '@/ui/motion';
 import { set, useStore } from '@/lib/store';
 
-const OPTIONS: [string, string][] = [['🎵', 'TikTok'], ['📸', 'Instagram'], ['💬', 'A friend'], ['🔎', 'App Store'], ['▶️', 'YouTube'], ['✨', 'Other']];
+const OPTIONS: [string, string][] = [['🎵', 'TikTok'], ['📸', 'Instagram'], ['💬', 'A friend'], ['🔎', 'App Store'], ['📌', 'Pinterest'], ['✨', 'Other']];
 
 export default function SourceScreen() {
   const source = useStore((s) => s.source);

@@ -1,0 +1,104 @@
+{
+  "about": "Motion references for Digi (Nov 18, 2026). Mobbin gives still screen sequences, not video: motion is inferred from consecutive screens. 'confidence' = how sure we are the app animates this way.",
+  "refs": [
+    {
+      "file": "01-lapse-onboarding-shutter.jpg",
+      "app": "Lapse",
+      "mobbin_url": "https://mobbin.com/flows/96fcdd96-85ca-4d4f-9504-8d8fbdd2c050?tab=screens",
+      "learn": "Onboarding opens on a black screen with only a glowing orange focus bracket and a big shutter. No copy. The first thing you do is press the shutter.",
+      "confidence": "high (screen is in the flow)"
+    },
+    {
+      "file": "02-lapse-onboarding-developing.jpg",
+      "app": "Lapse",
+      "mobbin_url": "https://mobbin.com/flows/96fcdd96-85ca-4d4f-9504-8d8fbdd2c050?tab=screens",
+      "learn": "After the shutter: a rounded card of heavily blurred colour that says 'Developing snaps...'. This is our first-flash develop step: blur, then sharpen.",
+      "confidence": "high for the blur card, medium for the exact timing"
+    },
+    {
+      "file": "03-lapse-onboarding-reveal.jpg",
+      "app": "Lapse",
+      "mobbin_url": "https://mobbin.com/flows/96fcdd96-85ca-4d4f-9504-8d8fbdd2c050?tab=screens",
+      "learn": "The blurred card resolves into a sharp, flash-lit party photo inside the same card frame. The frame stays still and only the image changes, so it reads as a reveal and not a new screen.",
+      "confidence": "medium"
+    },
+    {
+      "file": "04-lapse-first-snap-confetti.jpg",
+      "app": "Lapse",
+      "mobbin_url": "https://mobbin.com/flows/36c9cc1a-cb0b-4f70-980f-2c57260ee5b4?tab=screens",
+      "learn": "First real capture: the headline swaps to 'You took your first snap', the roll counter goes from 0 to 1 with a pink thumbnail, and ribbon confetti bursts from the bottom. One small celebration, only the first time.",
+      "confidence": "high (before and after screens)"
+    },
+    {
+      "file": "05-duolingo-question-tile-progress.jpg",
+      "app": "Duolingo",
+      "mobbin_url": "https://mobbin.com/flows/b0b4f93f-5637-46ec-9d77-49ecda6b991d?tab=screens",
+      "learn": "One-tap question tiles: the picked tile turns tinted with a coloured border, and the top progress bar grows by one step on each screen. Copy this pattern for our pixel battery.",
+      "confidence": "high for the states, medium for the springy fill"
+    },
+    {
+      "file": "06-duolingo-streak-celebration.jpg",
+      "app": "Duolingo",
+      "mobbin_url": "https://mobbin.com/flows/c199f9a9-7a91-4795-8ba5-5a3c24847009?tab=screens",
+      "learn": "Full-bleed colour celebration with a big number ('5 day streak') and a row of day dots ticking in. Template for the 'camera ready' moment and number count-ups.",
+      "confidence": "high"
+    },
+    {
+      "file": "07-calai-plan-loader-100.jpg",
+      "app": "Cal AI",
+      "mobbin_url": "https://mobbin.com/flows/122d172a-7263-4367-9c3d-cc534a0152d3?tab=screens",
+      "learn": "Big % count-up, a gradient bar and a checklist that ticks item by item ('Calories... Carbs...'). Builds the sense that something is being computed. Use for After Dark developing stages.",
+      "confidence": "high"
+    },
+    {
+      "file": "08-metaai-thinking-dotfield.jpg",
+      "app": "Meta AI",
+      "mobbin_url": "https://mobbin.com/flows/761a6305-3eda-48e6-9ed7-5a38ebddaadc?tab=screens",
+      "learn": "AI image edit wait state: a 'Thinking' shimmer label and a soft dot field that pulses. This feels calmer than a spinner. Our version is CCD grain or a scan line over the blurred photo.",
+      "confidence": "medium (one frame, the motion is implied)"
+    },
+    {
+      "file": "09-locket-setup-complete-glow.jpg",
+      "app": "Locket",
+      "mobbin_url": "https://mobbin.com/flows/29465928-82fe-42e1-a44a-f47a006cc3b1?tab=screens",
+      "learn": "Dark 'You're set up' screen: a tilted phone outline in the brand colour with a warm radial glow behind it. Reference for the 'Your camera's ready' LCD screen: a dark screen, one glowing object and one CTA.",
+      "confidence": "medium"
+    },
+    {
+      "file": "10-opal-paywall-before-after.jpg",
+      "app": "Opal",
+      "mobbin_url": "https://mobbin.com/flows/8b5b84fd-6168-4265-a74d-cc7d6c08c356?tab=screens",
+      "learn": "Dark paywall that leads with a before/after visual (bars), then three benefit rows and a single bright CTA. The bars likely grow in on entry.",
+      "confidence": "medium for the motion"
+    },
+    {
+      "file": "11-photoroom-paywall-cards-plans.jpg",
+      "app": "Photoroom",
+      "mobbin_url": "https://mobbin.com/flows/d04549cd-1994-497e-84ef-4742670404ff?tab=screens",
+      "learn": "Three overlapping, slightly tilted cards (the centre one raised) above two plan tiles. The selected tile gets a thick border and a filled radio. The close button is visible on the plan step: never delay it.",
+      "confidence": "high for the layout, medium for the fan-in"
+    },
+    {
+      "file": "12-talabat-offer-bottom-sheet.jpg",
+      "app": "talabat",
+      "mobbin_url": "https://mobbin.com/flows/81effd21-4b3d-421b-b583-e87bc93d0126?tab=screens",
+      "learn": "Offer bottom sheet over a dimmed paywall: an illustration header with floating sparkles, a visible close button, one primary button. Pattern for our Party Pack sheet.",
+      "confidence": "high for the layout"
+    }
+  ],
+  "other_flows_viewed": [
+    {"app": "Duolingo", "flow": "Onboarding (selecting)", "mobbin_url": "https://mobbin.com/flows/ac9d2f58-868d-4fd3-a79c-9655ce6b1522?tab=screens"},
+    {"app": "Cal AI", "flow": "Onboarding", "mobbin_url": "https://mobbin.com/flows/05ca2ff4-106a-4fda-a0dd-3cc9b73a83c1?tab=screens"},
+    {"app": "Halide Mark III", "flow": "Onboarding (pick your look, tile wall)", "mobbin_url": "https://mobbin.com/flows/b37e3f2d-d9ae-4fcc-94ae-cd885c9d9621?tab=screens"},
+    {"app": "Rise", "flow": "Sleep detection (pulsing ring, bars)", "mobbin_url": "https://mobbin.com/flows/a1ec472a-49c3-45bc-8426-2ff2a8524b4b?tab=screens"}
+  ],
+  "web_sources": [
+    "https://developer.apple.com/design/human-interface-guidelines/motion",
+    "https://developer.apple.com/help/app-store-connect/manage-app-accessibility/reduced-motion-evaluation-criteria",
+    "https://docs.swmansion.com/react-native-reanimated/docs/guides/accessibility",
+    "https://docs.swmansion.com/react-native-reanimated/docs/layout-animations/entering-exiting-animations",
+    "https://www.revenuecat.com/blog/growth/rip-toggle-paywall",
+    "https://resources.web2wave.com/calai/",
+    "https://goodux.appcues.com/blog/duolingo-user-onboarding"
+  ]
+}
