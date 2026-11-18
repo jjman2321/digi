@@ -156,7 +156,7 @@ function camera(o) {
   let looksUi = '';
   if (o.looks === 'tabs') looksUi = tabsRow(['Y2K', 'FILM', 'DIGICAM', 'STRIP', '✦ AI']);
   if (o.looks === 'tiles') looksUi = tilesRow + tabsRow(['PHOTO', 'STRIP', '✦ AI']).replace('padding:16px 0 0', 'padding:10px 0 0');
-  if (o.looks === 'hybrid') looksUi = tabsRow(['PHOTO', 'STRIP', '✦ AI', 'LIVE ✦']);
+  if (o.looks === 'hybrid') looksUi = tabsRow(['PHOTO', 'STRIP', 'AFTER DARK ✦', 'LIVE ✦']);
 
   const right = o.looks === 'hybrid'
     ? `<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:52px;height:52px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 2px #fff"><img src="${img('r1.png')}" style="width:100%;height:100%;object-fit:cover;filter:contrast(1.1) saturate(1.1)"></div><span style="font-size:11px;font-weight:600;color:#B4B4C0">Digicam ⌃</span></div>`
@@ -168,7 +168,7 @@ function camera(o) {
       <div style="width:84px;height:84px;border-radius:50%;border:4px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(255,79,163,.35)"><span style="width:66px;height:66px;border-radius:50%;background:#fff"></span></div>
       ${right}
     </div>
-    <div class="pix" style="text-align:center;font-size:11px;color:#B4B4C0;padding-top:10px">3 FREE DIGIS ✦</div>
+    <div class="pix" style="text-align:center;font-size:11px;color:#B4B4C0;padding-top:10px">2 FREE DIGIS ✦</div>
   </div>`;
 
   return `<div class="screen">${top}${body}${looksUi}${controls}<div style="height:26px"></div>${o.overlay || ''}</div>`;
@@ -298,7 +298,7 @@ function ready() {
     <div style="margin-top:30px;width:350px;border-radius:32px;background:${SKIN.pink.bg};padding:12px;box-shadow:0 14px 40px rgba(255,79,163,.25)">
       <div style="display:flex;align-items:center;gap:10px;padding:0 4px 10px"><div style="width:62px;height:22px;border-radius:7px;background:linear-gradient(180deg,#FFFBEA,#F3E6B5)"></div><div style="width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#4A6BFF 0%,#1B1B3A 45%,#050508 70%);box-shadow:0 0 0 4px ${SKIN.pink.ring}"></div><span class="pix" style="margin-left:auto;font-size:12px;color:${SKIN.pink.ink}">DIGI-05</span></div>
       <div style="border-radius:16px;background:#101012;padding:30px 20px;min-height:330px;display:flex;flex-direction:column;justify-content:center;box-shadow:inset 0 2px 8px rgba(0,0,0,.7)">
-        <div class="pix" style="font-size:17px;line-height:2.3;color:#fff">${line('BIRTHDAY LOOKS')}${line('STRIP MODE')}${line('FLASH ON')}${line('<span style="color:#FF7DBE">3 FREE AI DIGIS ✦</span>')}</div>
+        <div class="pix" style="font-size:17px;line-height:2.3;color:#fff">${line('BIRTHDAY LOOKS')}${line('STRIP MODE')}${line('FLASH ON')}${line('<span style="color:#FF7DBE">2 FREE DIGIS ✦</span>')}</div>
         <div class="stamp" style="text-align:right;font-size:15px;margin-top:6px">11 17 '26</div></div></div>
     <div style="flex-grow:1"></div>
     <div style="width:350px;padding-bottom:30px"><div class="btn">Open my camera</div><div style="text-align:center;font-size:13px;color:#9A9AA8;margin-top:10px">Next, iPhone asks for the camera. Photos stay on your phone.</div></div></div>`;
@@ -369,7 +369,7 @@ function payA() {
     <div style="padding:0 20px 24px;display:flex;flex-direction:column;flex-grow:1">
       <div style="display:flex;align-items:center;gap:8px;margin-top:6px">${pixelLogo(3.4)}<span class="pix" style="font-size:12px;padding:3px 8px;border-radius:5px;background:#FF4FA3;color:#1A0010">PLUS</span></div>
       <div class="serif" style="font-size:36px;line-height:1.02;margin-top:8px">Keep the <span class="pink">flash</span> going</div>
-      <div style="margin-top:8px">${featRow(PICON.ai, '60 AI re-lights a month', '')}${featRow(PICON.live, 'Live digis: 5-second flash clips', '')}${featRow(PICON.mark, 'Every look, no DIGI.PINK mark', '')}</div>
+      <div style="margin-top:8px">${featRow(PICON.ai, '60 digis a month for After Dark', '')}${featRow(PICON.live, 'Live digis: 5-second flash clips', '')}${featRow(PICON.mark, 'Every look, no DIGI.PINK mark', '')}</div>
       <div style="flex-grow:1"></div>${payBottom()}</div></div>`;
 }
 // Paywall B: camera bento (Halide), drawn as digicam widgets
@@ -389,7 +389,7 @@ function payB() {
 }
 // Out of digis: separate sheet, Party Pack first (Replika), never on the main paywall
 function payPack() {
-  const pk = (sel, n, price, sub, badge) => `<div style="position:relative;flex:1;border-radius:20px;padding:16px 14px;text-align:center;${sel ? 'background:#FFFFFF;color:#1A0010' : 'background:#1C1C22;border:1.5px solid #2E2E36'}">${badge ? `<span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:3px 9px;border-radius:999px;background:#FF4FA3;color:#1A0010;font-size:11px;font-weight:800">${badge}</span>` : ''}<div style="font-size:40px;font-weight:800;line-height:1">${n}</div><div style="font-size:14px;font-weight:600;margin-top:2px">AI digis</div><div style="font-size:22px;font-weight:800;margin-top:12px">${price}</div><div style="font-size:12px;margin-top:2px;${sel ? 'color:#55304A' : 'color:#B4B4C0'}">${sub}</div></div>`;
+  const pk = (sel, n, price, sub, badge) => `<div style="position:relative;flex:1;border-radius:20px;padding:16px 14px;text-align:center;${sel ? 'background:#FFFFFF;color:#1A0010' : 'background:#1C1C22;border:1.5px solid #2E2E36'}">${badge ? `<span style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:3px 9px;border-radius:999px;background:#FF4FA3;color:#1A0010;font-size:11px;font-weight:800">${badge}</span>` : ''}<div style="font-size:40px;font-weight:800;line-height:1">${n}</div><div style="font-size:14px;font-weight:600;margin-top:2px">digis</div><div style="font-size:22px;font-weight:800;margin-top:12px">${price}</div><div style="font-size:12px;margin-top:2px;${sel ? 'color:#55304A' : 'color:#B4B4C0'}">${sub}</div></div>`;
   return camera({ ...PICK, overlay: sheet(`<div style="text-align:center"><div class="pix" style="font-size:12px;color:#FF7DBE">0 DIGIS LEFT · CAMERA'S STILL FREE</div><div class="serif" style="font-size:34px;margin-top:6px">Party <span class="pink">tonight?</span></div><div style="font-size:14px;color:#B4B4C0;margin-top:4px">Pay once. Your digis never expire.</div></div>
     <div style="display:flex;gap:10px;margin:22px 0 16px">${pk(true, '25', '$5.99', 'Party Pack', 'PAY ONCE')}${pk(false, '60', '$11.99', 'Big Night')}</div>
     <div style="height:58px;border-radius:999px;background:#FFFFFF;color:#1A0010;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 34px rgba(255,79,163,.5)">Get 25 digis · $5.99</div>
@@ -425,7 +425,7 @@ function freeCard(kind) {
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding:12px 14px;border-radius:16px;background:#1C1C22"><div><div style="font-size:15px;font-weight:700">Invite a friend · +2 digis</div><div style="font-size:12px;color:#B4B4C0">When they make their first digi</div></div><span style="height:40px;padding:0 14px;border-radius:999px;background:#2A1420;color:#FF7DBE;font-weight:700;font-size:14px;display:flex;align-items:center">Invite</span></div><div style="height:14px"></div>`,
   }[kind];
   const vf = `<span class="pix" style="position:absolute;top:9px;left:10px;font-size:11px;padding:2px 7px;border-radius:4px;background:#FF4FA3;color:#1A0010">${counter}</span>`;
-  return camera({ ...PICK, vfOverlay: vf, overlay: sheet(`${body}<div class="btn">Re-light a photo ✦</div>`) });
+  return camera({ ...PICK, vfOverlay: vf, overlay: sheet(`${body}<div class="btn">Try After Dark ✦</div>`) });
 }
 
 // ---------- round 9: sign-in + age (Mobbin: Slopes, Once, Lapse, Locket) ----------
@@ -539,7 +539,7 @@ const SCREENS = {
   'logo-thin': withLogo('thin', '#FF4FA3', () => camera({ ...BASE })),
 };
 
-(async () => {
+async function renderAll() {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   const audit = {};
@@ -565,4 +565,6 @@ const SCREENS = {
   fs.writeFileSync(path.join(__dirname, 'audit-metrics.json'), JSON.stringify(audit, null, 1));
   await browser.close();
   console.log('rendered', Object.keys(SCREENS).length);
-})();
+}
+module.exports = { CSS, img, camera, sheet, chip, coach, confetti, vfLabel, pixelLogo, SKIN, ICON, PICK, BASE, print, featRow, payA, payPack, freeCard, R6_Q1, R6_Q3, R6_G, R6_Q4, pickLook, ready, qTop, battery, appleBtn, darkBtn };
+if (require.main === module) renderAll();

@@ -45,12 +45,20 @@ export default function RootLayout() {
   if (!ready) return <View style={{ flex: 1, backgroundColor: C.bg }} />;
 
   return (
-    <View style={{ flex: 1, backgroundColor: C.bg }}>
+    <View style={Platform.OS === 'web' ? webFrame.outer : { flex: 1, backgroundColor: C.bg }}>
+      <View style={Platform.OS === 'web' ? webFrame.phone : { flex: 1 }}>
       <StatusBar style="light" />
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: C.bg }, animation: 'fade' }}>
         <Stack.Screen name="paywall" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
         <Stack.Screen name="looks" options={{ presentation: 'formSheet', sheetAllowedDetents: [0.62, 0.95], sheetGrabberVisible: true }} />
       </Stack>
+      </View>
     </View>
   );
 }
+
+// Web preview only: on a computer, show the app in a phone-sized frame instead of stretching it.
+const webFrame = {
+  outer: { flex: 1, backgroundColor: '#050507', alignItems: 'center' as const, justifyContent: 'center' as const },
+  phone: { flex: 1, width: '100%' as const, maxWidth: 430, maxHeight: 932, backgroundColor: C.bg, overflow: 'hidden' as const, borderRadius: 0 },
+};
