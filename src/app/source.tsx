@@ -1,51 +1,38 @@
-// Onboarding 3/3: "How did you find Digi?" (attribution, one tap). Then straight to the camera.
+// Onboarding 6: how did you find Digi? One tap, for attribution (ch. 10 #9).
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { C, F } from '@/ui/theme';
-import { Headline, PrimaryButton, TopBar, tap } from '@/ui/kit';
+import { tap } from '@/ui/kit';
+import { Question } from '@/ui/digi';
 import { set, useStore } from '@/lib/store';
 
-const SOURCES = ['TikTok', 'Instagram', 'A friend', 'App Store', 'Snapchat', 'Somewhere else'];
+const OPTIONS: [string, string][] = [['🎵', 'TikTok'], ['📸', 'Instagram'], ['💬', 'A friend'], ['🔎', 'App Store'], ['▶️', 'YouTube'], ['✨', 'Other']];
 
-export default function Source() {
+export default function SourceScreen() {
   const source = useStore((s) => s.source);
-  const done = () => {
-    set({ onboarded: true });
-    router.replace('/camera');
-  };
+  const next = () => router.push('/ready');
   return (
-    <SafeAreaView style={st.root}>
-      <TopBar step={3} total={3} onSkip={done} />
-      <View style={{ paddingHorizontal: 20, gap: 6 }}>
-        <Headline pre="How did you" pink="find us?" size={38} />
-        <Text style={st.sub}>Helps us make more of what you like.</Text>
-      </View>
-      <View style={st.wrap}>
-        {SOURCES.map((x) => {
-          const on = source === x;
-          return (
-            <Pressable key={x} accessibilityRole="button" accessibilityState={{ selected: on }} onPress={() => { tap(); set({ source: x }); }} style={[st.chip, on && st.chipOn]}>
-              <Text style={[st.chipText, on && { color: C.onPink }]}>{x}</Text>
+    <SafeAreaView style={st.root} edges={['top', 'bottom']}>
+      <Question step={5} reply="Got it." title="How did you find" pink="Digi?" helper="One tap. It helps a tiny team a lot." onSkip={next}>
+        <View style={st.grid}>
+          {OPTIONS.map(([icon, label]) => (
+            <Pressable key={label} accessibilityRole="button" accessibilityState={{ selected: source === label }} onPress={() => { tap(); set({ source: label }); next(); }} style={[st.cell, source === label && st.sel]}>
+              <Text style={st.icon}>{icon}</Text>
+              <Text style={[st.label, source === label && { color: C.onPink }]}>{label}</Text>
             </Pressable>
-          );
-        })}
-      </View>
-      <View style={st.bottom}>
-        <PrimaryButton label="Open the camera" onPress={done} disabled={!source} />
-        <Text style={st.note}>Next, iPhone asks for your camera.</Text>
-      </View>
+          ))}
+        </View>
+      </Question>
     </SafeAreaView>
   );
 }
 
 const st = StyleSheet.create({
   root: { flex: 1, backgroundColor: C.bg },
-  sub: { fontFamily: F.body, fontSize: 15, color: C.sub },
-  wrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, paddingHorizontal: 16, marginTop: 24 },
-  chip: { height: 48, paddingHorizontal: 18, borderRadius: 999, backgroundColor: C.card, justifyContent: 'center' },
-  chipOn: { backgroundColor: C.pink },
-  chipText: { fontFamily: F.bodySemi, fontSize: 16, color: C.text },
-  bottom: { marginTop: 'auto', paddingHorizontal: 20, paddingBottom: 12, gap: 8 },
-  note: { fontFamily: F.body, fontSize: 13, color: C.mute, textAlign: 'center' },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
+  cell: { width: '48.5%', height: 124, borderRadius: 18, backgroundColor: '#17171C', borderWidth: 2, borderColor: '#24242B', alignItems: 'center', justifyContent: 'center', gap: 8 },
+  sel: { backgroundColor: C.pink, borderColor: C.pink },
+  icon: { fontSize: 28 },
+  label: { fontFamily: F.bodyBold, fontSize: 16, color: '#fff' },
 });

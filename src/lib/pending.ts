@@ -1,6 +1,12 @@
-// Hand-off for the photo just taken/picked (avoids huge data URIs in route params).
-let pending: { uri: string; source: 'camera' | 'library' | 'sample' } | null = null;
-export const setPending = (p: typeof pending) => {
+// Hand-off between screens (avoids huge data URIs in route params).
+export type Pending = { uri: string; source: 'camera' | 'library' | 'sample'; mode?: 'afterdark' | 'live' };
+let pending: Pending | null = null;
+let result: { uri: string; before: string; preview: boolean } | null = null;
+export const setPending = (p: Pending | null) => {
   pending = p;
 };
 export const takePending = () => pending;
+export const setResult = (r: typeof result) => {
+  result = r;
+};
+export const takeResult = () => result;

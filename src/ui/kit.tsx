@@ -82,16 +82,14 @@ export function PixelLogo({ size = 18, color = C.bodyText }: { size?: number; co
 }
 
 // The pink plastic digicam body that frames the viewfinder.
-export function CamBody({ children, style }: { children: ReactNode; style?: ViewStyle }) {
+export function CamBody({ children, style, label = 'DIGI-05' }: { children: ReactNode; style?: ViewStyle; label?: string }) {
   return (
     <LinearGradient colors={[C.bodyHi, C.bodyMid, C.bodyLo]} start={{ x: 0.2, y: 0 }} end={{ x: 0.8, y: 1 }} style={[s.body, style]}>
       <View style={s.bodyTop}>
         <LinearGradient colors={['#FFFBEA', '#F3E6B5']} style={s.flashWindow} />
         <View style={s.lens} />
         <View style={s.led} />
-        <View style={{ marginLeft: 'auto' }}>
-          <PixelLogo size={13} />
-        </View>
+        <Text style={{ marginLeft: 'auto', fontFamily: F.pixel, fontSize: 12, color: '#A33A72' }}>{label}</Text>
       </View>
       <View style={s.screenBezel}>{children}</View>
     </LinearGradient>

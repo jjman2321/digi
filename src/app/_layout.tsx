@@ -8,6 +8,7 @@ import { InstrumentSerif_400Regular, InstrumentSerif_400Regular_Italic } from '@
 import { Inter_400Regular, Inter_500Medium, Inter_600SemiBold, Inter_700Bold } from '@expo-google-fonts/inter';
 import { Silkscreen_700Bold } from '@expo-google-fonts/silkscreen';
 import { C } from '@/ui/theme';
+import { hydrate } from '@/lib/store';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -36,7 +37,12 @@ export default function RootLayout() {
     DSEG7: require('../../assets/fonts/DSEG7Classic-Bold.ttf'),
   });
   const skiaReady = useSkiaReady();
-  const ready = fontsLoaded && skiaReady;
+  // Load saved settings before any screen shows, whichever screen the app opens on (home, deep link, notification).
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    hydrate().finally(() => setHydrated(true));
+  }, []);
+  const ready = fontsLoaded && skiaReady && hydrated;
 
   useEffect(() => {
     if (ready) SplashScreen.hideAsync().catch(() => {});
@@ -50,7 +56,6 @@ export default function RootLayout() {
       <StatusBar style="light" />
       <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: C.bg }, animation: 'fade' }}>
         <Stack.Screen name="paywall" options={{ presentation: 'modal', animation: 'slide_from_bottom' }} />
-        <Stack.Screen name="looks" options={{ presentation: 'formSheet', sheetAllowedDetents: [0.62, 0.95], sheetGrabberVisible: true }} />
       </Stack>
       </View>
     </View>

@@ -4,29 +4,54 @@ import { useSyncExternalStore } from 'react';
 import { Platform } from 'react-native';
 
 export type Occasion = 'birthday' | 'house_party' | 'night_out' | 'holiday' | 'wedding' | 'just_us';
+export type Look = 'digicam' | 'film400' | 'y2kglow' | 'clubbw';
+export type Who = 'me' | 'few' | 'group';
 export type Shot = { id: string; uri: string; createdAt: number; kind: 'digi' | 'ai' | 'live' | 'strip'; look: string };
 
 export type State = {
   onboarded: boolean;
   occasion: Occasion | null;
+  look: Look;
+  who: Who | null;
+  gender: string | null; // optional; only picks sample photos and look order, never shown
   source: string | null;
   stampOn: boolean;
-  aiConsent: boolean;
-  ageOk: boolean;
-  freeAiLeft: number; // free AI digis (server is the source of truth once RevenueCat is wired)
+  aiConsent: boolean; // ticked once before the first After Dark
+  freeDigis: number; // owner, Nov 17: 2 to start, +1 every Friday, banked up to 3
+  lastRefill: number; // ms timestamp of the last Friday refill
+  plus: boolean; // Digi Plus (demo until RevenueCat, build step 5)
+  paywallSeen: boolean; // the paywall shows once after the first After Dark
   roll: Shot[];
 };
 
 const initial: State = {
   onboarded: false,
   occasion: null,
+  look: 'digicam',
+  who: null,
+  gender: null,
   source: null,
   stampOn: true,
   aiConsent: false,
-  ageOk: false,
-  freeAiLeft: 3,
+  freeDigis: 2,
+  lastRefill: Date.now(),
+  plus: false,
+  paywallSeen: false,
   roll: [],
 };
+
+/** Friday refill: +1 free digi each Friday since the last refill, banked up to 3. */
+export function refillFreeDigis(now = Date.now()) {
+  const s = get();
+  const d = new Date(s.lastRefill);
+  let next = new Date(d.getFullYear(), d.getMonth(), d.getDate() + ((5 - d.getDay() + 7) % 7 || 7));
+  let add = 0;
+  while (next.getTime() <= now) {
+    add += 1;
+    next = new Date(next.getFullYear(), next.getMonth(), next.getDate() + 7);
+  }
+  if (add > 0) set({ freeDigis: Math.min(3, s.freeDigis + add), lastRefill: now });
+}
 
 const KEY = 'digi.state.v1';
 let state: State = initial;

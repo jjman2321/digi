@@ -1,4 +1,4 @@
-// The photo "develops" into a digi (free, on-device), then: save, share, or re-light with AI.
+// The photo "develops" into a digi (free, on-device), then: save, share, or make it After Dark ✦.
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import { Image } from 'expo-image';
@@ -11,13 +11,14 @@ import * as Haptics from 'expo-haptics';
 import { C, F } from '@/ui/theme';
 import { BackButton, GhostButton, PrimaryButton, todayStamp } from '@/ui/kit';
 import { developImage, loadImage } from '@/lib/develop';
-import { takePending } from '@/lib/pending';
+import { setPending, takePending } from '@/lib/pending';
 import { saveDigi } from '@/lib/files';
 import { addShot, get, set, useStore } from '@/lib/store';
 
 function goAi(u: string) {
   const s = get();
-  router.push({ pathname: s.aiConsent && s.ageOk ? '/developing' : '/consent', params: { uri: u } });
+  setPending({ uri: u, source: 'library', mode: 'afterdark' });
+  router.push(s.aiConsent ? '/developing' : '/consent');
 }
 
 export default function Develop() {
@@ -25,7 +26,7 @@ export default function Develop() {
   const lcd = useFont(require('../../assets/fonts/DSEG7Classic-Bold.ttf'), 40);
   const pixel = useFont(require('@expo-google-fonts/silkscreen/700Bold/Silkscreen_700Bold.ttf'), 30);
   const stampOn = useStore((s) => s.stampOn);
-  const freeAi = useStore((s) => s.freeAiLeft);
+  const freeAi = useStore((s) => s.freeDigis);
   const [uri, setUri] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
@@ -40,7 +41,7 @@ export default function Develop() {
     (async () => {
       try {
         const img = await loadImage(p.uri);
-        const out = developImage(img, { stamp: stampOn ? todayStamp() : null, brand: true, lcdFont: lcd, pixelFont: pixel });
+        const out = developImage(img, { stamp: stampOn ? todayStamp() : null, brand: !get().plus, look: get().look, lcdFont: lcd, pixelFont: pixel });
         const shot = addShot({ uri: await saveDigi(out.base64, `d${Date.now()}`), kind: 'digi', look: 'Digicam Flash' });
         setUri(shot.uri);
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => {});
@@ -87,8 +88,8 @@ export default function Develop() {
         <Pressable accessibilityRole="button" disabled={!uri} onPress={() => uri && goAi(uri)} style={st.aiRow}>
           <View style={st.aiIcon}><Text style={{ fontSize: 18, color: C.onPink }}>✦</Text></View>
           <View style={{ flex: 1 }}>
-            <Text style={st.aiTitle}>Re-light it with AI</Text>
-            <Text style={st.aiSub}>Real flash, room goes dark. {freeAi > 0 ? `${freeAi} free left` : '1 digi'}</Text>
+            <Text style={st.aiTitle}>Make it After Dark ✦</Text>
+            <Text style={st.aiSub}>The room goes dark, you’re lit. {freeAi > 0 ? `${freeAi} free left` : '1 digi'}</Text>
           </View>
           <Text style={st.chev}>›</Text>
         </Pressable>
